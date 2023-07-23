@@ -1,5 +1,5 @@
 import { useEffect, FormEventHandler } from 'react';
-import GuestLayout from '@/Layouts/Admin/GuestLayout';
+import GuestLayout from '@/Layouts/Web/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -23,7 +23,7 @@ export default function Register() {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('admin.register'));
+        post(route('register'));
     };
 
     return (
@@ -101,7 +101,7 @@ export default function Register() {
 
                 <div className="flex items-center justify-end mt-4">
                     <Link
-                        href={route('admin.login')}
+                        href={route('login')}
                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Already registered?

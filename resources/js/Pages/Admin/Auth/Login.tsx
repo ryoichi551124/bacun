@@ -1,6 +1,6 @@
 import { useEffect, FormEventHandler } from 'react';
 import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
+import GuestLayout from '@/Layouts/Admin/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -88,7 +88,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                     )}
 
                     <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
+                        Admin Log in
                     </PrimaryButton>
                 </div>
             </form>
