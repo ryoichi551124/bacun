@@ -5,7 +5,7 @@ import SellIcon from '@mui/icons-material/Sell'
 import EmailIcon from '@mui/icons-material/Email'
 import PersonIcon from '@mui/icons-material/Person'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
-import NavLink from '@/Components/Admin/NavLink'
+import NavLink from '@/Components/Admin/Layout/NavLink'
 
 const container = css`
   width: 200px;

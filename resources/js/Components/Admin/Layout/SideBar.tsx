@@ -2,8 +2,8 @@
 import { css } from '@emotion/react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
-import AdminLogo from '@/Components/Admin/AdminLogo'
-import SideMenu from '@/Components/Admin/SideMenu'
+import AdminLogo from '@/Components/Admin/Layout/AdminLogo'
+import SideMenu from '@/Components/Admin/Layout/SideMenu'
 
 const background = '#212529'
 const width = 250

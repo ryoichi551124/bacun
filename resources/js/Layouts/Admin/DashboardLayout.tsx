@@ -3,8 +3,8 @@ import { useState, PropsWithChildren, ReactNode } from 'react'
 import { css } from '@emotion/react'
 import { Link } from '@inertiajs/react'
 import { Admin } from '@/types'
-import SideBar from '@/Components/Admin/SideBar'
-import Header from '@/Components/Admin/Header'
+import SideBar from '@/Components/Admin/Layout/SideBar'
+import Header from '@/Components/Admin/Layout/Header'
 import { StoreProvider } from '@/Providers/store'
 
 const container = css`
