@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Web\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Web\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Web\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Web\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Web\Auth\NewPasswordController;
-use App\Http\Controllers\Web\Auth\PasswordController;
-use App\Http\Controllers\Web\Auth\PasswordResetLinkController;
-use App\Http\Controllers\Web\Auth\RegisteredUserController;
-use App\Http\Controllers\Web\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Admin\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Admin\Auth\NewPasswordController;
+use App\Http\Controllers\Admin\Auth\PasswordController;
+use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Admin\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::middleware('guest')->group(function () {
+Route::middleware('guest:admin')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
@@ -35,7 +36,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:admin')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
@@ -57,3 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+
+Route::get('/dashboard', function () {
+    return Inertia::render('Admin/Dashboard');
+})->middleware(['auth:admin', 'verified'])->name('dashboard');
