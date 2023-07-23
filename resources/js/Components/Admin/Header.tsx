@@ -15,6 +15,7 @@ const container = css`
   height: 4rem;
   background: ${background};
   padding: 0.5rem 1rem;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
 `
 const inner = css`
   display: flex;
