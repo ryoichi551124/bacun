@@ -11,19 +11,19 @@ const container = css`
   width: 200px;
   display: flex;
   align-items: center;
-  padding: .5rem;
+  padding: 0.5rem;
   color: #fff;
 `
 const inner = css`
   width: 100%;
   height: 3rem;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
 `
 const navMenu = css`
   display: flex;
   align-items: center;
-  margin: .5rem 0;
-  padding: 1rem .5rem;
+  margin: 0.5rem 0;
+  padding: 1rem 0.5rem;
   border-radius: 5px;
 `
 const icon = css`

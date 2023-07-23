@@ -16,10 +16,7 @@ export default function NavLink({
   ...props
 }: InertiaLinkProps & { active: boolean }) {
   return (
-    <Link
-      {...props}
-      css={[link, active && activeLink]}
-    >
+    <Link {...props} css={[link, active && activeLink]}>
       {children}
     </Link>
   )
