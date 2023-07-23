@@ -65,5 +65,5 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Admin/Dashboard');
+    return Inertia::render('Admin/Dashboard/Index');
 })->middleware(['auth:admin', 'verified'])->name('dashboard');
