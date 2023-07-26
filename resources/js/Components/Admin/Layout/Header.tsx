@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { setIsOpen } from '@/Stores/isSideOpen'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
-import { useState } from 'react'
+import AdminMenu from '@/Components/Admin/Layout/AdminMenu'
 
 const width = 'calc(100%)'
 const background = '#f2f2f2'
@@ -41,7 +41,7 @@ export default function Header() {
             <MenuIcon />
           </button>
         </div>
-        <div>ryoichi</div>
+        <AdminMenu />
       </div>
     </header>
   )

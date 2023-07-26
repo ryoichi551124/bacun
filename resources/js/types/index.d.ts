@@ -12,6 +12,12 @@ export type Admin = {
   email_verified_at: string
 }
 
+export type AdminAuth = {
+  auth: {
+    user: Admin
+  }
+}
+
 export type PageProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
