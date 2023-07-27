@@ -1,3 +1,5 @@
+import { Role } from "@/types/config"
+
 export interface User {
   id: number
   name: string
@@ -10,6 +12,7 @@ export type Admin = {
   name: string
   email: string
   email_verified_at: string
+  role: Role
 }
 
 export type AdminAuth = {

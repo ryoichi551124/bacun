@@ -42,24 +42,24 @@ export default function SideMenu() {
       <div css={inner}>
         <NavLink
           css={navMenu}
-          active={route().current('admin.order')}
-          href={route('admin.order')}
+          active={route().current('admin.order.list')}
+          href={route('admin.order.list')}
         >
           <ShoppingBagIcon css={icon} />
           <div css={title}>受注管理</div>
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.product')}
-          href={route('admin.product')}
+          active={route().current('admin.product.list')}
+          href={route('admin.product.list')}
         >
           <SellIcon css={icon} />
           <div>商品管理</div>
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.category')}
-          href={route('admin.category')}
+          active={route().current('admin.category.list')}
+          href={route('admin.category.list')}
         >
           <CategoryIcon css={icon} />
           <div>カテゴリー</div>
@@ -82,24 +82,24 @@ export default function SideMenu() {
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.user')}
-          href={route('admin.user')}
+          active={route().current('admin.user.list')}
+          href={route('admin.user.list')}
         >
           <PersonIcon css={icon} />
           <div>顧客管理</div>
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.admin')}
-          href={route('admin.admin')}
+          active={route().current('admin.admin.list')}
+          href={route('admin.admin.list')}
         >
           <ManageAccountsIcon css={icon} />
           <div>管理者設定</div>
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.basic')}
-          href={route('admin.basic')}
+          active={route().current('admin.basic.list')}
+          href={route('admin.basic.list')}
         >
           <SettingsIcon css={icon} />
           <div>基本情報</div>

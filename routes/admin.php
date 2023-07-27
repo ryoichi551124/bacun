@@ -77,15 +77,18 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     Route::prefix('order')->name('order')->group(function () {
-        Route::get('/', Order\List\IndexController::class);
+        Route::get('/', Order\List\IndexController::class)
+            ->name('.list');
     });
 
     Route::prefix('product')->name('product')->group(function () {
-        Route::get('/', Product\List\IndexController::class);
+        Route::get('/', Product\List\IndexController::class)
+            ->name('.list');
     });
 
     Route::prefix('category')->name('category')->group(function () {
-        Route::get('/', Category\List\IndexController::class);
+        Route::get('/', Category\List\IndexController::class)
+            ->name('.list');
     });
 
     Route::prefix('shipping')->name('shipping')->group(function () {
@@ -97,14 +100,17 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     Route::prefix('user')->name('user')->group(function () {
-        Route::get('/', User\List\IndexController::class);
+        Route::get('/', User\List\IndexController::class)
+            ->name('.list');
     });
 
     Route::prefix('admin')->name('admin')->group(function () {
-        Route::get('/', Admin\List\IndexController::class);
+        Route::get('/', Admin\List\IndexController::class)
+            ->name('.list');
     });
 
     Route::prefix('basic')->name('basic')->group(function () {
-        Route::get('/', Basic\List\IndexController::class);
+        Route::get('/', Basic\List\IndexController::class)
+            ->name('.list');
     });
 });
