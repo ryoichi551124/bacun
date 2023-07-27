@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Category;
+namespace App\Http\Controllers\Admin\Basic\List;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -13,6 +13,6 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return Inertia::render('Admin/Category/Index');
+        return Inertia::render('Admin/Basic/List');
     }
 }

@@ -11,7 +11,6 @@ export default function Edit({
   status,
 }: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
   const props = usePage().props
-  console.log(props)
 
   return (
     <DashboardLayout>

@@ -2,8 +2,8 @@ import { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
 import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
 
-export default function Admin() {
+export default function OrderList() {
   return <Head title="Admin Dashboard" />
 }
 
-Admin.layout = (page: ReactNode) => <DashboardLayout children={page} />
+OrderList.layout = (page: ReactNode) => <DashboardLayout children={page} />
