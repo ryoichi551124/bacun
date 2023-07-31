@@ -11,6 +11,10 @@ type DeleteLinkProps = {
 const icon = css`
   color: ${theme.colors.delete};
   margin: 0 0.5rem;
+  &:hover {
+    transform: scale(1.1, 1.1);
+    transition: 0.5s;
+  }
 `
 
 export default function DeleteLinkIcon({ deleteLink }: DeleteLinkProps) {
