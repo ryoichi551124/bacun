@@ -1,23 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Admin\List;
+namespace App\Http\Controllers\Admin\Admin\Create;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 use Inertia\Inertia;
 
 class IndexController extends Controller
 {
     /**
-     * 管理者一覧
+     * 管理者登録
      */
     public function __invoke()
     {
-        $admins = Admin::all();
         $roles = config('admin.role');
 
-        return Inertia::render('Admin/Admin/List', [
-            'admins' => $admins,
+        return Inertia::render('Admin/Admin/Create', [
             'roles' => $roles,
         ]);
     }

@@ -43,4 +43,18 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * IDによるスコープ
+     *
+     * @param [type] $query
+     * @param int $id
+     * @return Admin
+     */
+    public function scopeId($query, $id = null)
+    {
+        if (empty($query)) return;
+
+        return $query->where('id', $id);
+    }
 }
