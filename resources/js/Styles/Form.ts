@@ -9,7 +9,7 @@ export const formContainer = css`
 
 export const input = css`
   display: block;
-  width: 40%;
+  width: 50%;
   margin-top: 0.5rem;
   border: 1px solid ${theme.colors.gray};
   border-radius: 5px;

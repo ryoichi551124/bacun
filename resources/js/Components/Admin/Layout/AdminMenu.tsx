@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import { Link } from '@inertiajs/react'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'

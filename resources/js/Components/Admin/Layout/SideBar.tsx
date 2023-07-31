@@ -4,20 +4,17 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
 import { theme } from '@/Theme/theme'
 import AdminLogo from '@/Components/Admin/Layout/AdminLogo'
-import SideMenu from '@/Components/Admin/Layout/SideMenu'
-
-const width = 250
+import SideNavi from '@/Components/Admin/Layout/SideNavi'
 
 const container = css`
-  width: 4rem;
+  width: ${theme.width.sideClose};
   height: 100vh;
-  overflow-x: hidden;
   overflow-y: scroll;
   background: ${theme.colors.darkGray};
   transition: 0.5s;
 `
 const open = css`
-  width: ${width}px;
+  width: ${theme.width.sideOpen};
 `
 
 export default function SideBar() {
@@ -28,7 +25,7 @@ export default function SideBar() {
   return (
     <aside css={[container, isOpen && open]}>
       <AdminLogo />
-      <SideMenu />
+      <SideNavi />
     </aside>
   )
 }

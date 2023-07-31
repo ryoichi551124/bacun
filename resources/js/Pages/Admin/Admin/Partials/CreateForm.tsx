@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Link, usePage, router } from '@inertiajs/react'
-import { theme } from '@/Theme/theme'
 import { input, error, errText, formContainer } from '@/Styles/form'
 import Card from '@/Components/Admin/Layout/Card'
 import Button from '@mui/material/Button'

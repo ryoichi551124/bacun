@@ -1,8 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { ThemeProvider, Global, css } from '@emotion/react'
+import { theme } from '@/Theme/theme'
 import { PropsWithChildren } from 'react'
-import { usePage } from '@inertiajs/react'
-import { AdminAuth } from '@/types'
 import SideBar from '@/Components/Admin/Layout/SideBar'
 import Header from '@/Components/Admin/Layout/Header'
 import { StoreProvider } from '@/Providers/store'
@@ -17,22 +16,20 @@ const rightContainer = css`
   overflow-x: scroll;
 `
 const mainContainer = css`
-  width: 100%;
   min-height: calc(100vh - 64px);
   margin-top: 64px;
   padding: 1rem 2rem;
 `
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
-  const { props } = usePage<AdminAuth>()
-  const admin = props.auth.user
-
   return (
     <>
       <Global styles={global} />
       <StoreProvider>
         <div css={container}>
-          <SideBar />
+          <div>
+            <SideBar />
+          </div>
           <div css={rightContainer}>
             <Header />
             <main>

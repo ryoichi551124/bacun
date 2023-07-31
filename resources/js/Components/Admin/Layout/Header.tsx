@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { theme } from '@/Theme/theme'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useDispatch } from 'react-redux'
 import { setIsOpen } from '@/Stores/isSideOpen'
@@ -7,16 +8,17 @@ import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
 import AdminMenu from '@/Components/Admin/Layout/AdminMenu'
 
-const width = 'calc(100%)'
-const background = '#f2f2f2'
-
 const container = css`
   position: fixed;
-  width: ${width};
-  height: 4rem;
-  background: ${background};
+  width: calc(100% - ${theme.width.sideOpen});
+  height: ${theme.height.headerHeight};
+  background: ${theme.colors.lightGray};
   padding: 0.5rem 1rem;
   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+`
+const open = css`
+  width: calc(100% - ${theme.width.sideClose});
 `
 const inner = css`
   display: flex;
@@ -35,7 +37,7 @@ export default function Header() {
   }
 
   return (
-    <header css={container}>
+    <header css={[container, !isOpen && open]}>
       <div css={inner}>
         <div>
           <button onClick={changeSide}>
