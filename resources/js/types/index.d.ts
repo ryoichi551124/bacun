@@ -1,4 +1,4 @@
-import { Role } from "@/types/config"
+import { Role } from '@/types/config'
 
 export interface User {
   id: number

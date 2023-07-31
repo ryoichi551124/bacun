@@ -76,19 +76,19 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/', Dashboard\IndexController::class);
     });
 
-    Route::prefix('order')->name('order')->group(function () {
+    Route::prefix('order')->name('order.')->group(function () {
         Route::get('/', Order\List\IndexController::class)
-            ->name('.list');
+            ->name('list');
     });
 
-    Route::prefix('product')->name('product')->group(function () {
+    Route::prefix('product')->name('product.')->group(function () {
         Route::get('/', Product\List\IndexController::class)
-            ->name('.list');
+            ->name('list');
     });
 
-    Route::prefix('category')->name('category')->group(function () {
+    Route::prefix('category')->name('category.')->group(function () {
         Route::get('/', Category\List\IndexController::class)
-            ->name('.list');
+            ->name('list');
     });
 
     Route::prefix('shipping')->name('shipping')->group(function () {
@@ -99,18 +99,22 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/', Mail\IndexController::class);
     });
 
-    Route::prefix('user')->name('user')->group(function () {
+    Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', User\List\IndexController::class)
-            ->name('.list');
+            ->name('list');
     });
 
-    Route::prefix('admin')->name('admin')->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', Admin\List\IndexController::class)
-            ->name('.list');
+            ->name('list');
+        Route::prefix('create')->name('create.')->group(function () {
+            Route::get('/', Admin\Create\IndexController::class)
+                ->name('index');
+        });
     });
 
-    Route::prefix('basic')->name('basic')->group(function () {
+    Route::prefix('basic')->name('basic.')->group(function () {
         Route::get('/', Basic\List\IndexController::class)
-            ->name('.list');
+            ->name('list');
     });
 });

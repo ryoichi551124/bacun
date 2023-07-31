@@ -42,7 +42,7 @@ export default function SideMenu() {
       <div css={inner}>
         <NavLink
           css={navMenu}
-          active={route().current('admin.order.list')}
+          active={route().current('admin.order.*')}
           href={route('admin.order.list')}
         >
           <ShoppingBagIcon css={icon} />
@@ -50,7 +50,7 @@ export default function SideMenu() {
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.product.list')}
+          active={route().current('admin.product.*')}
           href={route('admin.product.list')}
         >
           <SellIcon css={icon} />
@@ -58,7 +58,7 @@ export default function SideMenu() {
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.category.list')}
+          active={route().current('admin.category.*')}
           href={route('admin.category.list')}
         >
           <CategoryIcon css={icon} />
@@ -82,7 +82,7 @@ export default function SideMenu() {
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.user.list')}
+          active={route().current('admin.user.*')}
           href={route('admin.user.list')}
         >
           <PersonIcon css={icon} />
@@ -90,7 +90,7 @@ export default function SideMenu() {
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.admin.list')}
+          active={route().current('admin.admin.*')}
           href={route('admin.admin.list')}
         >
           <ManageAccountsIcon css={icon} />
@@ -98,7 +98,7 @@ export default function SideMenu() {
         </NavLink>
         <NavLink
           css={navMenu}
-          active={route().current('admin.basic.list')}
+          active={route().current('admin.basic.*')}
           href={route('admin.basic.list')}
         >
           <SettingsIcon css={icon} />

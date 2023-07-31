@@ -11,6 +11,7 @@ const width = 'calc(100%)'
 const background = '#f2f2f2'
 
 const container = css`
+  position: fixed;
   width: ${width};
   height: 4rem;
   background: ${background};

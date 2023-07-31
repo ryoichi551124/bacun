@@ -2,10 +2,10 @@
 import { css } from '@emotion/react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
+import { theme } from '@/Theme/theme'
 import AdminLogo from '@/Components/Admin/Layout/AdminLogo'
 import SideMenu from '@/Components/Admin/Layout/SideMenu'
 
-const background = '#212529'
 const width = 250
 
 const container = css`
@@ -13,7 +13,7 @@ const container = css`
   height: 100vh;
   overflow-x: hidden;
   overflow-y: scroll;
-  background: ${background};
+  background: ${theme.colors.darkGray};
   transition: 0.5s;
 `
 const open = css`

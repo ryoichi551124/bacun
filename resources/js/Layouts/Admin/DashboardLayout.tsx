@@ -13,10 +13,13 @@ const container = css`
 `
 const rightContainer = css`
   width: 100%;
+  height: 100vh;
+  overflow-x: scroll;
 `
 const mainContainer = css`
   width: 100%;
   min-height: calc(100vh - 64px);
+  margin-top: 64px;
   padding: 1rem 2rem;
 `
 
