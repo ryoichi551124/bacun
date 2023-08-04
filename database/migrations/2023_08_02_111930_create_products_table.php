@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained()->comment('カテゴリーID');
             // 商品
             $table->string('name', 128)->comment('商品名');
-            $table->string('thumnail_url')->nullable()->comment('サムネイル画像URL');
+            $table->string('thumbnail_url')->nullable()->comment('サムネイル画像URL');
             $table->string('main_img')->nullable()->comment('メイン画像');
             $table->string('sub_img1')->nullable()->comment('サブ画像1');
             $table->string('sub_img2')->nullable()->comment('サブ画像2');
@@ -33,7 +33,7 @@ return new class extends Migration
             // 料金
             $table->unsignedMediumInteger('regular_price')->comment('通常料金');
             $table->unsignedMediumInteger('sales_price')->comment('販売料金');
-            $table->foreignId('delivery_id')->constrained()->onDelete('cascade')->comment('送料ID');
+            $table->foreignId('delivery_id')->constrained()->comment('送料ID');
             $table->timestamps();
 
             $table->index('category_id');

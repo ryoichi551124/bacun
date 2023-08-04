@@ -4,13 +4,16 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +21,22 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'last_name',
+        'first_name',
+        'last_kana',
+        'first_kana',
+        'zip_code',
+        'pref',
+        'city',
+        'address',
+        'building',
+        'tel',
+        'sex',
+        'birth_date',
+        'memo',
+        'status',
     ];
 
     /**
@@ -42,4 +58,54 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * ユーザーのカート
+     *
+     * @return HasOne
+     */
+    public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+    /**
+     * ユーザーの受注
+     *
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * ユーザーの配送先
+     *
+     * @return HasMany
+     */
+    public function shippings(): HasMany
+    {
+        return $this->hasMany(Shipping::class);
+    }
+
+    /**
+     * ユーザーのメール履歴
+     *
+     * @return HasMany
+     */
+    public function mail_histories(): HasMany
+    {
+        return $this->hasMany(MailHistory::class);
+    }
+
+    /**
+     * ユーザーのメールログ
+     *
+     * @return HasMany
+     */
+    public function mail_logs(): HasMany
+    {
+        return $this->hasMany(MailLog::class);
+    }
 }

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('reply_to_address, 128')->nullable()->comment('返信先メールアドレス');
             $table->string('cc_address')->nullable()->comment('CCアドレス');
             $table->string('bcc_address')->nullable()->comment('BCCアドレス');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

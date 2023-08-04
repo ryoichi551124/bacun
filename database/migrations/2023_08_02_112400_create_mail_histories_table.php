@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('mail_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->nullable()->comment('オーダーID');
             $table->foreignId('mail_template_id')->constrained()->nullable()->comment('メールテンプレートID');
+            $table->foreignId('user_id')->constrained()->nullable()->comment('ユーザーID');
+            $table->foreignId('order_id')->constrained()->nullable()->comment('オーダーID');
             $table->date('send_date')->nullable()->comment('送信日時');
             $table->string('mail_subject', 128)->comment('メール件名');
             $table->text('mail_body')->comment('メール本文');

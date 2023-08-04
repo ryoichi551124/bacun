@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('bcc_address')->nullable()->comment('BCCアドレス');
             $table->string('subject', 128)->comment('件名');
             $table->text('body')->comment('メール本文');
-            $table->softDeletes();
             $table->timestamps();
 
             $table->index('mail_template_id');

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('duration')->nullable()->comment('配送日数');
             $table->unsignedTinyInteger('deliv_fee1')->comment('送料');
             $table->unsignedTinyInteger('deliv_fee2')->comment('沖縄・離島料金');
-            $table->unsignedTinyInteger('division')->nullable()->comment('配送区分');
+            $table->unsignedTinyInteger('category')->nullable()->comment('配送区分');
             $table->unsignedTinyInteger('rank')->nullable()->comment('並び順');
             $table->timestamps();
         });

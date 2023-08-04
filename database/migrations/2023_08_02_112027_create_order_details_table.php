@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('product_name', 128)->comment('商品名');
             $table->unsignedMediumInteger('price')->comment('料金');
             $table->unsignedTinyInteger('quantity')->comment('数量');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->index('order_id');
