@@ -20,7 +20,6 @@ use App\Http\Controllers\Admin\Order;
 use App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Admin\Shipping;
 use App\Http\Controllers\Admin\User;
-use Inertia\Inertia;
 
 Route::middleware('guest:admin')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -76,47 +75,119 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/', Dashboard\IndexController::class);
     });
 
+    // 受注管理
     Route::prefix('order')->name('order.')->group(function () {
-        Route::get('/', Order\List\IndexController::class)
+        Route::get('/list', Order\List\IndexController::class)
             ->name('list');
+        Route::delete('/list/delete/{id}', Order\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', Order\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', Order\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', Order\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', Order\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 
+    // 商品管理
     Route::prefix('product')->name('product.')->group(function () {
-        Route::get('/', Product\List\IndexController::class)
+        Route::get('/list', Product\List\IndexController::class)
             ->name('list');
+        Route::delete('/list/delete/{id}', Product\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', Product\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', Product\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', Product\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', Product\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 
+    // カテゴリー管理
     Route::prefix('category')->name('category.')->group(function () {
-        Route::get('/', Category\List\IndexController::class)
+        Route::get('/list', Category\List\IndexController::class)
             ->name('list');
+        Route::delete('/list/delete/{id}', Category\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', Category\Create\IndexController::class)
+            ->name('create');
+        Route::post('create.create', Category\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', Category\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', Category\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 
-    Route::prefix('shipping')->name('shipping')->group(function () {
-        Route::get('/', Shipping\IndexController::class);
+    // 配送管理
+    Route::prefix('shipping')->name('shipping.')->group(function () {
+        Route::get('/list', Shipping\List\IndexController::class)
+            ->name('list');
+        Route::delete('/list/delete/{id}', Shipping\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', Shipping\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', Shipping\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', Shipping\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', Shipping\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 
+    // メール管理
     Route::prefix('mail')->name('mail')->group(function () {
         Route::get('/', Mail\IndexController::class);
     });
 
+    // 顧客管理
     Route::prefix('user')->name('user.')->group(function () {
-        Route::get('/', User\List\IndexController::class)
+        Route::get('/list', User\List\IndexController::class)
             ->name('list');
+        Route::delete('/list/delete/{id}', User\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', User\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', User\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', User\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', User\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 
+    // 管理者設定
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/', Admin\List\IndexController::class)
+        Route::get('/list', Admin\List\IndexController::class)
             ->name('list');
-        Route::prefix('create')->name('create.')->group(function () {
-            Route::get('/', Admin\Create\IndexController::class)
-                ->name('index');
-            Route::post('/create', Admin\Create\CreateController::class)
-                ->name('create');
-        });
+        Route::delete('/list/delete/{id}', Admin\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', Admin\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', Admin\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', Admin\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', Admin\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 
     Route::prefix('basic')->name('basic.')->group(function () {
-        Route::get('/', Basic\List\IndexController::class)
+        Route::get('/list', Basic\List\IndexController::class)
             ->name('list');
+        Route::delete('/list/delete/{id}', Basic\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', Basic\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', Basic\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', Basic\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', Basic\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 });

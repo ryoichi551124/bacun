@@ -68,7 +68,7 @@ export default function SideNavi() {
         <NavLink
           css={navMenu}
           active={route().current('admin.shipping')}
-          href={route('admin.shipping')}
+          href={route('admin.shipping.list')}
         >
           <LocalShippingIcon css={icon} />
           <div>配送管理</div>

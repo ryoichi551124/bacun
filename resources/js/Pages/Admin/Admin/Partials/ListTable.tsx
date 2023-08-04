@@ -27,7 +27,7 @@ export default function AdminListTable() {
   return (
     <Card
       title="管理者一覧"
-      icon={<AddLinkIcon addLink="admin.admin.create.index" />}
+      icon={<AddLinkIcon addLink="admin.admin.create" />}
     >
       <Table>
         <TableHead>
