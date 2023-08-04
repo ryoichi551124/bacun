@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Link, usePage, router } from '@inertiajs/react'
-import { input, error, errText, formContainer } from '@/Styles/form'
+import { input, error, errText, formContainer } from '@/Styles/Form'
 import Card from '@/Components/Admin/Layout/Card'
 import Button from '@mui/material/Button'
 import { useForm } from 'react-hook-form'
@@ -41,8 +41,7 @@ export default function AdminCreateForm() {
   })
 
   const createAdmin = (data: CreateAdminSchemaType) => {
-    console.log('test')
-    console.log(data)
+    router.post('/admin/admin/create/create', data)
   }
 
   return (

@@ -110,6 +110,8 @@ Route::middleware('auth:admin')->group(function () {
         Route::prefix('create')->name('create.')->group(function () {
             Route::get('/', Admin\Create\IndexController::class)
                 ->name('index');
+            Route::post('/create', Admin\Create\CreateController::class)
+                ->name('create');
         });
     });
 

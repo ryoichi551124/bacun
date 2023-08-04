@@ -20,6 +20,7 @@ type AdminData = {
 
 export default function AdminListTable() {
   const { props } = usePage<AdminData>()
+  console.log(props)
   const admins = props.admins
   const adminRoles = props.roles
 
