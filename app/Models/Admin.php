@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
@@ -47,14 +48,13 @@ class Admin extends Authenticatable
     /**
      * IDによるスコープ
      *
-     * @param [type] $query
+     * @param Builder $query
      * @param int $id
-     * @return Admin
+     * @return void
      */
-    public function scopeId($query, $id = null)
+    public function scopeId(Builder $query, int $id = null): void
     {
-        if (empty($query)) return;
-
-        return $query->where('id', $id);
+        if (empty($id)) return;
+        $query->where('id', $id);
     }
 }

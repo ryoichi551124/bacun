@@ -11,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,57 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'company_name'  => ['required', 'string', 'max:128'],
+            'company_kana'  => ['nullable', 'string', 'max:128'],
+            'zip_code'      => ['nullable', 'regex:/^\d{7}$/i'],
+            'address1'      => ['nullable', 'string', 'max:256'],
+            'address2'      => ['nullable', 'string', 'max:256'],
+            'tel1'          => ['nullable', 'regex:/^\d{10,11}$/i'],
+            'tel2'          => ['nullable', 'regex:/^\d{10,11}$/i'],
+            'email1'        => ['nullable', 'email', 'max:128'],
+            'email2'        => ['nullable', 'email', 'max:128'],
+            'shop_name'     => ['required', 'string', 'max:128'],
+            'shop_kana'     => ['nullable', 'string', 'max:128'],
+            'shop_message'  => ['nullable', 'string'],
+        ];
+    }
+
+    /**
+     * 属性
+     *
+     * @return array
+     */
+    public function attributes(): array
+    {
+        return [
+            'company_name'  => '会社名',
+            'compnay_kana'  => '会社名カナ',
+            'zip_code'      => '会社郵便番号',
+            'address1'      => '住所1',
+            'address2'      => '住所2',
+            'tel1'          => '電話番号1',
+            'tel2'          => '電話番号2',
+            'email1'        => 'メールアドレス1',
+            'email2'        => 'メースアドレス2',
+            'shop_name'     => 'ショップ名',
+            'shop_kana'     => 'ショップ名カナ',
+            'shop_message'  => 'ショップメッセージ',
+        ];
+    }
+
+    /**
+     * エラーメッセージ
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'required'      => ':attributeは必須項目です',
+            'string'        => ':attributeは文字列を入力してください',
+            'email'         => '不正なメールアドレスです',
+            'max'           => ':attributeは:max文字以内で入力してください',
+            'regex'         => ':attributeは不正な値です',
         ];
     }
 }

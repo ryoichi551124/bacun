@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained()->comment('カテゴリーID');
             // 商品
             $table->string('name', 128)->comment('商品名');
-            $table->string('thumbnail_url')->nullable()->comment('サムネイル画像URL');
+            $table->string('thumbnail')->nullable()->comment('サムネイル画像');
             $table->string('main_img')->nullable()->comment('メイン画像');
             $table->string('sub_img1')->nullable()->comment('サブ画像1');
             $table->string('sub_img2')->nullable()->comment('サブ画像2');

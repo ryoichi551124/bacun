@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Admin\Admin;
+namespace App\Http\Requests\Admin\Delivery;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rules\Enum;
-use App\Enums\AdminRoleType;
-use App\Models\Admin;
+use App\Rules\UnsignedTinyInteger;
+use App\Rules\UnsignedSmallInteger;
+use App\Models\Delivery;
 
 class UpdateRequest extends FormRequest
 {
@@ -27,13 +26,13 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => ['required', 'string', 'max:64'],
-            'email'     => [
-                'required', 'email', 'confirmed', 'max:128',
-                Rule::unique(Admin::class)->ignore($this->route('id'))
-            ],
-            'password'  => ['required', 'confirmed', Password::defaults()],
-            'role'      => ['required', new Enum(AdminRoleType::class)],
+            'name'          => ['required', 'string', 'max:128', Rule::unique(Delivery::class)],
+            'description'   => ['nullable', 'string'],
+            'duration'      => ['nullable', 'string'],
+            'deliv_fee1'    => ['nullable', new UnsignedSmallInteger],
+            'defil_fee2'    => ['nullable', new UnsignedSmallInteger],
+            'category'      => ['nullable', new UnsignedTinyInteger],
+            'rank'          => ['nullable', new UnsignedTinyInteger],
         ];
     }
 
@@ -45,10 +44,13 @@ class UpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name'      => '管理者名',
-            'email'     => 'メールアドレス',
-            'password'  => 'パスワード',
-            'role'      => '権限名',
+            'name'          => '送料名',
+            'description'   => '送料説明',
+            'duration'      => '配送日数',
+            'deliv_fee1'    => '送料',
+            'deliv_fee2'    => '送料（沖縄・離島料金）',
+            'category'      => '配送区分',
+            'rank'          => '並び順',
         ];
     }
 
@@ -62,11 +64,7 @@ class UpdateRequest extends FormRequest
         return [
             'required'      => ':attributeは必須項目です',
             'string'        => ':attributeは文字列を入力してください',
-            'email'         => '不正なメールアドレスです',
-            'confirmed'     => '確認用の:attributeに誤りがあります',
-            'unique'        => 'この:attributeはすでに登録されています',
             'max'           => ':attributeは:max文字以内で入力してください',
-            'enum'          => ':attributeは無効な権限です',
         ];
     }
 }

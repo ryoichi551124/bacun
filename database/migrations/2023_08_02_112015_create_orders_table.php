@@ -35,7 +35,7 @@ return new class extends Migration
             $table->unsignedMediumInteger('tax')->comment('消費税');
             $table->unsignedMediumInteger('total')->comment('合計');
             // 支払い
-            $table->string('payment_method')->comment('支払い方法');
+            $table->string('payment_method', 64)->comment('支払い方法');
             $table->date('payment_date')->nullable()->comment('支払い日');
 
             $table->softDeletes();
