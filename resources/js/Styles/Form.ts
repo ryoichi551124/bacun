@@ -5,6 +5,15 @@ import { theme } from '@/Theme/theme'
 export const formContainer = css`
   padding: 1rem 1.5rem;
   margin-bottom: 3rem;
+  font-size: ${theme.fontSize.ss};
+`
+
+export const wrap = css`
+  padding: 0.5rem 0;
+`
+
+export const label = css`
+  font-weight: bold;
 `
 
 export const input = css`
@@ -14,6 +23,10 @@ export const input = css`
   border: 1px solid ${theme.colors.gray};
   border-radius: 5px;
   color: ${theme.colors.font};
+`
+
+export const buttonWrap = css`
+  padding: 1.5rem 0;
 `
 
 export const error = css`

@@ -14,14 +14,15 @@ const createAdminSchema = z
         /^(?=.*?[A-Z\d])[a-zA-Z0-9.?/-]{8,24}$/,
         'パスワードは数字とアルファベットの大文字を一文字以上含めてください',
       ),
-    passwordConfirmation: z.string().min(8, '8文字以上で入力してください'),
+    password_confirmation: z.string().min(8, '8文字以上で入力してください'),
+    role: z.enum(['admin', 'member']),
   })
   .refine(
-    ({ password, passwordConfirmation }) => {
-      return password === passwordConfirmation
+    ({ password, password_confirmation }) => {
+      return password === password_confirmation
     },
     {
-      path: ['passwordConfirmation'],
+      path: ['password_confirmation'],
       message: '確認用のパスワードに誤りがあります',
     },
   )

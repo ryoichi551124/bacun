@@ -1,7 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Link, usePage, router } from '@inertiajs/react'
-import { input, error, errText, formContainer } from '@/Styles/Form'
+import {
+  formContainer,
+  wrap,
+  label,
+  input,
+  buttonWrap,
+  error,
+  errText,
+} from '@/Styles/Form'
 import Card from '@/Components/Admin/Layout/Card'
 import Button from '@mui/material/Button'
 import { useForm } from 'react-hook-form'
@@ -11,15 +19,6 @@ import createAdminSchema, {
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { AdminRoles } from '@/types/config'
 
-const wrap = css`
-  padding: 0.5rem 0 1rem;
-`
-const label = css`
-  font-weight: bold;
-`
-const buttonWrap = css`
-  padding: 1rem 0;
-`
 const button = css`
   margin-right: 2rem;
 `
@@ -96,11 +95,11 @@ export default function AdminCreateForm() {
             id="password_confirmation"
             type="password"
             autoComplete="off"
-            css={[input, errors.passwordConfirmation && error]}
-            {...register('passwordConfirmation')}
+            css={[input, errors.password_confirmation && error]}
+            {...register('password_confirmation')}
           />
-          {errors.passwordConfirmation && (
-            <div css={errText}>{errors.passwordConfirmation.message}</div>
+          {errors.password_confirmation && (
+            <div css={errText}>{errors.password_confirmation.message}</div>
           )}
         </div>
         {/* 権限 */}
@@ -108,7 +107,7 @@ export default function AdminCreateForm() {
           <label htmlFor="role" css={label}>
             権限
           </label>
-          <select css={input}>
+          <select css={input} {...register('role')}>
             {roles.map((role) => (
               <option key={role[0]} value={role[0]}>
                 {role[1]}

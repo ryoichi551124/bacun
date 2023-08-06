@@ -3,16 +3,23 @@
 namespace App\Http\Controllers\Admin\Admin\Create;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\Admin\CreateRequest;
+use App\Models\Admin;
 
 class CreateController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(CreateRequest $request)
     {
-        session()->flash('message', 'ユーザー登録しました。');
-        return redirect()->route('admin.admin.list');
+        Admin::create($request->validated());
+
+        return redirect()
+            ->route('admin.admin.list')
+            ->with([
+                'severity' => 'success',
+                'message' => '新規管理者を登録しました',
+            ]);
     }
 }

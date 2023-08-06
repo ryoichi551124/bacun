@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Link } from '@inertiajs/react'
+import { Link, router } from '@inertiajs/react'
 import { theme } from '@/Theme/theme'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 type DeleteLinkProps = {
   deleteLink: string
+  id: number
 }
 
 const icon = css`
@@ -17,10 +18,14 @@ const icon = css`
   }
 `
 
-export default function DeleteLinkIcon({ deleteLink }: DeleteLinkProps) {
+export default function DeleteLinkIcon({ deleteLink, id }: DeleteLinkProps) {
+  const deleteAdmin = () => {
+    router.delete(`${deleteLink}${id}`)
+  }
+
   return (
-    <Link href={route(deleteLink)}>
+    <button onClick={deleteAdmin}>
       <DeleteIcon css={icon} />
-    </Link>
+    </button>
   )
 }

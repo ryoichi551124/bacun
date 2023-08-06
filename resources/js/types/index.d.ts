@@ -1,4 +1,5 @@
 import { Role } from '@/types/config'
+import type { AlertColor } from '@mui/material'
 
 export interface User {
   id: number
@@ -21,10 +22,17 @@ export type AdminAuth = {
   }
 }
 
+export type FlashMessage = {
+  severity: AlertColor
+  message: string
+}
+
 export type PageProps<
   T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
   auth: {
     user: User
   }
+} & {
+  flash: FlashMessage
 }
