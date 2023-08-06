@@ -5,9 +5,6 @@ namespace App\Http\Requests\Admin\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rules\Enum;
-use App\Enums\SexType;
-use App\Enums\UserStatusType;
 use App\Models\User;
 
 class CreateRequest extends FormRequest
@@ -29,7 +26,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'email'         => [
-                'required', 'email', 'confirmed', 'max:128',
+                'required', 'email', 'max:128',
                 Rule::unique(User::class)
             ],
             'password'      => ['required', 'confirmed', Password::defaults()],
@@ -43,13 +40,13 @@ class CreateRequest extends FormRequest
             'address'       => ['required', 'string', 'max:128'],
             'building'      => ['nullable', 'string', 'max:128'],
             'tel'           => ['nullable', 'regex:/^\d{10,11}$/i'],
-            'sex'           => ['nullable', new Enum(SexType::class)],
+            'sex'           => ['nullable', Rule::in(1, 2)],
             'birth_date'    => ['nullable', 'date'],
             'birth_year'    => ['nullable'],
             'birth_month'   => ['nullable'],
             'birth_day'     => ['nullable'],
             'memo'          => ['nullable', 'string'],
-            'status'        => ['required', new Enum(UserStatusType::class)],
+            'status'        => ['required', Rule::in(0, 1, 2)],
         ];
     }
 
@@ -99,7 +96,7 @@ class CreateRequest extends FormRequest
             'date'          => ':attributeは無効な日付です',
             'confirmed'     => '確認用の:attributeに誤りがあります',
             'unique'        => 'この:attributeはすでに登録されています',
-            'enum'          => ':attributeは無効な権限です',
+            'in'            => ':attributeは無効な値です',
         ];
     }
 

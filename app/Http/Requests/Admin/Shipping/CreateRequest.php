@@ -3,8 +3,7 @@
 namespace App\Http\Requests\Admin\shipping;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
-use App\Enums\SexType;
+use Illuminate\Validation\Rule;
 
 class CreateRequest extends FormRequest
 {
@@ -37,7 +36,7 @@ class CreateRequest extends FormRequest
             'shipping_building'     => ['nullable', 'string', 'max:128'],
             'shipping_tel'          => ['nullable', 'regex:/^\d{10,11}$/i'],
             'shipping_email'        => ['nullable', 'email', 'max:128'],
-            'shipping_sex'          => ['nullable', new Enum(SexType::class)],
+            'shipping_sex'          => ['nullable', Rule::in(1, 2)],
             'shipping_date'         => ['nullable', 'date'],
             'shipping_memo'         => ['nullable', 'string'],
             'tracking_number'       => ['nullable', 'string', 'max:128'],
@@ -86,7 +85,7 @@ class CreateRequest extends FormRequest
             'max'           => ':attributeは:max文字以内で入力してください',
             'regex'         => ':attributeは不正な値です',
             'date'          => ':attributeは無効な日付です',
-            'enum'          => ':attributeは無効な権限です',
+            'in'            => ':attributeは無効な値です',
         ];
     }
 }

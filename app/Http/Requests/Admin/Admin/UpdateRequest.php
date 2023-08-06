@@ -5,8 +5,6 @@ namespace App\Http\Requests\Admin\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rules\Enum;
-use App\Enums\AdminRoleType;
 use App\Models\Admin;
 
 class UpdateRequest extends FormRequest
@@ -29,11 +27,11 @@ class UpdateRequest extends FormRequest
         return [
             'name'      => ['required', 'string', 'max:64'],
             'email'     => [
-                'required', 'email', 'confirmed', 'max:128',
+                'required', 'email', 'max:128',
                 Rule::unique(Admin::class)->ignore($this->route('id'))
             ],
             'password'  => ['required', 'confirmed', Password::defaults()],
-            'role'      => ['required', new Enum(AdminRoleType::class)],
+            'role'      => ['required', Rule::in('admin', 'role')],
         ];
     }
 
@@ -66,7 +64,7 @@ class UpdateRequest extends FormRequest
             'confirmed'     => '確認用の:attributeに誤りがあります',
             'unique'        => 'この:attributeはすでに登録されています',
             'max'           => ':attributeは:max文字以内で入力してください',
-            'enum'          => ':attributeは無効な権限です',
+            'in'            => '無効な権限名です',
         ];
     }
 }

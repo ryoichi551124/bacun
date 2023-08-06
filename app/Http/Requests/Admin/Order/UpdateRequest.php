@@ -3,8 +3,7 @@
 namespace App\Http\Requests\Admin\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
-use App\Enums\SexType;
+use Illuminate\Validation\Rule;
 use App\Rules\UnsignedTinyInteger;
 use App\Rules\UnsignedMediumInteger;
 
@@ -38,7 +37,7 @@ class UpdateRequest extends FormRequest
             'order_building'    => ['nullable', 'string', 'max:128'],
             'order_tel'         => ['nullable', 'regex:/^\d{10,11}$/i'],
             'order_email'       => ['nullable', 'email', 'max:128'],
-            'order_sex'         => ['required', new Enum(SexType::class)],
+            'order_sex'         => ['required', Rule::in(1, 2)],
             'order_memo'        => ['nullable', 'string'],
             'order_status'      => ['required', new UnsignedTinyInteger],
             'subtotal'          => ['required', new UnsignedMediumInteger],
@@ -96,7 +95,7 @@ class UpdateRequest extends FormRequest
             'max'           => ':attributeは:max文字以内で入力してください',
             'regex'         => ':attributeは不正な値です',
             'date'          => ':attributeは無効な日付です',
-            'enum'          => ':attributeは無効な権限です',
+            'in'            => ':attributeは無効な値です',
         ];
     }
 }

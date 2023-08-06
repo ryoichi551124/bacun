@@ -3,8 +3,7 @@
 namespace App\Http\Requests\Admin\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
-use App\Enums\ProductStatusType;
+use Illuminate\Validation\Rule;
 use App\Rules\UnsignedTinyInteger;
 use App\Rules\UnsignedMediumInteger;
 
@@ -38,7 +37,7 @@ class UpdateRequest extends FormRequest
             'content3'          => ['nullable', 'string'],
             'content4'          => ['nullable', 'string'],
             'memo'              => ['nullable', 'string'],
-            'status'            => ['required', new Enum(ProductStatusType::class)],
+            'status'            => ['required', Rule::in(0, 1)],
             'tag'               => ['nullable', new UnsignedTinyInteger],
             'rank'              => ['nullable', new UnsignedMediumInteger],
             'regular_price'     => ['required', new UnsignedMediumInteger],
@@ -89,7 +88,7 @@ class UpdateRequest extends FormRequest
             'string'        => ':attributeは文字列を入力してください',
             'url'           => '不正なURLです',
             'max'           => ':attributeは:max文字以内で入力してください',
-            'enum'          => ':attributeは無効な権限です',
+            'in'            => ':attributeは無効な値です',
         ];
     }
 }
