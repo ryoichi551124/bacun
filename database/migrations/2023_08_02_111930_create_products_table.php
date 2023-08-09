@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('content3')->nullbale()->comment('商品説明3');
             $table->text('content4')->nullbale()->comment('商品説明4');
             $table->text('memo')->nullable()->comment('メモ');
+            $table->unsignedTinyInteger('stock')->comment('在庫数');
             $table->enum('status', [0, 1])->comment('ステータス [0 => "非公開", 1 => "公開"]');
             $table->unsignedTinyInteger('tag')->nullable()->comment('タグ ["新商品", "おすすめ商品", "限定品", etc...]');
             $table->unsignedMediumInteger('rank')->rank()->comment('並び順');

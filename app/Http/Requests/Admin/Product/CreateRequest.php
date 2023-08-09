@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\UnsignedTinyInteger;
 use App\Rules\UnsignedMediumInteger;
+use App\Rules\UnsignedSmallInteger;
 
 class CreateRequest extends FormRequest
 {
@@ -38,6 +39,7 @@ class CreateRequest extends FormRequest
             'content4'          => ['nullable', 'string'],
             'memo'              => ['nullable', 'string'],
             'status'            => ['required', Rule::in(0, 1)],
+            'stock'             => ['required', new UnsignedTinyInteger],
             'tag'               => ['nullable', new UnsignedTinyInteger],
             'rank'              => ['nullable', new UnsignedMediumInteger],
             'regular_price'     => ['required', new UnsignedMediumInteger],
@@ -68,6 +70,7 @@ class CreateRequest extends FormRequest
             'content4'          => '商品説明4',
             'memo'              => 'メモ',
             'status'            => 'ステータス',
+            'stock'             => '在庫数',
             'tag'               => 'タグ',
             'rank'              => '並び順',
             'regular_price'     => '通常料金',

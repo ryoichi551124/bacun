@@ -68,6 +68,7 @@ class UpdateRequest extends FormRequest
             'content4'          => '商品説明4',
             'memo'              => 'メモ',
             'status'            => 'ステータス',
+            'stock'             => '在庫数',
             'tag'               => 'タグ',
             'rank'              => '並び順',
             'regular_price'     => '通常料金',
