@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { ThemeProvider, Global, css } from '@emotion/react'
-import { theme } from '@/Theme/theme'
+import { Global, css } from '@emotion/react'
 import { PropsWithChildren } from 'react'
 import SideBar from '@/Components/Admin/Layout/SideBar'
 import Header from '@/Components/Admin/Layout/Header'

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { theme } from '@/Theme/theme'
+import { colors, utils } from '@/Styles'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useDispatch } from 'react-redux'
 import { setIsOpen } from '@/Stores/isSideOpen'
@@ -10,15 +10,15 @@ import AdminMenu from '@/Components/Admin/Layout/AdminMenu'
 
 const container = css`
   position: fixed;
-  width: calc(100% - ${theme.width.sideOpen});
-  height: ${theme.height.headerHeight};
-  background: ${theme.colors.lightGray};
+  width: calc(100% - ${utils.width.sideOpen});
+  height: ${utils.height.headerHeight};
+  background: ${colors.lightGray};
   padding: 0.5rem 1rem;
   box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
   transition: 0.5s;
 `
 const open = css`
-  width: calc(100% - ${theme.width.sideClose});
+  width: calc(100% - ${utils.width.sideClose});
 `
 const inner = css`
   display: flex;

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import BreadCrumbs from '@/Components/Admin/Layout/BreadCrumbs'
-import { theme } from '@/Theme/theme'
+import { fontSizes } from '@/Styles'
 
 type TitleProps = {
   title: string
@@ -13,7 +13,7 @@ const container = css`
   align-items: center;
 `
 const titleText = css`
-  font-size: ${theme.fontSize.lg};
+  font-size: ${fontSizes.lg};
 `
 
 export default function Title({ title }: TitleProps) {

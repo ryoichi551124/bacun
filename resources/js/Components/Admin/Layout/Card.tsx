@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { theme } from '@/Theme/theme'
+import { colors, utils, fontSizes } from '@/Styles'
 import { PropsWithChildren, ReactNode } from 'react'
 
 const container = css`
@@ -8,15 +8,15 @@ const container = css`
 `
 const card = css`
   width: 100%;
-  box-shadow: ${theme.util.cardShadow};
+  box-shadow: ${utils.cardShadow};
   border-radius: 10px;
 `
 const header = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${theme.colors.lightGray};
-  font-size: ${theme.fontSize.md};
+  background: ${colors.lightGray};
+  font-size: ${fontSizes.md};
   padding: 1rem 1.5rem;
 `
 

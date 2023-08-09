@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { theme } from '@/Theme/theme'
+import { colors } from '@/Styles'
 
 export const global = css`
   body {
-    color: ${theme.colors.font};
+    color: ${colors.font};
   }
 `

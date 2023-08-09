@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { theme } from '@/Theme/theme'
+import { utils } from '@/Styles'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import SellIcon from '@mui/icons-material/Sell'
 import CategoryIcon from '@mui/icons-material/Category'
@@ -12,7 +12,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import NavLink from '@/Components/Admin/Layout/NavLink'
 
 const container = css`
-  width: ${theme.width.sideOpen};
+  width: ${utils.width.sideOpen};
   display: flex;
   align-items: center;
   padding: 0.5rem;

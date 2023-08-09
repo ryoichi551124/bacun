@@ -1,15 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Link, usePage, router } from '@inertiajs/react'
-import {
-  formContainer,
-  wrap,
-  label,
-  input,
-  buttonWrap,
-  error,
-  errText,
-} from '@/Styles/Form'
+import { forms } from '@/Styles'
 import Card from '@/Components/Admin/Layout/Card'
 import Button from '@mui/material/Button'
 import { useForm } from 'react-hook-form'
@@ -55,69 +47,69 @@ export default function AdminUpdateForm() {
 
   return (
     <Card title="管理者編集">
-      <form onSubmit={handleSubmit(updateAdmin)} css={formContainer}>
+      <form onSubmit={handleSubmit(updateAdmin)} css={forms.container}>
         {/* 名前 */}
-        <div css={wrap}>
-          <label htmlFor="name" css={label}>
+        <div css={forms.wrap}>
+          <label htmlFor="name" css={forms.label}>
             名前
           </label>
           <input
             id="name"
-            css={[input, errors.name && error]}
+            css={[forms.input, errors.name && forms.error]}
             {...register('name')}
           />
-          {errors.name && <div css={errText}>{errors.name.message}</div>}
+          {errors.name && <div css={forms.errText}>{errors.name.message}</div>}
         </div>
         {/* メール */}
-        <div css={wrap}>
-          <label htmlFor="email" css={label}>
+        <div css={forms.wrap}>
+          <label htmlFor="email" css={forms.label}>
             メール
           </label>
           <input
             id="email"
-            css={[input, errors.email && error]}
+            css={[forms.input, errors.email && forms.error]}
             {...register('email')}
           />
-          {errors.email && <div css={errText}>{errors.email.message}</div>}
+          {errors.email && <div css={forms.errText}>{errors.email.message}</div>}
         </div>
         {/* パスワード */}
-        <div css={wrap}>
-          <label htmlFor="password" css={label}>
+        <div css={forms.wrap}>
+          <label htmlFor="password" css={forms.label}>
             パスワード
           </label>
           <input
             id="password"
             type="password"
             autoComplete="off"
-            css={[input, errors.password && error]}
+            css={[forms.input, errors.password && forms.error]}
             {...register('password')}
           />
           {errors.password && (
-            <div css={errText}>{errors.password.message}</div>
+            <div css={forms.errText}>{errors.password.message}</div>
           )}
         </div>
         {/* パスワード（確認） */}
-        <div css={wrap}>
-          <label htmlFor="password_confirmation" css={label}>
+        <div css={forms.wrap}>
+          <label htmlFor="password_confirmation" css={forms.label}>
             パスワード（確認）
           </label>
           <input
             id="password_confirmation"
             type="password"
             autoComplete="off"
-            css={[input, errors.password_confirmation && error]}
+            css={[forms.input, errors.password_confirmation && forms.error]}
             {...register('password_confirmation')}
           />
           {errors.password_confirmation && (
-            <div css={errText}>{errors.password_confirmation.message}</div>
+            <div css={forms.errText}>{errors.password_confirmation.message}</div>
           )}
         </div>
         {/* 権限 */}
-        <div css={wrap}>
-          <label htmlFor="role" css={label}>
+        <div css={forms.wrap}>
+          <label htmlFor="role" css={forms.label}>
             権限
           </label>
-          <select css={input} {...register('role')}>
+          <select css={forms.input} {...register('role')}>
             {roles.map((role) => (
               <option key={role[0]} value={role[0]}>
                 {role[1]}
@@ -126,7 +118,7 @@ export default function AdminUpdateForm() {
           </select>
         </div>
         {/* ボタン */}
-        <div css={buttonWrap}>
+        <div css={forms.buttonWrap}>
           <Link href={route('admin.admin.list')}>
             <Button variant="outlined" css={button}>
               戻る

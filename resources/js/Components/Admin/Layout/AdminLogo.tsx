@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { theme } from '@/Theme/theme'
+import { utils } from '@/Styles'
 import HomeIcon from '@mui/icons-material/Home'
 import { Link } from '@inertiajs/react'
 
 const container = css`
   display: flex;
   align-items: center;
-  height: ${theme.height.headerHeight};
+  height: ${utils.height.headerHeight};
   padding: 0.5rem;
   color: #fff;
   border-bottom: 1px solid #ccc;

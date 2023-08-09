@@ -2,19 +2,19 @@
 import { css } from '@emotion/react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
-import { theme } from '@/Theme/theme'
+import { colors, utils } from '@/Styles'
 import AdminLogo from '@/Components/Admin/Layout/AdminLogo'
 import SideNavi from '@/Components/Admin/Layout/SideNavi'
 
 const container = css`
-  width: ${theme.width.sideClose};
+  width: ${utils.width.sideClose};
   height: 100vh;
   overflow-y: scroll;
-  background: ${theme.colors.darkGray};
+  background: ${colors.darkGray};
   transition: 0.5s;
 `
 const open = css`
-  width: ${theme.width.sideOpen};
+  width: ${utils.width.sideOpen};
 `
 
 export default function SideBar() {

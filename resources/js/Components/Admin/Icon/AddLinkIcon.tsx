@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Link } from '@inertiajs/react'
-import { theme } from '@/Theme/theme'
+import { colors } from '@/Styles'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 
 type AddLinkProps = {
@@ -9,7 +9,7 @@ type AddLinkProps = {
 }
 
 const icon = css`
-  color: ${theme.colors.primary};
+  color: ${colors.primary};
   &:hover {
     transform: scale(1.1, 1.1);
     transition: 0.5s;
