@@ -53,7 +53,10 @@ export default function AdminListTable() {
                 <TableCell>{admin.email}</TableCell>
                 <TableCell>{roles[admin.role]}</TableCell>
                 <TableCell align="right" width="150">
-                  <EditLinkIcon editLink="admin.admin.list" />
+                  <EditLinkIcon
+                    editLink="/admin/admin/edit/"
+                    id={admin.id}
+                  />
                   <DeleteLinkIcon
                     deleteLink="/admin/admin/list/delete/"
                     id={admin.id}

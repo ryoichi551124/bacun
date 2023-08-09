@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Link } from '@inertiajs/react'
+import { router } from '@inertiajs/react'
 import { theme } from '@/Theme/theme'
 import EditIcon from '@mui/icons-material/Edit'
 
 type EditLinkProps = {
   editLink: string
+  id: number
 }
 
 const icon = css`
@@ -17,10 +18,14 @@ const icon = css`
   }
 `
 
-export default function EditLinkIcon({ editLink }: EditLinkProps) {
+export default function EditLinkIcon({ editLink, id }: EditLinkProps) {
+  const editAdmin = () => {
+    router.get(`${editLink}${id}`)
+  }
+
   return (
-    <Link href={route(editLink)}>
+    <button onClick={editAdmin}>
       <EditIcon css={icon} />
-    </Link>
+    </button>
   )
 }

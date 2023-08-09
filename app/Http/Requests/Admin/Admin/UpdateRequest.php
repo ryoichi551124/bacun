@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
                 Rule::unique(Admin::class)->ignore($this->route('id'))
             ],
             'password'  => ['required', 'confirmed', Password::defaults()],
-            'role'      => ['required', Rule::in('admin', 'role')],
+            'role'      => ['required', Rule::in('admin', 'member')],
         ];
     }
 

@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
 import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
 import Title from '@/Components/Admin/Layout/Title'
-import AdminCreateForm from '@/Pages/Admin/Admin/Partials/CreateForm'
+import AdminEditForm from '@/Pages/Admin/Admin/Partials/EditForm'
 
 const title = '管理者設定'
 
@@ -11,7 +11,7 @@ export default function AdminCreate() {
     <>
       <Head title={title} />
       <Title title={title} />
-      <AdminCreateForm />
+      <AdminEditForm />
     </>
   )
 }
