@@ -2,7 +2,7 @@
 import { css } from '@emotion/react'
 import { Link, usePage, router } from '@inertiajs/react'
 import { forms } from '@/Styles'
-import Card from '@/Components/Admin/Layout/Card'
+import Card from '@/Components/Admin/Common/Card'
 import Button from '@mui/material/Button'
 import { useForm } from 'react-hook-form'
 import updateAdminSchema, {

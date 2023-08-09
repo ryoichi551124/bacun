@@ -2,7 +2,7 @@
 import { css } from '@emotion/react'
 import { Link, usePage } from '@inertiajs/react'
 import AlertMessage from '@/Components/Admin/FeedBack/AlertMessage'
-import Card from '@/Components/Admin/Layout/Card'
+import Card from '@/Components/Admin/Common/Card'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import BreadCrumbs from '@/Components/Admin/Layout/BreadCrumbs'
+import BreadCrumbs from '@/Components/Admin/Common/BreadCrumbs'
 import { fontSizes } from '@/Styles'
 
 type TitleProps = {

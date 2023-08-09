@@ -3,8 +3,8 @@ import { css } from '@emotion/react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
 import { colors, utils } from '@/Styles'
-import AdminLogo from '@/Components/Admin/Layout/AdminLogo'
-import SideNavi from '@/Components/Admin/Layout/SideNavi'
+import AdminLogo from '@/Components/Admin/Common/AdminLogo'
+import SideNav from '@/Components/Admin/Layout/SideNav'
 
 const container = css`
   width: ${utils.width.sideClose};
@@ -25,7 +25,7 @@ export default function SideBar() {
   return (
     <aside css={[container, isOpen && open]}>
       <AdminLogo />
-      <SideNavi />
+      <SideNav />
     </aside>
   )
 }

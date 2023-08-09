@@ -10,7 +10,7 @@ const activeLink = css`
   color: #212529;
 `
 
-export default function NavLink({
+export default function SideNavLink({
   active = false,
   children,
   ...props
