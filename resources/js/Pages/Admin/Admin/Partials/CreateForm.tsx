@@ -47,10 +47,13 @@ export default function AdminCreateForm() {
             </label>
             <input
               id="name"
+              placeholder="名前"
               css={[forms.input, errors.name && forms.error]}
               {...register('name')}
             />
-            {errors.name && <div css={forms.errText}>{errors.name.message}</div>}
+            {errors.name && (
+              <div css={forms.errText}>{errors.name.message}</div>
+            )}
           </Grid>
           <Grid xs={6}></Grid>
           {/* メール */}
@@ -60,6 +63,7 @@ export default function AdminCreateForm() {
             </label>
             <input
               id="email"
+              placeholder="メールアドレス"
               css={[forms.input, errors.email && forms.error]}
               {...register('email')}
             />
@@ -75,6 +79,7 @@ export default function AdminCreateForm() {
             </label>
             <input
               id="password"
+              placeholder="パスワード"
               type="password"
               autoComplete="off"
               css={[forms.input, errors.password && forms.error]}
@@ -92,6 +97,7 @@ export default function AdminCreateForm() {
             </label>
             <input
               id="password_confirmation"
+              placeholder="パスワード（確認）"
               type="password"
               autoComplete="off"
               css={[forms.input, errors.password_confirmation && forms.error]}
