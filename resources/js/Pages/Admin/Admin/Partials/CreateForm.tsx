@@ -9,7 +9,7 @@ import createAdminSchema, {
   CreateAdminSchemaType,
 } from '@/Schemas/Admin/Admin/CreateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { AdminRoles } from '@/types/config'
+import type { AdminRoles } from '@/Types'
 
 const button = css`
   margin-right: 2rem;
@@ -60,7 +60,9 @@ export default function AdminCreateForm() {
             css={[forms.input, errors.email && forms.error]}
             {...register('email')}
           />
-          {errors.email && <div css={forms.errText}>{errors.email.message}</div>}
+          {errors.email && (
+            <div css={forms.errText}>{errors.email.message}</div>
+          )}
         </div>
         {/* パスワード */}
         <div css={forms.wrap}>
@@ -91,7 +93,9 @@ export default function AdminCreateForm() {
             {...register('password_confirmation')}
           />
           {errors.password_confirmation && (
-            <div css={forms.errText}>{errors.password_confirmation.message}</div>
+            <div css={forms.errText}>
+              {errors.password_confirmation.message}
+            </div>
           )}
         </div>
         {/* 権限 */}

@@ -3,7 +3,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { useState } from 'react'
 import { usePage } from '@inertiajs/react'
-import type { AdminAuth } from '@/types'
+import type { AdminAuth } from '@/Types'
 
 export default function AdminMenu() {
   const { props } = usePage<AdminAuth>()

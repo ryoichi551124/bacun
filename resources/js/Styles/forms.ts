@@ -26,10 +26,10 @@ export const forms = {
     padding: 1.5rem 0;
   `,
   error: css`
-    border: 1px solid ${colors.error}
+    border: 1px solid ${colors.error};
   `,
   errText: css`
     color: ${colors.error};
     font-size: ${fontSizes.xs};
-  `
+  `,
 }

@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import AuthenticatedLayout from '@/Layouts/Web/AuthenticatedLayout'
 import { Head } from '@inertiajs/react'
-import { PageProps } from '@/types'
+import { PageProps } from '@/Types'
 import { css } from '@emotion/react'
 
 export default function Dashboard({ auth }: PageProps) {

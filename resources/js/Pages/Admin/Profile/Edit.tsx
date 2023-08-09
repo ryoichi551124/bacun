@@ -1,9 +1,7 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import { Head } from '@inertiajs/react'
-import { PageProps } from '@/types'
+import type { PageProps } from '@/Types'
 import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
-import { router, usePage } from '@inertiajs/react'
+import { usePage } from '@inertiajs/react'
 
 export default function Edit({
   auth,

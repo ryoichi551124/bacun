@@ -9,8 +9,7 @@ import updateAdminSchema, {
   UpdateAdminSchemaType,
 } from '@/Schemas/Admin/Admin/UpdateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { AdminRoles } from '@/types/config'
-import { Admin } from '@/types'
+import type { Admin, AdminRoles } from '@/Types'
 
 const button = css`
   margin-right: 2rem;
@@ -41,7 +40,7 @@ export default function AdminUpdateForm() {
   })
 
   const updateAdmin = (data: UpdateAdminSchemaType) => {
-    console.log(data);
+    console.log(data)
     router.put(`/admin/admin/edit/update/${admin.id}`, data)
   }
 
@@ -70,7 +69,9 @@ export default function AdminUpdateForm() {
             css={[forms.input, errors.email && forms.error]}
             {...register('email')}
           />
-          {errors.email && <div css={forms.errText}>{errors.email.message}</div>}
+          {errors.email && (
+            <div css={forms.errText}>{errors.email.message}</div>
+          )}
         </div>
         {/* パスワード */}
         <div css={forms.wrap}>
@@ -101,7 +102,9 @@ export default function AdminUpdateForm() {
             {...register('password_confirmation')}
           />
           {errors.password_confirmation && (
-            <div css={forms.errText}>{errors.password_confirmation.message}</div>
+            <div css={forms.errText}>
+              {errors.password_confirmation.message}
+            </div>
           )}
         </div>
         {/* 権限 */}

@@ -11,8 +11,7 @@ import TableRow from '@mui/material/TableRow'
 import AddLinkIcon from '@/Components/Admin/Icon/AddLinkIcon'
 import EditLinkIcon from '@/Components/Admin/Icon/EditLinkIcon'
 import DeleteLinkIcon from '@/Components/Admin/Icon/DeleteLinkIcon'
-import type { Admin, FlashMessage } from '@/types'
-import type { AdminRoles } from '@/types/config'
+import type { Admin, AdminRoles, FlashMessage } from '@/Types'
 
 type AdminData = {
   admins: Admin[]
@@ -53,10 +52,7 @@ export default function AdminListTable() {
                 <TableCell>{admin.email}</TableCell>
                 <TableCell>{roles[admin.role]}</TableCell>
                 <TableCell align="right" width="150">
-                  <EditLinkIcon
-                    editLink="/admin/admin/edit/"
-                    id={admin.id}
-                  />
+                  <EditLinkIcon editLink="/admin/admin/edit/" id={admin.id} />
                   <DeleteLinkIcon
                     deleteLink="/admin/admin/list/delete/"
                     id={admin.id}

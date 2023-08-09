@@ -1,6 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout'
 import { Head } from '@inertiajs/react'
-import { PageProps } from '@/types'
+import type { PageProps } from '@/Types'
 
 export default function Dashboard({ auth }: PageProps) {
   return (
