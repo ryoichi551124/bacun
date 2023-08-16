@@ -6,40 +6,47 @@ import Card from '@/Components/Admin/Common/Card'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
-import createAdminSchema, {
-  CreateAdminSchemaType,
-} from '@/Schemas/Admin/Admin/CreateSchema'
+import updateAdminSchema, {
+  UpdateAdminSchemaType,
+} from '@/Schemas/Admin/Admin/UpdateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { AdminRoles } from '@/Types'
+import type { Admin, AdminRoles } from '@/Types'
 
 const button = css`
   margin-right: 2rem;
 `
 
 type AdminData = {
+  admin: Admin
   roles: AdminRoles
 }
 
-export default function AdminCreateForm() {
+export default function AdminUpdateForm() {
   const { props } = usePage<AdminData>()
+  const admin = props.admin
   const roles = Object.entries(props.roles)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateAdminSchemaType>({
+  } = useForm<UpdateAdminSchemaType>({
+    defaultValues: {
+      name: admin.name,
+      email: admin.email,
+      role: admin.role,
+    },
     reValidateMode: 'onBlur',
-    resolver: zodResolver(createAdminSchema),
+    resolver: zodResolver(updateAdminSchema),
   })
 
-  const createAdmin = (data: CreateAdminSchemaType) => {
-    router.post('/admin/admin/create/create', data)
+  const updateAdmin = (data: UpdateAdminSchemaType) => {
+    router.put(`/admin/admin/edit/update/${admin.id}`, data)
   }
 
   return (
-    <Card title="管理者新規作成">
-      <form onSubmit={handleSubmit(createAdmin)} css={forms.container}>
+    <Card title="管理者編集">
+      <form onSubmit={handleSubmit(updateAdmin)} css={forms.container}>
         <Grid container spacing={2}>
           {/* 名前 */}
           <Grid xs={6}>
@@ -133,7 +140,7 @@ export default function AdminCreateForm() {
               </Button>
             </Link>
             <Button type="submit" variant="contained">
-              作成
+              編集
             </Button>
           </Grid>
         </Grid>
