@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Admin\Basic\Edit;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Basic;
+use Inertia\Inertia;
 
 class IndexController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        //
+        $basic = Basic::Data()->first();
+
+        return Inertia::render('Admin/Basic/Edit', ['basic' => $basic]);
     }
 }

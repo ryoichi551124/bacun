@@ -22,16 +22,17 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_name'  => ['required', 'string', 'max:128'],
+            'company_name'  => ['nullable', 'string', 'max:128'],
             'company_kana'  => ['nullable', 'string', 'max:128'],
-            'zip_code'      => ['nullable', 'regex:/^\d{7}$/i'],
+            'zip_code1'     => ['nullable', 'regex:/^[0-9]{3}-[0-9]{4}$/i'],
+            'zip_code2'     => ['nullable', 'regex:/^[0-9]{3}-[0-9]{4}$/i'],
             'address1'      => ['nullable', 'string', 'max:256'],
             'address2'      => ['nullable', 'string', 'max:256'],
-            'tel1'          => ['nullable', 'regex:/^\d{10,11}$/i'],
-            'tel2'          => ['nullable', 'regex:/^\d{10,11}$/i'],
+            'tel1'          => ['nullable', 'regex:/^([0-9]|-){12,13}$/i'],
+            'tel2'          => ['nullable', 'regex:/^([0-9]|-){12,13}$/i'],
             'email1'        => ['nullable', 'email', 'max:128'],
             'email2'        => ['nullable', 'email', 'max:128'],
-            'shop_name'     => ['required', 'string', 'max:128'],
+            'shop_name'     => ['nullable', 'string', 'max:128'],
             'shop_kana'     => ['nullable', 'string', 'max:128'],
             'shop_message'  => ['nullable', 'string'],
         ];
@@ -47,9 +48,10 @@ class UpdateRequest extends FormRequest
         return [
             'company_name'  => '会社名',
             'compnay_kana'  => '会社名カナ',
-            'zip_code'      => '会社郵便番号',
-            'address1'      => '住所1',
-            'address2'      => '住所2',
+            'zip_code1'     => '会社郵便番号1',
+            'zip_code2'     => '会社郵便番号2',
+            'address1'      => '会社住所1',
+            'address2'      => '会社住所2',
             'tel1'          => '電話番号1',
             'tel2'          => '電話番号2',
             'email1'        => 'メールアドレス1',

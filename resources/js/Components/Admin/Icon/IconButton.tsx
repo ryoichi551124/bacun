@@ -59,7 +59,7 @@ function withIconStyle(
   Icon: typeof SvgIcon,
 ): React.ComponentType<IconButtonProps> {
   const IconWithStyle = (props: IconButtonProps) => {
-    const { onClick, className, size = "sm", ...rest } = props
+    const { onClick, className, size = 'sm', ...rest } = props
     const cursor = onClick ? 'pointer' : ''
 
     return (

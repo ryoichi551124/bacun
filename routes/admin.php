@@ -176,18 +176,11 @@ Route::middleware('auth:admin')->group(function () {
             ->name('edit.update');
     });
 
+    // 基本情報
     Route::prefix('basic')->name('basic.')->group(function () {
-        Route::get('/list', Basic\List\IndexController::class)
-            ->name('list');
-        Route::delete('/list/delete/{id}', Basic\List\DeleteController::class)
-            ->name('list.delete');
-        Route::get('/create', Basic\Create\IndexController::class)
-            ->name('create');
-        Route::post('/create/create', Basic\Create\CreateController::class)
-            ->name('create.create');
-        Route::get('/edit/{id}', Basic\Edit\IndexController::class)
+        Route::get('/edit', Basic\Edit\IndexController::class)
             ->name('edit');
-        Route::put('/edit/update/{id}', Basic\Edit\UpdateController::class)
+        Route::put('/edit/update', Basic\Edit\UpdateController::class)
             ->name('edit.update');
     });
 });

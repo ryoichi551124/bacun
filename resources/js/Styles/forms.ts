@@ -5,7 +5,7 @@ import { colors, fontSizes } from '@/Styles'
 export const forms = {
   container: css`
     padding: 1rem 1.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     font-size: ${fontSizes.ss};
   `,
   label: css`

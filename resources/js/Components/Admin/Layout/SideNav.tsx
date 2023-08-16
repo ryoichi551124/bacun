@@ -100,7 +100,7 @@ export default function SideNav() {
         <SideNavLink
           css={navMenu}
           active={route().current('admin.basic.*')}
-          href={route('admin.basic.list')}
+          href={route('admin.basic.edit')}
         >
           <SettingsIcon css={icon} />
           <div>基本情報</div>

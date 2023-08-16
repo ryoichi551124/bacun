@@ -10,6 +10,7 @@ import AdminMenu from '@/Components/Admin/Layout/AdminMenu'
 
 const container = css`
   position: fixed;
+  z-index: 99999;
   width: calc(100% - ${utils.width.sideOpen});
   height: ${utils.height.headerHeight};
   background: ${colors.lightGray};
