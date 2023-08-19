@@ -8,7 +8,7 @@ if (!function_exists('combine_zip')) {
      * @param string $zip_code2
      * @return array
      */
-    function combine_zip(string $zip_code1, string $zip_code2): array
+    function combine_zip(?string $zip_code1, ?string $zip_code2): array
     {
         if ($zip_code1 && $zip_code2) {
             return ['zip_code' => $zip_code1 . $zip_code2];
@@ -24,7 +24,7 @@ if (!function_exists('split_zip')) {
      * @param string $zip_code
      * @return array
      */
-    function split_zip(string $zip_code): array
+    function split_zip(?string $zip_code): array
     {
         if ($zip_code) {
             return [
@@ -45,7 +45,7 @@ if (!function_exists('combine_birth')) {
      * @param string $birth_day
      * @return array
      */
-    function combine_birth(string $birth_year, string $birth_month, string $birth_day): array
+    function combine_birth(?string $birth_year, ?string $birth_month, ?string $birth_day): array
     {
         if ($birth_year && $birth_month && $birth_day) {
             return ['birth_date' => implode('-', [
@@ -63,7 +63,7 @@ if (!function_exists('split_birth')) {
      * @param string $birth_date
      * @return array
      */
-    function split_birth(string $birth_date): array
+    function split_birth(?string $birth_date): array
     {
         if ($birth_date) {
             $birth_array = explode('-', $birth_date);
@@ -86,7 +86,7 @@ if (!function_exists('combine_tel')) {
      * @param string $tel3
      * @return array
      */
-    function combine_tel(string $tel1, string $tel2, string $tel3): array
+    function combine_tel(?string $tel1, ?string $tel2, ?string $tel3): array
     {
         if ($tel1 && $tel2 && $tel3) {
             return ['tel' => $tel1 . $tel2 . $tel3];
@@ -102,7 +102,7 @@ if (!function_exists('split_tel')) {
      * @param string $tel
      * @return array
      */
-    function split_tel(string $tel): array
+    function split_tel(?string $tel): array
     {
         if ($tel) {
             return [
