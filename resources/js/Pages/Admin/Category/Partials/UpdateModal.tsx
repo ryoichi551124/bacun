@@ -10,7 +10,7 @@ import Modal from '@mui/material/Modal'
 import EditIcon from '@mui/icons-material/Edit'
 import { useForm } from 'react-hook-form'
 import updateCategorySchema, {
-  UpdateCategorySchemaType
+  UpdateCategorySchemaType,
 } from '@/Schemas/Admin/Category/UpdateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Category } from '@/Types'
@@ -61,10 +61,7 @@ export default function CategoryUpdateModal({ id, name }: Category) {
       <Button onClick={handleOpen}>
         <EditIcon css={icon} />
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box css={modal}>
           <form onSubmit={handleSubmit(updateCategory)}>
             <div css={title}>カテゴリーの編集</div>
@@ -90,5 +87,5 @@ export default function CategoryUpdateModal({ id, name }: Category) {
         </Box>
       </Modal>
     </>
-  );
+  )
 }

@@ -26,7 +26,11 @@ const icon = css`
   }
 `
 
-export default function DeleteLinkIcon({ deleteLink, id, target }: DeleteLinkProps) {
+export default function DeleteLinkIcon({
+  deleteLink,
+  id,
+  target,
+}: DeleteLinkProps) {
   const [open, setOpen] = useState<boolean>(false)
 
   const handleClickOpen = () => {
@@ -47,13 +51,8 @@ export default function DeleteLinkIcon({ deleteLink, id, target }: DeleteLinkPro
       <button onClick={handleClickOpen}>
         <DeleteIcon css={icon} />
       </button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>
-          {target}を削除してもよろしいですか？
-        </DialogTitle>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{target}を削除してもよろしいですか？</DialogTitle>
         <DialogContent>
           <DialogContentText>
             この操作は取り消すことが出来ません

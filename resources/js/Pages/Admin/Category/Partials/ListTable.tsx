@@ -30,7 +30,7 @@ export default function CategoryListTable() {
             </TableRow>
           </TableHead>
           {categories.length === 0 ? (
-              <NoTableData />
+            <NoTableData />
           ) : (
             <TableBody>
               {categories.map((category) => (

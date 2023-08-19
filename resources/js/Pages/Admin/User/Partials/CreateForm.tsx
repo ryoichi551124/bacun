@@ -357,17 +357,18 @@ export default function UserCreateForm() {
           {/* ステータス */}
           <Grid xs={6}>
             <div css={forms.label}>ステータス</div>
-            {statuses && statuses.map((status) => (
-              <label key={status[0]} css={forms.radioLabel}>
-                <input
-                  type="radio"
-                  value={status[0]}
-                  css={forms.radioInput}
-                  {...register('status')}
-                />
-                {status[1]}
-              </label>
-            ))}
+            {statuses &&
+              statuses.map((status) => (
+                <label key={status[0]} css={forms.radioLabel}>
+                  <input
+                    type="radio"
+                    value={status[0]}
+                    css={forms.radioInput}
+                    {...register('status')}
+                  />
+                  {status[1]}
+                </label>
+              ))}
           </Grid>
           <Grid xs={6}></Grid>
           {/* ボタン */}

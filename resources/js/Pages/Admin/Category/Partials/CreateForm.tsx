@@ -16,7 +16,7 @@ export default function CategoryCreateForm() {
     register,
     handleSubmit,
     reset,
-    formState: { errors }
+    formState: { errors },
   } = useForm<CreateCategorySchemaType>({
     reValidateMode: 'onBlur',
     resolver: zodResolver(createCategorySchema),
@@ -56,7 +56,7 @@ export default function CategoryCreateForm() {
             <>
               <Grid xs={1}></Grid>
               <Grid xs={11} css={pt0}>
-                  <div css={forms.errText}>{errors.name.message}</div>
+                <div css={forms.errText}>{errors.name.message}</div>
               </Grid>
             </>
           )}
