@@ -1,4 +1,5 @@
-export * from '@/Styles/Colors'
+export * from '@/Styles/colors'
 export * from '@/Styles/fontSizes'
+export * from '@/Styles/modal'
 export * from '@/Styles/utils'
 export * from '@/Styles/forms'

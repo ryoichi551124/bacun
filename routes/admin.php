@@ -113,12 +113,8 @@ Route::middleware('auth:admin')->group(function () {
             ->name('list');
         Route::delete('/list/delete/{id}', Category\List\DeleteController::class)
             ->name('list.delete');
-        Route::get('/create', Category\Create\IndexController::class)
-            ->name('create');
-        Route::post('create.create', Category\Create\CreateController::class)
+        Route::post('/create/create', Category\Create\CreateController::class)
             ->name('create.create');
-        Route::get('/edit/{id}', Category\Edit\IndexController::class)
-            ->name('edit');
         Route::put('/edit/update/{id}', Category\Edit\UpdateController::class)
             ->name('edit.update');
     });

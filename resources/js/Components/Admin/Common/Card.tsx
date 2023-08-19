@@ -18,6 +18,7 @@ const header = css`
   background: ${colors.lightGray};
   font-size: ${fontSizes.md};
   padding: 1rem 1.5rem;
+  border-radius: 10px 10px 0 0;
 `
 
 type CardProps = {

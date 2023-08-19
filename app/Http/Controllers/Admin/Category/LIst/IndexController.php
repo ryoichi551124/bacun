@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Category\List;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Category;
 use Inertia\Inertia;
 
 class IndexController extends Controller
@@ -11,8 +11,12 @@ class IndexController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        return Inertia::render('Admin/Category/List');
+        $categories = Category::all();
+
+        return Inertia::render('Admin/Category/List', [
+            'categories' => $categories,
+        ]);
     }
 }

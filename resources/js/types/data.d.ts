@@ -70,6 +70,11 @@ export type Basic = {
   basic: Partial<Company> & Partial<Shop>
 }
 
+export type Category = {
+  id: number
+  name: string
+}
+
 export type FlashMessage = {
   severity: AlertColor
   message: string

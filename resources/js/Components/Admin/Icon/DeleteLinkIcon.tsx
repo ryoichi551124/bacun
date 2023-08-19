@@ -52,7 +52,7 @@ export default function DeleteLinkIcon({ deleteLink, id, target }: DeleteLinkPro
         onClose={handleClose}
       >
         <DialogTitle>
-          {target}の登録情報を削除してもよろしいですか？
+          {target}を削除してもよろしいですか？
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
