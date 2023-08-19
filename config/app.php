@@ -168,6 +168,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /**
+         * カスタムヘルパ読み込み用プロバイダ
+         */
+        App\Providers\CustomHelperServiceProvider::class,
+
     ])->toArray(),
 
     /*
