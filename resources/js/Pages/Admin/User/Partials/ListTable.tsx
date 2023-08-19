@@ -60,6 +60,7 @@ export default function UserListTable() {
                     <DeleteLinkIcon
                       deleteLink="/admin/user/list/delete/"
                       id={user.id}
+                      target={`${user.last_name}${user.first_name}`}
                     />
                   </TableCell>
                 </TableRow>

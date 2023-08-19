@@ -49,7 +49,7 @@ class Admin extends Authenticatable
      * IDによるスコープ
      *
      * @param Builder $query
-     * @param int $id
+     * @param integer|null $id
      * @return void
      */
     public function scopeId(Builder $query, int $id = null): void

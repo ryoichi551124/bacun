@@ -6,11 +6,11 @@ import Card from '@/Components/Admin/Common/Card'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
-import createUserSchema, {
-  CreateUserSchemaType,
-} from '@/Schemas/Admin/User/CreateSchema'
+import updateUserSchema, {
+  UpdateUserSchemaType,
+} from '@/Schemas/Admin/User/UpdateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { UserStatuses, Pref } from '@/Types'
+import type { User, UserStatuses, Pref } from '@/Types'
 
 const flex = css`
   display: flex;
@@ -21,12 +21,14 @@ const button = css`
 `
 
 type UserData = {
+  user: User
   statuses: UserStatuses
   prefs: Pref
 }
 
-export default function UserCreateForm() {
+export default function UserUpdateForm() {
   const { props } = usePage<UserData>()
+  const user = props.user
   const statuses = Object.entries(props.statuses)
   const prefs = Object.entries(props.prefs)
 
@@ -34,18 +36,18 @@ export default function UserCreateForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateUserSchemaType>({
+  } = useForm<UpdateUserSchemaType>({
     reValidateMode: 'onBlur',
-    defaultValues: { sex: '1', status: '1' },
-    resolver: zodResolver(createUserSchema),
+    defaultValues: user,
+    resolver: zodResolver(updateUserSchema),
   })
 
-  const createUser = (data: CreateUserSchemaType) => {
-    router.post('/admin/user/create/create', data)
+  const createUser = (data: UpdateUserSchemaType) => {
+    router.put(`/admin/user/edit/update/${user.id}`, data)
   }
 
   return (
-    <Card title="顧客新規作成">
+    <Card title="顧客編集">
       <form onSubmit={handleSubmit(createUser)} css={forms.container}>
         <Grid container spacing={2}>
           {/* 名前（漢字） */}
@@ -378,7 +380,7 @@ export default function UserCreateForm() {
               </Button>
             </Link>
             <Button type="submit" variant="contained">
-              作成
+              編集
             </Button>
           </Grid>
         </Grid>

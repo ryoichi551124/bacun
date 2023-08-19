@@ -58,6 +58,7 @@ export default function AdminListTable() {
                     <DeleteLinkIcon
                       deleteLink="/admin/admin/list/delete/"
                       id={admin.id}
+                      target={admin.name}
                     />
                   </TableCell>
                 </TableRow>

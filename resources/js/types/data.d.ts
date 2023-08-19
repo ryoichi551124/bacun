@@ -1,4 +1,4 @@
-import { Role, Statuses } from '@/Types/config'
+import { Role, Sex, Statuses } from '@/Types/config'
 import type { AlertColor } from '@mui/material'
 
 export interface User {
@@ -10,14 +10,19 @@ export interface User {
   first_name: string
   last_kana: string
   first_kana: string
-  zip_code: string
+  zip_code1: string
+  zip_code2: string
   pref: string
   city: string
-  addresss: string
+  address: string
   building?: string
-  tel: string
-  sex: 1 | 2
-  birth_date: Date
+  tel1: string
+  tel2: string
+  tel3: string
+  sex: Sex
+  birth_year: string
+  birth_month: string
+  birth_day: string
   memo: string
   status: Statuses
 }

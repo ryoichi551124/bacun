@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 
-class UpdateRequeset extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -42,9 +42,6 @@ class UpdateRequeset extends FormRequest
             'tel'           => ['nullable', 'regex:/^\d{10,11}$/i'],
             'sex'           => ['nullable', Rule::in(1, 2)],
             'birth_date'    => ['nullable', 'date'],
-            'birth_year'    => ['nullable'],
-            'birth_month'   => ['nullable'],
-            'birth_day'     => ['nullable'],
             'memo'          => ['nullable', 'string'],
             'status'        => ['required', Rule::in(0, 1, 2)],
         ];
@@ -72,9 +69,6 @@ class UpdateRequeset extends FormRequest
             'tel'           => '電話番号',
             'sex'           => '性別',
             'birth_date'    => '誕生日',
-            'birth_year'    => '年',
-            'birth_month'   => '月',
-            'birth_day'     => '日',
             'memo'          => 'メモ',
             'status'        => 'ステータス',
         ];
@@ -108,25 +102,13 @@ class UpdateRequeset extends FormRequest
         $input = $this->all();
 
         // 誕生日
-        if ($input['birth_year'] && $input['birth_month'] && $input['birth_day']) {
-            $this->merge([
-                'birth_date' => implode('-', [
-                    $input['birth_year'],
-                    $input['birth_month'],
-                    $input['birth_day']
-                ])
-            ]);
-        }
+        $this->merge(combine_birth($input['birth_year'], $input['birth_month'], $input['birth_day']));
 
         // 郵便番号
-        if ($input['zip_code1'] && $input['zip_code2']) {
-            $this->merge(['zip_code' => $input['zip_code1'] . $input['zip_code2']]);
-        }
+        $this->merge(combine_zip($input['zip_code1'], $input['zip_code2']));
 
         // 電話番号
-        if ($input['tel1'] && $input['tel2'] && $input['tel3']) {
-            $this->merge(['tel' => $input['tel1'] . $input['tel2'] . $input['tel3']]);
-        }
+        $this->merge(combine_tel($input['tel1'], $input['tel2'], $input['tel3']));
 
         return parent::getValidatorInstance();
     }

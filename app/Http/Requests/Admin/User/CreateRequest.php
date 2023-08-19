@@ -108,25 +108,13 @@ class CreateRequest extends FormRequest
         $input = $this->all();
 
         // 誕生日
-        if ($input['birth_year'] && $input['birth_month'] && $input['birth_day']) {
-            $this->merge([
-                'birth_date' => implode('-', [
-                    $input['birth_year'],
-                    $input['birth_month'],
-                    $input['birth_day']
-                ])
-            ]);
-        }
+        $this->merge(combine_birth($input['birth_year'], $input['birth_month'], $input['birth_day']));
 
         // 郵便番号
-        if ($input['zip_code1'] && $input['zip_code2']) {
-            $this->merge(['zip_code' => $input['zip_code1'] . $input['zip_code2']]);
-        }
+        $this->merge(combine_zip($input['zip_code1'], $input['zip_code2']));
 
         // 電話番号
-        if ($input['tel1'] && $input['tel2'] && $input['tel3']) {
-            $this->merge(['tel' => $input['tel1'] . $input['tel2'] . $input['tel3']]);
-        }
+        $this->merge(combine_tel($input['tel1'], $input['tel2'], $input['tel3']));
 
         return parent::getValidatorInstance();
     }
