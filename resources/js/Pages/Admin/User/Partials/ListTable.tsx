@@ -1,4 +1,6 @@
-import { usePage } from '@inertiajs/react'
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
+import { Link, usePage } from '@inertiajs/react'
 import AlertMessage from '@/Components/Admin/FeedBack/AlertMessage'
 import NoTableData from '@/Components/Admin/Common/NoTableData'
 import Card from '@/Components/Admin/Common/Card'
@@ -10,54 +12,54 @@ import TableRow from '@mui/material/TableRow'
 import AddLinkIcon from '@/Components/Admin/Icon/AddLinkIcon'
 import EditLinkIcon from '@/Components/Admin/Icon/EditLinkIcon'
 import DeleteLinkIcon from '@/Components/Admin/Icon/DeleteLinkIcon'
-import type { Admin, AdminRoles, FlashMessage } from '@/Types'
+import type { User, UserStatuses, FlashMessage } from '@/Types'
+import { ConnectingAirportsOutlined } from '@mui/icons-material'
 
-type AdminData = {
-  admins: Admin[]
-  roles: AdminRoles
+type UserData = {
+  users: User[]
+  statuses: UserStatuses
   flash: FlashMessage
 }
 
-export default function AdminListTable() {
-  const { admins, roles, flash } = usePage<AdminData>().props
+export default function UserListTable() {
+  const { users, statuses, flash } = usePage<UserData>().props
 
   return (
     <>
       {flash.message && <AlertMessage {...flash} />}
-      <Card
-        title="管理者一覧"
-        icon={<AddLinkIcon addLink="admin.admin.create" />}
-      >
+      <Card title="顧客一覧" icon={<AddLinkIcon addLink="admin.user.create" />}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell>名前</TableCell>
               <TableCell>メール</TableCell>
-              <TableCell>権限</TableCell>
+              <TableCell>ステータス</TableCell>
               <TableCell align="center"></TableCell>
             </TableRow>
           </TableHead>
-          {admins.length === 0 ? (
+          {users.length === 0 ? (
             <NoTableData />
           ) : (
             <TableBody>
-              {admins.map((admin) => (
+              {users.map((user) => (
                 <TableRow
-                  key={admin.id}
+                  key={user.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {admin.id}
+                    {user.id}
                   </TableCell>
-                  <TableCell>{admin.name}</TableCell>
-                  <TableCell>{admin.email}</TableCell>
-                  <TableCell>{roles[admin.role]}</TableCell>
+                  <TableCell>
+                    {user.last_name} {user.first_name}
+                  </TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{statuses[user.status]}</TableCell>
                   <TableCell align="right" width="150">
-                    <EditLinkIcon editLink="/admin/admin/edit/" id={admin.id} />
+                    <EditLinkIcon editLink="/admin/user/edit/" id={user.id} />
                     <DeleteLinkIcon
-                      deleteLink="/admin/admin/list/delete/"
-                      id={admin.id}
+                      deleteLink="/admin/user/list/delete/"
+                      id={user.id}
                     />
                   </TableCell>
                 </TableRow>

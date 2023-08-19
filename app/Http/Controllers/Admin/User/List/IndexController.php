@@ -3,16 +3,22 @@
 namespace App\Http\Controllers\Admin\User\List;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Inertia;
 
 class IndexController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * 顧客一覧
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        return Inertia::render('Admin/User/List');
+        $users = User::all();
+        $statuses = config('user.status');
+
+        return Inertia::render('Admin/User/List', [
+            'users' => $users,
+            'statuses' => $statuses,
+        ]);
     }
 }

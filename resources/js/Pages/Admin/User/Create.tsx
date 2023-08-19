@@ -2,18 +2,18 @@ import { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
 import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
 import Title from '@/Components/Admin/Common/Title'
-import UserListTable from '@/Pages/Admin/User/Partials/ListTable'
+import UserCreateForm from '@/Pages/Admin/User/Partials/CreateForm'
 
 const title = '顧客管理'
 
-export default function UserList() {
+export default function AdminCreate() {
   return (
     <>
       <Head title={title} />
       <Title title={title} />
-      <UserListTable />
+      <UserCreateForm />
     </>
   )
 }
 
-UserList.layout = (page: ReactNode) => <DashboardLayout children={page} />
+AdminCreate.layout = (page: ReactNode) => <DashboardLayout children={page} />

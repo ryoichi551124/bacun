@@ -105,19 +105,27 @@ class UpdateRequeset extends FormRequest
      */
     public function getValidatorInstance()
     {
-        if (
-            $this->input('birth_year') &&
-            $this->input('birth_month') &&
-            $this->input('birth_day')
-        ) {
-            $birth_date = implode('-', $this->only([
-                'birth_year',
-                'birth_month',
-                'birth_day'
-            ]));
+        $input = $this->all();
+
+        // 誕生日
+        if ($input['birth_year'] && $input['birth_month'] && $input['birth_day']) {
             $this->merge([
-                'birth_date' => $birth_date
+                'birth_date' => implode('-', [
+                    $input['birth_year'],
+                    $input['birth_month'],
+                    $input['birth_day']
+                ])
             ]);
+        }
+
+        // 郵便番号
+        if ($input['zip_code1'] && $input['zip_code2']) {
+            $this->merge(['zip_code' => $input['zip_code1'] . $input['zip_code2']]);
+        }
+
+        // 電話番号
+        if ($input['tel1'] && $input['tel2'] && $input['tel3']) {
+            $this->merge(['tel' => $input['tel1'] . $input['tel2'] . $input['tel3']]);
         }
 
         return parent::getValidatorInstance();

@@ -1,11 +1,31 @@
-import { Role } from '@/Types/config'
+import { Role, Statuses } from '@/Types/config'
 import type { AlertColor } from '@mui/material'
 
 export interface User {
   id: number
-  name: string
   email: string
-  email_verified_at: string
+  password: string
+  password_confirmation: string
+  last_name: string
+  first_name: string
+  last_kana: string
+  first_kana: string
+  zip_code: string
+  pref: string
+  city: string
+  addresss: string
+  building?: string
+  tel: string
+  sex: 1 | 2
+  birth_date: Date
+  memo: string
+  status: Statuses
+}
+
+export type UserAuth = {
+  auth: {
+    user: User
+  }
 }
 
 export type Admin = {

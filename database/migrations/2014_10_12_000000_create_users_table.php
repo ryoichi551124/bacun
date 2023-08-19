@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('pref', 8)->comment('都道府県');
             $table->string('city', 32)->comment('市区町村');
             $table->string('address', 128)->comment('丁目番地号');
-            $table->string('building', 128)->comment('建物名');
-            $table->string('tel', 20)->comment('電話番号');
+            $table->string('building', 128)->nullable()->comment('建物名');
+            $table->string('tel', 20)->nullable()->comment('電話番号');
             $table->enum('sex', [1, 2])->nullable()->comment('性別 [1 => "男性", 2 => "女性"]');
             $table->date('birth_date')->nullable()->comment('生年月日');
             $table->text('memo')->nullable()->comment('メモ');
