@@ -28,9 +28,10 @@ return new class extends Migration
             $table->text('content4')->nullbale()->comment('商品説明4');
             $table->text('memo')->nullable()->comment('メモ');
             $table->unsignedTinyInteger('stock')->comment('在庫数');
+            $table->enum('type', [1, 2])->default(1)->comment('商品タイプ [1 => "物理商品", 2 => "ダウンロード商品"]');
             $table->enum('status', [0, 1])->comment('ステータス [0 => "非公開", 1 => "公開"]');
             $table->unsignedTinyInteger('tag')->nullable()->comment('タグ ["新商品", "おすすめ商品", "限定品", etc...]');
-            $table->unsignedMediumInteger('rank')->rank()->comment('並び順');
+            $table->unsignedMediumInteger('rank')->nullable()->rank()->comment('並び順');
             // 料金
             $table->unsignedMediumInteger('regular_price')->comment('通常料金');
             $table->unsignedMediumInteger('sales_price')->comment('販売料金');

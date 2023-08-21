@@ -8,7 +8,7 @@ export default function NoTableData() {
   return (
     <TableBody>
       <TableRow>
-        <TableCell>データがありません</TableCell>
+        <TableCell colSpan={4}>データがありません</TableCell>
       </TableRow>
     </TableBody>
   )

@@ -1,5 +1,10 @@
-import { Role, Sex, Statuses } from '@/Types/config'
+import { Role, Sex, Statuses, ProductStatus, ProductType } from '@/Types/config'
 import type { AlertColor } from '@mui/material'
+
+export type FlashMessage = {
+  severity: AlertColor
+  message: string
+}
 
 export interface User {
   id: number
@@ -75,7 +80,27 @@ export type Category = {
   name: string
 }
 
-export type FlashMessage = {
-  severity: AlertColor
-  message: string
+export type Product = {
+  id: number
+  category_id?: number
+  name: string
+  thumbnail?: string
+  main_img?: string
+  sub_img1?: string
+  sub_img2?: string
+  sub_img3?: string
+  sub_img4?: string
+  content1?: string
+  content2?: string
+  content3?: string
+  content4?: string
+  memo?: string
+  stock: string
+  type: ProductType
+  status: ProductStatus
+  tag?: number
+  rank?: number
+  regular_price: number
+  sales_price: number
+  delivery_id: number
 }
