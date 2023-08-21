@@ -21,15 +21,14 @@ const button = css`
 `
 
 export default function ProductCreateForm() {
-
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors }
+    formState: { errors },
   } = useForm<CreateProductSchemaType>({
     reValidateMode: 'onBlur',
-    resolver: zodResolver(createProductSchema)
+    resolver: zodResolver(createProductSchema),
   })
 
   const createProduct = (data: CreateProductSchemaType) => {
@@ -50,7 +49,10 @@ export default function ProductCreateForm() {
               control={control}
               name="main_img"
               rules={{ required: true }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <InputImage
                   images={value ?? []}
                   width={'200px'}
@@ -119,7 +121,10 @@ export default function ProductCreateForm() {
               control={control}
               name="thumbnail"
               rules={{ required: true }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <InputImage
                   images={value ?? []}
                   width={'180px'}
@@ -138,7 +143,10 @@ export default function ProductCreateForm() {
               control={control}
               name="sub_img1"
               rules={{ required: true }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <InputImage
                   images={value ?? []}
                   width={'180px'}
@@ -157,7 +165,10 @@ export default function ProductCreateForm() {
               control={control}
               name="sub_img2"
               rules={{ required: true }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <InputImage
                   images={value ?? []}
                   width={'180px'}
@@ -176,7 +187,10 @@ export default function ProductCreateForm() {
               control={control}
               name="sub_img3"
               rules={{ required: true }}
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
                 <InputImage
                   images={value ?? []}
                   width={'180px'}

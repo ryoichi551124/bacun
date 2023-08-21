@@ -23,7 +23,10 @@ export default function ProductListTable() {
   return (
     <>
       {flash.message && <AlertMessage {...flash} />}
-      <Card title="商品一覧" icon={<AddLinkIcon addLink="admin.product.create" />}>
+      <Card
+        title="商品一覧"
+        icon={<AddLinkIcon addLink="admin.product.create" />}
+      >
         <Table>
           <TableHead>
             <TableRow>
@@ -52,7 +55,10 @@ export default function ProductListTable() {
                   <TableCell>{product.type}</TableCell>
                   <TableCell>{product.status}</TableCell>
                   <TableCell align="right" width="150">
-                    <EditLinkIcon editLink="/admin/product/edit/" id={product.id} />
+                    <EditLinkIcon
+                      editLink="/admin/product/edit/"
+                      id={product.id}
+                    />
                     <DeleteLinkIcon
                       deleteLink="/admin/product/list/delete/"
                       id={product.id}

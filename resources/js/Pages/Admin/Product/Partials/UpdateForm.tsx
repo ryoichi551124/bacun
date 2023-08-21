@@ -1,5 +1,3 @@
 export default function ProcutUpdateForm() {
-  return (
-    <>product update</>
-  )
+  return <>product update</>
 }

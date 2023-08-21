@@ -36,33 +36,38 @@ export default function InputImage(props: InputImageProps) {
   const isDropZoneDisplay = images.length === 0 ? 'block' : 'none'
 
   const files = useMemo(
-    () => images
-      .map((img: FileData) =>  img.file as File),
+    () => images.map((img: FileData) => img.file as File),
     [images],
   )
 
-  const onRemove = useCallback((src: string) => {
-    const image = images.find((img: FileData) => img.src === src)
-    const newImages = images.filter((img: FileData) => img.src !== src)
+  const onRemove = useCallback(
+    (src: string) => {
+      const image = images.find((img: FileData) => img.src === src)
+      const newImages = images.filter((img: FileData) => img.src !== src)
 
-    if (image) {
-      if (image.file && image.src) {
-        URL.revokeObjectURL(image.src)
-        delete image.src
+      if (image) {
+        if (image.file && image.src) {
+          URL.revokeObjectURL(image.src)
+          delete image.src
+        }
+        onChange && onChange(newImages)
+      }
+    },
+    [images, onChange],
+  )
+
+  const onDrop = useCallback(
+    (files: File[]) => {
+      const newImages = []
+
+      for (const file of files) {
+        const img = images.find((img: FileData) => img.file === file)
+        !img && newImages.push({ file, src: URL.createObjectURL(file) })
       }
       onChange && onChange(newImages)
-    }
-  }, [images, onChange])
-
-  const onDrop = useCallback((files: File[]) => {
-    const newImages = []
-
-    for (const file of files) {
-      const img = images.find((img: FileData) => img.file === file)
-      !img && newImages.push({ file, src: URL.createObjectURL(file) })
-    }
-    onChange && onChange(newImages)
-  }, [images, onChange])
+    },
+    [images, onChange],
+  )
 
   return (
     <div css={container}>
@@ -79,8 +84,7 @@ export default function InputImage(props: InputImageProps) {
               onRemove={onRemove}
             />
           )
-        })
-      }
+        })}
       {/* 画像ファイルドロップゾーン */}
       <div style={{ display: isDropZoneDisplay }}>
         <DropZone

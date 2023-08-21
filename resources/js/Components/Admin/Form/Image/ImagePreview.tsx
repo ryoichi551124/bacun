@@ -42,7 +42,6 @@ export default function ImagePreview({
   height,
   onRemove,
 }: ImagePreviewProps) {
-
   // CSS
   const container = css`
     position: relative;
@@ -58,7 +57,7 @@ export default function ImagePreview({
   }
 
   return (
-    <div　css={container}>
+    <div css={container}>
       {/* 画像表示 */}
       <img src={src} alt={alt} height={height} width={width} css={image} />
       {/* 削除アイコン */}

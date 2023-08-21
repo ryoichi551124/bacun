@@ -9,7 +9,7 @@ const focus = css`
   border-color: #000;
 `
 const error = css`
-  border-color: ${colors.error}
+  border-color: ${colors.error};
 `
 const inputFile = css`
   display: none;
@@ -80,7 +80,7 @@ export default function DropZone(props: DropZoneProps) {
 
     const files = value.concat(
       getFilesFromEvent(e).filter((f) =>
-        acceptedFileTypes.includes(f.type as FileType)
+        acceptedFileTypes.includes(f.type as FileType),
       ),
     )
     onDrop && onDrop(files)
@@ -100,7 +100,9 @@ export default function DropZone(props: DropZoneProps) {
 
     if (files.length == 0) {
       return window.alert(
-        `次のファイルフォーマットは指定出来ません${acceptedFileTypes.join(' ,')}`
+        `次のファイルフォーマットは指定出来ません${acceptedFileTypes.join(
+          ' ,',
+        )}`,
       )
     }
     onDrop && onDrop(files)

@@ -7,9 +7,7 @@ import ProductUpdateForm from '@/Pages/Admin/Product/Partials/UpdateForm'
 const title = '商品管理'
 
 export default function ProductEdit() {
-  return (
-    <>product edit</>
-  )
+  return <>product edit</>
 }
 
 ProductEdit.layout = (page: ReactNode) => <DashboardLayout children={page} />
