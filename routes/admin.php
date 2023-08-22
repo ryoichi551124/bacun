@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\Mail;
 use App\Http\Controllers\Admin\Order;
 use App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Admin\Shipping;
+use App\Http\Controllers\Admin\Delivery;
 use App\Http\Controllers\Admin\User;
 
 Route::middleware('guest:admin')->group(function () {
@@ -132,6 +133,22 @@ Route::middleware('auth:admin')->group(function () {
         Route::get('/edit/{id}', Shipping\Edit\IndexController::class)
             ->name('edit');
         Route::put('/edit/update/{id}', Shipping\Edit\UpdateController::class)
+            ->name('edit.update');
+    });
+
+    // 送料管理
+    Route::prefix('delivery')->name('delivery.')->group(function () {
+        Route::get('/list', Delivery\List\IndexController::class)
+            ->name('list');
+        Route::delete('/list/delete/{id}', Delivery\List\DeleteController::class)
+            ->name('list.delete');
+        Route::get('/create', Delivery\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', Delivery\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', Delivery\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', Delivery\Edit\UpdateController::class)
             ->name('edit.update');
     });
 

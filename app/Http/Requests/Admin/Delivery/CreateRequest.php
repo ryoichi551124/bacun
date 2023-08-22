@@ -29,9 +29,9 @@ class CreateRequest extends FormRequest
             'name'          => ['required', 'string', 'max:128', Rule::unique(Delivery::class)],
             'description'   => ['nullable', 'string'],
             'duration'      => ['nullable', 'string'],
-            'deliv_fee1'    => ['nullable', new UnsignedSmallInteger],
-            'defil_fee2'    => ['nullable', new UnsignedSmallInteger],
-            'category'      => ['nullable', new UnsignedTinyInteger],
+            'delivery_fee1' => ['required', new UnsignedSmallInteger],
+            'delivery_fee2' => ['required', new UnsignedSmallInteger],
+            'category'      => ['nullable', 'string'],
             'rank'          => ['nullable', new UnsignedTinyInteger],
         ];
     }
@@ -47,8 +47,8 @@ class CreateRequest extends FormRequest
             'name'          => '送料名',
             'description'   => '送料説明',
             'duration'      => '配送日数',
-            'deliv_fee1'    => '送料',
-            'deliv_fee2'    => '送料（沖縄・離島料金）',
+            'delivery_fee1' => '送料',
+            'delivery_fee2' => '送料（沖縄・離島料金）',
             'category'      => '配送区分',
             'rank'          => '並び順',
         ];

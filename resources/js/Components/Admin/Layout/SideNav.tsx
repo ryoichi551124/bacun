@@ -5,6 +5,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
 import SellIcon from '@mui/icons-material/Sell'
 import CategoryIcon from '@mui/icons-material/Category'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping'
+import CurrencyYenIcon from '@mui/icons-material/CurrencyYen'
 import EmailIcon from '@mui/icons-material/Email'
 import PersonIcon from '@mui/icons-material/Person'
 import SettingsIcon from '@mui/icons-material/Settings'
@@ -67,7 +68,7 @@ export default function SideNav() {
         </SideNavLink>
         <SideNavLink
           css={navMenu}
-          active={route().current('admin.shipping')}
+          active={route().current('admin.shipping.*')}
           href={route('admin.shipping.list')}
         >
           <LocalShippingIcon css={icon} />
@@ -75,7 +76,15 @@ export default function SideNav() {
         </SideNavLink>
         <SideNavLink
           css={navMenu}
-          active={route().current('admin.mail')}
+          active={route().current('admin.delivery.*')}
+          href={route('admin.delivery.list')}
+        >
+          <CurrencyYenIcon css={icon} />
+          <div>送料管理</div>
+        </SideNavLink>
+        <SideNavLink
+          css={navMenu}
+          active={route().current('admin.mail.*')}
           href={route('admin.mail')}
         >
           <EmailIcon css={icon} />

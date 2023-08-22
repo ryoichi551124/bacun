@@ -1,4 +1,4 @@
-import { Role, Sex, Statuses, ProductStatus, ProductType } from '@/Types/config'
+import { Role, Sex, UserStatus, ProductStatus, ProductType } from '@/Types/config'
 import type { AlertColor } from '@mui/material'
 
 export type FlashMessage = {
@@ -29,7 +29,7 @@ export interface User {
   birth_month: string
   birth_day: string
   memo: string
-  status: Statuses
+  status: UserStatus
 }
 
 export type UserAuth = {
@@ -103,4 +103,15 @@ export type Product = {
   regular_price: number
   sales_price: number
   delivery_id: number
+}
+
+export type Delivery = {
+  id: number
+  name: string
+  description?: string
+  duration?: string
+  delivery_fee1: string
+  delivery_fee2: string
+  category?: string
+  rank?: number
 }

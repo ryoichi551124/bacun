@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name', 64)->comment('送料名');
             $table->text('description')->nullable()->comment('送料説明');
             $table->string('duration')->nullable()->comment('配送日数');
-            $table->unsignedSmallInteger('deliv_fee1')->comment('送料');
-            $table->unsignedSmallInteger('deliv_fee2')->comment('送料（沖縄・離島料金）');
-            $table->unsignedTinyInteger('category')->nullable()->comment('配送区分');
+            $table->unsignedSmallInteger('delivery_fee1')->comment('送料');
+            $table->unsignedSmallInteger('delivery_fee2')->comment('送料（沖縄・離島料金）');
+            $table->string('category')->nullable()->comment('配送区分');
             $table->unsignedTinyInteger('rank')->nullable()->comment('並び順');
             $table->timestamps();
         });

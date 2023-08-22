@@ -1,13 +1,13 @@
 export type AdminRoles = Record<Role, string>
 export type Role = 'admin' | 'member'
 
-export type UserStatuses = Record<Statuses, number>
-export type Statuses = '0' | '1' | '2'
+export type UserStatus = Record<number, string>
 export type Sex = '1' | '2'
-export type ProductStatus = '0' | '1'
-export type ProductType = '1' | '2'
-
 export type Pref = Record<number, string>
+
+export type ProductType = Record<number, string>
+export type ProductStatus = Record<number, string>
+export type ProductTag = Record<number, string>
 
 export type FileType =
   | 'image/png'

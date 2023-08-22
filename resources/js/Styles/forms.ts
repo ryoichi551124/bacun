@@ -40,6 +40,13 @@ export const forms = {
     border: 1px solid ${colors.gray};
     border-radius: 5px;
     color: ${colors.font};
+    box-sizing: border-box;
+    outline: none;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   `,
   radioLabel: css`
     display: flex;

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
@@ -19,8 +20,8 @@ class Delivery extends Model
         'name',
         'description',
         'duration',
-        'deliv_fee1',
-        'deliv_fee2',
+        'delivery_fee1',
+        'delivery_fee2',
         'category',
         'rank',
     ];
@@ -33,5 +34,18 @@ class Delivery extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Delivery::class);
+    }
+
+    /**
+     * IDによるスコープ
+     *
+     * @param Builder $query
+     * @param integer|null $id
+     * @return void
+     */
+    public function scopeId(Builder $query, int $id = null): void
+    {
+        if (empty($id)) return;
+        $query->where('id', $id);
     }
 }
