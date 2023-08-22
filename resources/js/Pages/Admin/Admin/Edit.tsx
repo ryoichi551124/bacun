@@ -6,7 +6,7 @@ import AdminUpdateForm from '@/Pages/Admin/Admin/Partials/UpdateForm'
 
 const title = '管理者設定'
 
-export default function AdminCreate() {
+export default function AdminEdit() {
   return (
     <>
       <Head title={title} />
@@ -16,4 +16,4 @@ export default function AdminCreate() {
   )
 }
 
-AdminCreate.layout = (page: ReactNode) => <DashboardLayout children={page} />
+AdminEdit.layout = (page: ReactNode) => <DashboardLayout children={page} />

@@ -10,7 +10,7 @@ import createUserSchema, {
   CreateUserSchemaType,
 } from '@/Schemas/Admin/User/CreateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { UserStatuses, Pref } from '@/Types'
+import type { UserStatus, Pref } from '@/Types'
 
 const flex = css`
   display: flex;
@@ -21,14 +21,12 @@ const button = css`
 `
 
 type UserData = {
-  statuses: UserStatuses
+  statuses: UserStatus
   prefs: Pref
 }
 
 export default function UserCreateForm() {
-  const { props } = usePage<UserData>()
-  const statuses = Object.entries(props.statuses)
-  const prefs = Object.entries(props.prefs)
+  const { statuses, prefs } = usePage<UserData>().props
 
   const {
     register,
@@ -196,11 +194,12 @@ export default function UserCreateForm() {
               都道府県
             </label>
             <select css={forms.input} {...register('pref')}>
-              {prefs.map((pref) => (
-                <option key={pref[0]} value={pref[0]}>
-                  {pref[1]}
-                </option>
-              ))}
+              {prefs &&
+                Object.entries(prefs).map((pref) => (
+                  <option key={pref[0]} value={pref[0]}>
+                    {pref[1]}
+                  </option>
+                ))}
             </select>
           </Grid>
           <Grid xs={9}></Grid>
@@ -358,7 +357,7 @@ export default function UserCreateForm() {
           <Grid xs={6}>
             <div css={forms.label}>ステータス</div>
             {statuses &&
-              statuses.map((status) => (
+              Object.entries(statuses).map((status) => (
                 <label key={status[0]} css={forms.radioLabel}>
                   <input
                     type="radio"

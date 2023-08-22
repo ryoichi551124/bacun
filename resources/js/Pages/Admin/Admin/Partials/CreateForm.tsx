@@ -21,8 +21,7 @@ type AdminData = {
 }
 
 export default function AdminCreateForm() {
-  const { props } = usePage<AdminData>()
-  const roles = Object.entries(props.roles)
+  const { roles } = usePage<AdminData>().props
 
   const {
     register,
@@ -117,7 +116,7 @@ export default function AdminCreateForm() {
               権限
             </label>
             <select css={forms.input} {...register('role')}>
-              {roles.map((role) => (
+              {Object.entries(roles).map((role) => (
                 <option key={role[0]} value={role[0]}>
                   {role[1]}
                 </option>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product\Create;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delivery;
 use Inertia\Inertia;
 
 class IndexController extends Controller
@@ -12,6 +13,16 @@ class IndexController extends Controller
      */
     public function __invoke()
     {
-        return Inertia::render('Admin/Product/Create');
+        $deliveries = Delivery::all();
+        $types = config('product.type');
+        $tags = config('product.tag');
+        $statuses = config('product.status');
+
+        return Inertia::render('Admin/Product/Create', [
+            'deliveries' => $deliveries,
+            'types' => $types,
+            'tags' => $tags,
+            'statuses' => $statuses,
+        ]);
     }
 }

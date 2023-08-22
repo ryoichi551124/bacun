@@ -10,11 +10,11 @@ import TableRow from '@mui/material/TableRow'
 import AddLinkIcon from '@/Components/Admin/Icon/AddLinkIcon'
 import EditLinkIcon from '@/Components/Admin/Icon/EditLinkIcon'
 import DeleteLinkIcon from '@/Components/Admin/Icon/DeleteLinkIcon'
-import type { User, UserStatuses, FlashMessage } from '@/Types'
+import type { User, UserStatus, FlashMessage } from '@/Types'
 
 type UserData = {
   users: User[]
-  statuses: UserStatuses
+  statuses: UserStatus
   flash: FlashMessage
 }
 

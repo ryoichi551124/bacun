@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { useState } from 'react'
 import { Link, usePage, router } from '@inertiajs/react'
-import { forms } from '@/Styles'
+import { forms, colors } from '@/Styles'
 import Card from '@/Components/Admin/Common/Card'
 import InputImage from '@/Components/Admin/Form/Image/InputImage'
 import Button from '@mui/material/Button'
@@ -11,7 +12,7 @@ import createProductSchema, {
   CreateProductSchemaType,
 } from '@/Schemas/Admin/Product/CreateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Product } from '@/Types'
+import type { Delivery, ProductType, ProductTag, ProductStatus } from '@/Types'
 
 const space = css`
   margin-top: 0.5rem;
@@ -19,20 +20,67 @@ const space = css`
 const button = css`
   margin-right: 2rem;
 `
+const stockFlex = css`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+`
+const leftSpace = css`
+  margin-left: 2rem;
+`
+const disabled = css`
+  background: ${colors.gray};
+`
+
+type ProductData = {
+  deliveries: Delivery[]
+  types: ProductType
+  tags: ProductTag
+  statuses: ProductStatus
+}
 
 export default function ProductCreateForm() {
+  const { deliveries, types, tags, statuses } = usePage<ProductData>().props
+
+  const [isUnLimited, setIsUnLimited] = useState<boolean>(false)
+  const [isStockOut, setIsStockOut] = useState<boolean>(false)
+  const [isDownload, setIsDownloade] = useState<boolean>(false)
+
+  const handleUnLimited = () => {
+    if (isStockOut) {
+      setIsStockOut(false)
+      setIsUnLimited(!isUnLimited)
+    } else {
+      setIsUnLimited(!isUnLimited)
+    }
+  }
+  const handleStockOut = () => {
+    if (isUnLimited) {
+      setIsUnLimited(false)
+      setIsStockOut(!isStockOut)
+    } else {
+      setIsStockOut(!isStockOut)
+    }
+  }
+  const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.target.value === '2' ? setIsDownloade(true) : setIsDownloade(false)
+  }
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<CreateProductSchemaType>({
+    defaultValues: { type: '1', status: '0' },
     reValidateMode: 'onBlur',
     resolver: zodResolver(createProductSchema),
   })
 
   const createProduct = (data: CreateProductSchemaType) => {
-    console.log(data)
+    data.stock = isUnLimited ? '999' : data.stock
+    data.stock = isStockOut ? '0' : data.stock
+    data.delivery_id = isDownload ? '0' : data.delivery_id
     //router.post('/admin/product/create/create', data)
   }
 
@@ -113,7 +161,7 @@ export default function ProductCreateForm() {
           <Grid xs={12}></Grid>
 
           {/* サムネイル */}
-          <Grid xs={3} style={{ width: '200px' }}>
+          <Grid style={{ width: '150px' }}>
             <label htmlFor="thumbnail" css={forms.label}>
               サムネイル
             </label>
@@ -127,15 +175,15 @@ export default function ProductCreateForm() {
               }) => (
                 <InputImage
                   images={value ?? []}
-                  width={'180px'}
-                  height={'180px'}
+                  width={'140px'}
+                  height={'140px'}
                   onChange={onChange}
                 />
               )}
             />
           </Grid>
           {/* サブ画像1 */}
-          <Grid xs={3} style={{ width: '200px' }}>
+          <Grid style={{ width: '150px' }}>
             <label htmlFor="sub_img1" css={forms.label}>
               サブ画像1
             </label>
@@ -149,15 +197,15 @@ export default function ProductCreateForm() {
               }) => (
                 <InputImage
                   images={value ?? []}
-                  width={'180px'}
-                  height={'180px'}
+                  width={'140px'}
+                  height={'140px'}
                   onChange={onChange}
                 />
               )}
             />
           </Grid>
           {/* サブ画像2 */}
-          <Grid xs={3} style={{ width: '200px' }}>
+          <Grid style={{ width: '150px' }}>
             <label htmlFor="sub_img2" css={forms.label}>
               サブ画像2
             </label>
@@ -171,15 +219,15 @@ export default function ProductCreateForm() {
               }) => (
                 <InputImage
                   images={value ?? []}
-                  width={'180px'}
-                  height={'180px'}
+                  width={'140px'}
+                  height={'140px'}
                   onChange={onChange}
                 />
               )}
             />
           </Grid>
           {/* サブ画像3 */}
-          <Grid xs={3} style={{ width: '200px' }}>
+          <Grid style={{ width: '150px' }}>
             <label htmlFor="sub_img3" css={forms.label}>
               サブ画像3
             </label>
@@ -193,13 +241,127 @@ export default function ProductCreateForm() {
               }) => (
                 <InputImage
                   images={value ?? []}
-                  width={'180px'}
-                  height={'180px'}
+                  width={'140px'}
+                  height={'140px'}
                   onChange={onChange}
                 />
               )}
             />
           </Grid>
+          <Grid style={{ width: 'calc(100% - 600px)' }}></Grid>
+
+          {/* ステータス */}
+          <Grid xs={3} css={space}>
+            <div css={forms.label}>ステータス</div>
+            {Object.entries(statuses).map((status) => (
+              <label css={forms.radioLabel} key={status[0]}>
+                <input
+                  type="radio"
+                  value={status[0]}
+                  css={forms.radioInput}
+                  {...register('status')}
+                />
+                {status[1]}
+              </label>
+            ))}
+          </Grid>
+          {/* タグ */}
+          <Grid xs={3} css={space}>
+            <div css={forms.label}>タグ</div>
+            {Object.entries(tags).map((tag) => (
+              <label css={forms.radioLabel} key={tag[0]}>
+                <input
+                  type="radio"
+                  value={tag[0]}
+                  css={forms.radioInput}
+                  {...register('tag')}
+                />
+                {tag[1]}
+              </label>
+            ))}
+          </Grid>
+          {/* 商品タイプ */}
+          <Grid xs={3} css={space}>
+            <div css={forms.label}>商品タイプ</div>
+            {Object.entries(types).map((type) => (
+              <label css={forms.radioLabel} key={type[0]}>
+                <input
+                  type="radio"
+                  value={type[0]}
+                  css={forms.radioInput}
+                  {...register('type')}
+                  onChange={handleType}
+                />
+                {type[1]}
+              </label>
+            ))}
+          </Grid>
+          <Grid xs={3}></Grid>
+
+          {/* 在庫数 */}
+          <Grid xs={6}>
+            <div css={stockFlex}>
+              <div>
+                <label htmlFor="stock" css={forms.label}>
+                  在庫数
+                </label>
+                <input
+                  id="stock"
+                  placeholder="在庫数"
+                  css={[
+                    forms.input,
+                    (isStockOut || isUnLimited) && disabled,
+                    errors.stock && forms.error,
+                  ]}
+                  {...register('stock')}
+                  disabled={isUnLimited || isStockOut}
+                />
+                {errors.stock && (
+                  <div css={forms.errText}>{errors.stock.message}</div>
+                )}
+              </div>
+              <div css={leftSpace}>
+                <label css={forms.radioLabel}>
+                  <input
+                    type="checkbox"
+                    css={forms.radioInput}
+                    checked={isStockOut ? false : isUnLimited}
+                    onChange={handleUnLimited}
+                  />
+                  無制限
+                </label>
+                <label css={forms.radioLabel}>
+                  <input
+                    type="checkbox"
+                    css={forms.radioInput}
+                    checked={isUnLimited ? false : isStockOut}
+                    onChange={handleStockOut}
+                  />
+                  在庫切れ
+                </label>
+              </div>
+            </div>
+          </Grid>
+          {/* 配送方法 */}
+          <Grid xs={4}>
+            <label htmlFor="delivery_id" css={forms.label}>
+              配送方法
+            </label>
+            <select
+              css={[forms.input, isDownload && disabled]}
+              {...register('delivery_id')}
+              disabled={isDownload}
+            >
+              <option value="0">なし</option>
+              {deliveries && deliveries.map((delivery) => (
+                <option key={delivery.id} value={delivery.id}>
+                  {delivery.name}
+                </option>
+              ))}
+            </select>
+          </Grid>
+          <Grid xs={2}></Grid>
+
           {/* 商品説明1 */}
           <Grid xs={8}>
             <label htmlFor="content1" css={forms.label}>

@@ -10,7 +10,7 @@ import updateUserSchema, {
   UpdateUserSchemaType,
 } from '@/Schemas/Admin/User/UpdateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { User, UserStatuses, Pref } from '@/Types'
+import type { User, UserStatus, Pref } from '@/Types'
 
 const flex = css`
   display: flex;
@@ -22,15 +22,12 @@ const button = css`
 
 type UserData = {
   user: User
-  statuses: UserStatuses
+  statuses: UserStatus
   prefs: Pref
 }
 
 export default function UserUpdateForm() {
-  const { props } = usePage<UserData>()
-  const user = props.user
-  const statuses = Object.entries(props.statuses)
-  const prefs = Object.entries(props.prefs)
+  const { user, statuses, prefs } = usePage<UserData>().props
 
   const {
     register,
@@ -198,11 +195,12 @@ export default function UserUpdateForm() {
               都道府県
             </label>
             <select css={forms.input} {...register('pref')}>
-              {prefs.map((pref) => (
-                <option key={pref[0]} value={pref[0]}>
-                  {pref[1]}
-                </option>
-              ))}
+              {prefs &&
+                Object.entries(prefs).map((pref) => (
+                  <option key={pref[0]} value={pref[0]}>
+                    {pref[1]}
+                  </option>
+                ))}
             </select>
           </Grid>
           <Grid xs={9}></Grid>
@@ -360,7 +358,7 @@ export default function UserUpdateForm() {
           <Grid xs={6}>
             <div css={forms.label}>ステータス</div>
             {statuses &&
-              statuses.map((status) => (
+              Object.entries(statuses).map((status) => (
                 <label key={status[0]} css={forms.radioLabel}>
                   <input
                     type="radio"
