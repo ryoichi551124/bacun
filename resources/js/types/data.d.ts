@@ -1,4 +1,10 @@
-import { Role, Sex, UserStatus, ProductStatus, ProductType } from '@/Types/config'
+import {
+  Role,
+  Sex,
+  UserStatus,
+  ProductStatus,
+  ProductType,
+} from '@/Types/config'
 import type { AlertColor } from '@mui/material'
 
 export type FlashMessage = {

@@ -3,7 +3,7 @@ import * as z from 'zod'
 import type { FileData } from '@/Components/Admin/Form/Image/InputImage'
 
 const createProductSchema = z.object({
-  category_id: z.number().optional().nullable(),
+  category_id: z.string().optional().nullable(),
   name: z.string().min(1, '入力が必須の項目です'),
   thumbnail: z.custom<FileData[]>(),
   main_img: z.custom<FileData[]>(),
@@ -16,7 +16,7 @@ const createProductSchema = z.object({
   content3: z.string().optional().nullable(),
   content4: z.string().optional().nullable(),
   memo: z.string().optional().nullable(),
-  stock: z.string().min(1, '入力が必須の項目です'),
+  stock: z.string().optional().nullable(),
   type: z.enum(['1', '2']),
   status: z.enum(['0', '1']),
   tag: z.string().optional().nullable(),

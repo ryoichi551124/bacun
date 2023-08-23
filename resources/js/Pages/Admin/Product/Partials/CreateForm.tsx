@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { useState } from 'react'
-import { Link, usePage, router } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { forms, colors } from '@/Styles'
 import Card from '@/Components/Admin/Common/Card'
 import InputImage from '@/Components/Admin/Form/Image/InputImage'
@@ -12,7 +12,13 @@ import createProductSchema, {
   CreateProductSchemaType,
 } from '@/Schemas/Admin/Product/CreateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Delivery, ProductType, ProductTag, ProductStatus } from '@/Types'
+import type {
+  Category,
+  Delivery,
+  ProductType,
+  ProductTag,
+  ProductStatus,
+} from '@/Types'
 
 const space = css`
   margin-top: 0.5rem;
@@ -33,15 +39,22 @@ const disabled = css`
 `
 
 type ProductData = {
+  categories: Category[]
   deliveries: Delivery[]
   types: ProductType
   tags: ProductTag
   statuses: ProductStatus
 }
 
-export default function ProductCreateForm() {
-  const { deliveries, types, tags, statuses } = usePage<ProductData>().props
+type ProductFormProps = {
+  onCreateProduct?: (data: CreateProductSchemaType) => void
+}
 
+export default function ProductCreateForm({
+  onCreateProduct,
+}: ProductFormProps) {
+  const { categories, deliveries, types, tags, statuses } =
+    usePage<ProductData>().props
   const [isUnLimited, setIsUnLimited] = useState<boolean>(false)
   const [isStockOut, setIsStockOut] = useState<boolean>(false)
   const [isDownload, setIsDownloade] = useState<boolean>(false)
@@ -72,16 +85,16 @@ export default function ProductCreateForm() {
     control,
     formState: { errors },
   } = useForm<CreateProductSchemaType>({
-    defaultValues: { type: '1', status: '0' },
+    defaultValues: { status: '0', tag: '0', type: '1' },
     reValidateMode: 'onBlur',
     resolver: zodResolver(createProductSchema),
   })
 
   const createProduct = (data: CreateProductSchemaType) => {
-    data.stock = isUnLimited ? '999' : data.stock
-    data.stock = isStockOut ? '0' : data.stock
+    data.stock = isUnLimited || isDownload ? '999' : data.stock
+    data.stock = isStockOut && !isDownload ? '0' : data.stock
     data.delivery_id = isDownload ? '0' : data.delivery_id
-    //router.post('/admin/product/create/create', data)
+    onCreateProduct && onCreateProduct(data)
   }
 
   return (
@@ -160,96 +173,6 @@ export default function ProductCreateForm() {
           <Grid xs={2}></Grid>
           <Grid xs={12}></Grid>
 
-          {/* サムネイル */}
-          <Grid style={{ width: '150px' }}>
-            <label htmlFor="thumbnail" css={forms.label}>
-              サムネイル
-            </label>
-            <Controller
-              control={control}
-              name="thumbnail"
-              rules={{ required: true }}
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <InputImage
-                  images={value ?? []}
-                  width={'140px'}
-                  height={'140px'}
-                  onChange={onChange}
-                />
-              )}
-            />
-          </Grid>
-          {/* サブ画像1 */}
-          <Grid style={{ width: '150px' }}>
-            <label htmlFor="sub_img1" css={forms.label}>
-              サブ画像1
-            </label>
-            <Controller
-              control={control}
-              name="sub_img1"
-              rules={{ required: true }}
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <InputImage
-                  images={value ?? []}
-                  width={'140px'}
-                  height={'140px'}
-                  onChange={onChange}
-                />
-              )}
-            />
-          </Grid>
-          {/* サブ画像2 */}
-          <Grid style={{ width: '150px' }}>
-            <label htmlFor="sub_img2" css={forms.label}>
-              サブ画像2
-            </label>
-            <Controller
-              control={control}
-              name="sub_img2"
-              rules={{ required: true }}
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <InputImage
-                  images={value ?? []}
-                  width={'140px'}
-                  height={'140px'}
-                  onChange={onChange}
-                />
-              )}
-            />
-          </Grid>
-          {/* サブ画像3 */}
-          <Grid style={{ width: '150px' }}>
-            <label htmlFor="sub_img3" css={forms.label}>
-              サブ画像3
-            </label>
-            <Controller
-              control={control}
-              name="sub_img3"
-              rules={{ required: true }}
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <InputImage
-                  images={value ?? []}
-                  width={'140px'}
-                  height={'140px'}
-                  onChange={onChange}
-                />
-              )}
-            />
-          </Grid>
-          <Grid style={{ width: 'calc(100% - 600px)' }}></Grid>
-
           {/* ステータス */}
           <Grid xs={3} css={space}>
             <div css={forms.label}>ステータス</div>
@@ -310,7 +233,7 @@ export default function ProductCreateForm() {
                   placeholder="在庫数"
                   css={[
                     forms.input,
-                    (isStockOut || isUnLimited) && disabled,
+                    (isStockOut || isUnLimited || isDownload) && disabled,
                     errors.stock && forms.error,
                   ]}
                   {...register('stock')}
@@ -342,8 +265,9 @@ export default function ProductCreateForm() {
               </div>
             </div>
           </Grid>
+          <Grid xs={6}></Grid>
           {/* 配送方法 */}
-          <Grid xs={4}>
+          <Grid xs={6}>
             <label htmlFor="delivery_id" css={forms.label}>
               配送方法
             </label>
@@ -353,14 +277,125 @@ export default function ProductCreateForm() {
               disabled={isDownload}
             >
               <option value="0">なし</option>
-              {deliveries && deliveries.map((delivery) => (
-                <option key={delivery.id} value={delivery.id}>
-                  {delivery.name}
-                </option>
-              ))}
+              {deliveries &&
+                deliveries.map((delivery) => (
+                  <option key={delivery.id} value={delivery.id}>
+                    {delivery.name}
+                  </option>
+                ))}
             </select>
           </Grid>
-          <Grid xs={2}></Grid>
+          <Grid xs={6}></Grid>
+          {/* カテゴリー */}
+          <Grid xs={6}>
+            <label htmlFor="category_id" css={forms.label}>
+              カテゴリー
+            </label>
+            <select
+              css={[forms.input, isDownload && disabled]}
+              {...register('category_id')}
+              disabled={isDownload}
+            >
+              <option value="0">なし</option>
+              {categories &&
+                categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+            </select>
+          </Grid>
+          <Grid xs={6}></Grid>
+
+          {/* サムネイル */}
+          <Grid style={{ width: '150px' }} css={space}>
+            <label htmlFor="thumbnail" css={forms.label}>
+              サムネイル
+            </label>
+            <Controller
+              control={control}
+              name="thumbnail"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <InputImage
+                  images={value ?? []}
+                  width={'140px'}
+                  height={'140px'}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Grid>
+          {/* サブ画像1 */}
+          <Grid style={{ width: '150px' }} css={space}>
+            <label htmlFor="sub_img1" css={forms.label}>
+              サブ画像1
+            </label>
+            <Controller
+              control={control}
+              name="sub_img1"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <InputImage
+                  images={value ?? []}
+                  width={'140px'}
+                  height={'140px'}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Grid>
+          {/* サブ画像2 */}
+          <Grid style={{ width: '150px' }} css={space}>
+            <label htmlFor="sub_img2" css={forms.label}>
+              サブ画像2
+            </label>
+            <Controller
+              control={control}
+              name="sub_img2"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <InputImage
+                  images={value ?? []}
+                  width={'140px'}
+                  height={'140px'}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Grid>
+          {/* サブ画像3 */}
+          <Grid style={{ width: '150px' }} css={space}>
+            <label htmlFor="sub_img3" css={forms.label}>
+              サブ画像3
+            </label>
+            <Controller
+              control={control}
+              name="sub_img3"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <InputImage
+                  images={value ?? []}
+                  width={'140px'}
+                  height={'140px'}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Grid>
+          <Grid style={{ width: 'calc(100% - 600px)' }}></Grid>
 
           {/* 商品説明1 */}
           <Grid xs={8}>

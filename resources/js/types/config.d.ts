@@ -5,9 +5,9 @@ export type UserStatus = Record<number, string>
 export type Sex = '1' | '2'
 export type Pref = Record<number, string>
 
-export type ProductType = Record<number, string>
-export type ProductStatus = Record<number, string>
-export type ProductTag = Record<number, string>
+export type ProductType = Record<string, string>
+export type ProductStatus = Record<string, string>
+export type ProductTag = Record<string, string>
 
 export type FileType =
   | 'image/png'

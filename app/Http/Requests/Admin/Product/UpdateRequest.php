@@ -44,7 +44,7 @@ class UpdateRequest extends FormRequest
             'rank'              => ['nullable', new UnsignedMediumInteger],
             'regular_price'     => ['required', new UnsignedMediumInteger],
             'sales_price'       => ['required', new UnsignedMediumInteger],
-            'delivery_id'       => ['required'],
+            'delivery_id'       => ['nullable'],
         ];
     }
 

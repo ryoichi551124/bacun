@@ -31,6 +31,7 @@ class Product extends Model
         'content4',
         'memo',
         'stock',
+        'type',
         'status',
         'tag',
         'rank',
