@@ -17,13 +17,13 @@ const createProductSchema = z.object({
   content4: z.string().optional().nullable(),
   memo: z.string().optional().nullable(),
   stock: z.string().optional().nullable(),
-  type: z.enum(['1', '2']),
-  status: z.enum(['0', '1']),
+  type: z.string(),
+  status: z.string(),
   tag: z.string().optional().nullable(),
   rank: z.string().optional().nullable(),
   regular_price: z.string().min(1, '入力が必須の項目です'),
   sales_price: z.string().min(1, '入力が必須の項目です'),
-  delivery_id: z.string().min(1, '入力が必須の項目です'),
+  delivery_id: z.string(),
 })
 
 export type CreateProductSchemaType = z.infer<typeof createProductSchema>

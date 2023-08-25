@@ -15,11 +15,13 @@ class IndexController extends Controller
     public function __invoke()
     {
         $products = Product::all();
+        $categories = Category::all();
         $types = config('product.type');
         $statuses = config('product.status');
 
         return Inertia::render('Admin/Product/List', [
             'products' => $products,
+            'categories' => $categories,
             'types' => $types,
             'statuses' => $statuses,
         ]);

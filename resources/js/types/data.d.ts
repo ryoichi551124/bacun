@@ -1,10 +1,4 @@
-import {
-  Role,
-  Sex,
-  UserStatus,
-  ProductStatus,
-  ProductType,
-} from '@/Types/config'
+import { ProductType, Role, Sex, UserStatus } from '@/Types/config'
 import type { AlertColor } from '@mui/material'
 
 export type FlashMessage = {
@@ -101,14 +95,14 @@ export type Product = {
   content3?: string
   content4?: string
   memo?: string
-  stock: string
-  type: ProductType
-  status: ProductStatus
+  stock: number
+  type: string
+  status: string
   tag?: number
   rank?: number
   regular_price: number
   sales_price: number
-  delivery_id: number
+  delivery_id?: number
 }
 
 export type Delivery = {

@@ -10,17 +10,25 @@ import TableRow from '@mui/material/TableRow'
 import AddLinkIcon from '@/Components/Admin/Icon/AddLinkIcon'
 import EditLinkIcon from '@/Components/Admin/Icon/EditLinkIcon'
 import DeleteLinkIcon from '@/Components/Admin/Icon/DeleteLinkIcon'
-import type { Product, ProductType, ProductStatus, FlashMessage } from '@/Types'
+import type {
+  Product,
+  Category,
+  ProductType,
+  ProductStatus,
+  FlashMessage,
+} from '@/Types'
 
 type ProductData = {
   products: Product[]
+  categories: Category[]
   types: ProductType
   statuses: ProductStatus
   flash: FlashMessage
 }
 
 export default function ProductListTable() {
-  const { products, types, statuses, flash } = usePage<ProductData>().props
+  const { products, categories, types, statuses, flash } =
+    usePage<ProductData>().props
 
   return (
     <>
@@ -55,11 +63,17 @@ export default function ProductListTable() {
                   </TableCell>
                   <TableCell>{product.name}</TableCell>
                   <TableCell>
-                    {product.category_id ? product.category_id : 'なし'}
+                    {product.category_id && categories.length > 0
+                      ? categories.filter(
+                          (category) => category.id === product.category_id,
+                        )[0].name
+                      : 'なし'}
                   </TableCell>
                   <TableCell>{types[product.type[0]]}</TableCell>
                   <TableCell>{statuses[product.status[0]]}</TableCell>
-                  <TableCell align="right">{product.stock}</TableCell>
+                  <TableCell align="right">
+                    {product.stock > 99 ? '無制限' : product.stock}
+                  </TableCell>
                   <TableCell align="right" width="150">
                     <EditLinkIcon
                       editLink="/admin/product/edit/"

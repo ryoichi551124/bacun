@@ -45,19 +45,18 @@ type ProductData = {
   tags: ProductTag
   statuses: ProductStatus
 }
-
-type ProductFormProps = {
+type ProductCreateFormProps = {
   onCreateProduct?: (data: CreateProductSchemaType) => void
 }
 
 export default function ProductCreateForm({
   onCreateProduct,
-}: ProductFormProps) {
+}: ProductCreateFormProps) {
   const { categories, deliveries, types, tags, statuses } =
     usePage<ProductData>().props
   const [isUnLimited, setIsUnLimited] = useState<boolean>(false)
   const [isStockOut, setIsStockOut] = useState<boolean>(false)
-  const [isDownload, setIsDownloade] = useState<boolean>(false)
+  const [isDownload, setIsDownload] = useState<boolean>(false)
 
   const handleUnLimited = () => {
     if (isStockOut) {
@@ -76,7 +75,7 @@ export default function ProductCreateForm({
     }
   }
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.value === '2' ? setIsDownloade(true) : setIsDownloade(false)
+    e.target.value === '2' ? setIsDownload(true) : setIsDownload(false)
   }
 
   const {
@@ -90,7 +89,7 @@ export default function ProductCreateForm({
     resolver: zodResolver(createProductSchema),
   })
 
-  const createProduct = (data: CreateProductSchemaType) => {
+  const onSubmit = (data: CreateProductSchemaType) => {
     data.stock = isUnLimited || isDownload ? '999' : data.stock
     data.stock = isStockOut && !isDownload ? '0' : data.stock
     data.delivery_id = isDownload ? '0' : data.delivery_id
@@ -99,7 +98,7 @@ export default function ProductCreateForm({
 
   return (
     <Card title="商品新規作成">
-      <form onSubmit={handleSubmit(createProduct)} css={forms.container}>
+      <form onSubmit={handleSubmit(onSubmit)} css={forms.container}>
         <Grid container spacing={2}>
           {/* メイン画像 */}
           <Grid xs={4} css={{ width: '250px' }}>
@@ -123,7 +122,7 @@ export default function ProductCreateForm({
               )}
             />
           </Grid>
-          <Grid xs={4}>
+          <Grid xs={5}>
             {/* 商品名 */}
             <div>
               <label htmlFor="name" css={forms.label}>
@@ -170,7 +169,7 @@ export default function ProductCreateForm({
               )}
             </div>
           </Grid>
-          <Grid xs={2}></Grid>
+          <Grid xs={7}></Grid>
           <Grid xs={12}></Grid>
 
           {/* ステータス */}
