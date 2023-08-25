@@ -127,6 +127,10 @@ export default function DropZone(props: DropZoneProps) {
   }, [])
 
   const handleClick = () => {
+    // 削除したデータが残っていた場合、同じデータを選ぶとonChangeイベントが発生しないため一旦削除する
+    if (inputRef.current?.value) {
+      inputRef.current.value = ''
+    }
     inputRef.current?.click()
   }
 
@@ -134,8 +138,8 @@ export default function DropZone(props: DropZoneProps) {
     <>
       {/* ドロップゾーン */}
       <div
-        ref={rootRef}
         css={[container, isFocused && focus, hasError && error]}
+        ref={rootRef}
         onDrop={handleDrop}
         onDragEnter={handleDragEnter}
         onDragOver={handleDragOver}

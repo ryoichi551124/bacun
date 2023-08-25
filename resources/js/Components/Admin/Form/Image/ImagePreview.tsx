@@ -29,7 +29,6 @@ const close = css`
 
 type ImagePreviewProps = {
   src?: string
-  alt?: string
   width?: string
   height?: string
   onRemove?: (src: string) => void
@@ -37,7 +36,6 @@ type ImagePreviewProps = {
 
 export default function ImagePreview({
   src,
-  alt,
   width,
   height,
   onRemove,
@@ -59,7 +57,7 @@ export default function ImagePreview({
   return (
     <div css={container}>
       {/* 画像表示 */}
-      <img src={src} alt={alt} height={height} width={width} css={image} />
+      <img src={src} height={height} width={width} css={image} />
       {/* 削除アイコン */}
       <div css={closeBox} onClick={handleCloseClick}>
         <CloseIcon css={close} />

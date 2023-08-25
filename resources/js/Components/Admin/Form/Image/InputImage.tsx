@@ -9,7 +9,6 @@ const container = css`
 `
 
 export type FileData = {
-  id?: string
   src?: string
   file?: File
 }
@@ -72,19 +71,14 @@ export default function InputImage(props: InputImageProps) {
   return (
     <div css={container}>
       {/* 画像プレビュー表示 */}
-      {images &&
-        images.map((img, index) => {
-          return (
-            <ImagePreview
-              key={index}
-              src={img.src}
-              alt={img.id}
-              width={width}
-              height={height}
-              onRemove={onRemove}
-            />
-          )
-        })}
+      {images?.length > 0 && (
+        <ImagePreview
+          src={images[0].src}
+          width={width}
+          height={height}
+          onRemove={onRemove}
+        />
+      )}
       {/* 画像ファイルドロップゾーン */}
       <div style={{ display: isDropZoneDisplay }}>
         <DropZone
