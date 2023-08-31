@@ -38,7 +38,7 @@ const createUserSchema = z
     birth_month: z.string().min(1, '入力が必須の項目です'),
     birth_day: z.string().min(1, '入力が必須の項目です'),
     memo: z.string().optional(),
-    status: z.enum(['0', '1', '2']),
+    status: z.string(),
   })
   .refine(
     ({ password, password_confirmation }) => {

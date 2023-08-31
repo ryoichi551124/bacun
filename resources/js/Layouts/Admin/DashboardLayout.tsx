@@ -11,7 +11,7 @@ const container = css`
 `
 const rightContainer = css`
   width: 100%;
-  min-width: 800px;
+  min-width: 880px;
   height: 100vh;
   overflow-x: scroll;
 `

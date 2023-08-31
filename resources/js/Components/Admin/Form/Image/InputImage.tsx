@@ -27,8 +27,8 @@ export default function InputImage(props: InputImageProps) {
     name,
     images,
     hasError,
-    width = '100%',
-    height = '260px',
+    width = '200px',
+    height = '200px',
     onChange,
   } = props
 

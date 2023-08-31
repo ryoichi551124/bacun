@@ -1,6 +1,12 @@
 import { CreateProductSchemaType } from '@/Schemas/Admin/Product/CreateSchema'
 import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/UpdateSchema'
 import { Product } from '@/Types'
+import type { FileData } from '@/Components/Admin/Form/Image/InputImage'
+
+function getFile(file: FileData[]): File | undefined {
+  return file?.length > 0 && file[0].file ? file[0].file : undefined
+}
+
 
 export function formDataToProduct(
   data: CreateProductSchemaType | UpdateProductSchemaType,
@@ -9,12 +15,12 @@ export function formDataToProduct(
     category_id: data.category_id === '0' ? null : Number(data.category_id),
     name: data.name,
     // 画像は未入力ならundefined、一度入力後削除した場合は空配列となる
-    thumbnail: data.thumbnail?.length > 0 ? data.thumbnail[0].file : null,
-    main_img: data.main_img?.length > 0 ? data.main_img[0].file : null,
-    sub_img1: data.sub_img1?.length > 0 ? data.sub_img1[0].file : null,
-    sub_img2: data.sub_img2?.length > 0 ? data.sub_img2[0].file : null,
-    sub_img3: data.sub_img3?.length > 0 ? data.sub_img3[0].file : null,
-    sub_img4: data.sub_img4?.length > 0 ? data.sub_img4[0].file : null,
+    thumbnail: getFile(data.thumbnail),
+    main_img: getFile(data.main_img),
+    sub_img1: getFile(data.sub_img1),
+    sub_img2: getFile(data.sub_img2),
+    sub_img3: getFile(data.sub_img3),
+    sub_img4: getFile(data.sub_img4),
     content1: data.content1,
     content2: data.content2,
     content3: data.content3,

@@ -21,6 +21,7 @@ class Product extends Model
     protected $fillable = [
         'category_id',
         'name',
+        'main_img',
         'thumbnail',
         'sub_img1',
         'sub_img2',
@@ -81,6 +82,13 @@ class Product extends Model
         return $this->hasOne(Delivery::class);
     }
 
+    /**
+     * IDによるスコープ
+     *
+     * @param Builder $query
+     * @param integer|null $id
+     * @return void
+     */
     public function scopeId(Builder $query, int $id = null): void
     {
         if (empty($id)) return;

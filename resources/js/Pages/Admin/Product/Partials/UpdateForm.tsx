@@ -81,6 +81,8 @@ export default function ProcutUpdateForm({
     e.target.value === '2' ? setIsDownload(true) : setIsDownload(false)
   }
 
+  product.main_img =
+    'https://yamani.itembox.design/product/000/000000000053/000000000053-01-l.jpg?t=20230808174428'
   const defaultProductValue = productToFormData(product)
 
   const {
@@ -399,7 +401,29 @@ export default function ProcutUpdateForm({
               )}
             />
           </Grid>
-          <Grid style={{ width: 'calc(100% - 600px)' }}></Grid>
+          {/* サブ画像4 */}
+          <Grid style={{ width: '150px' }} css={space}>
+            <label htmlFor="sub_img4" css={forms.label}>
+              サブ画像4
+            </label>
+            <Controller
+              control={control}
+              name="sub_img4"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <InputImage
+                  images={value ?? []}
+                  width={'140px'}
+                  height={'140px'}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Grid>
+          <Grid style={{ width: 'calc(100% - 750px)' }}></Grid>
 
           {/* 商品説明1 */}
           <Grid xs={8}>

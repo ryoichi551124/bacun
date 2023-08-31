@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Rules\UnsignedTinyInteger;
 use App\Rules\UnsignedMediumInteger;
+use Illuminate\Http\Request;
 
 class UpdateRequest extends FormRequest
 {
@@ -27,11 +28,12 @@ class UpdateRequest extends FormRequest
         return [
             'category_id'       => ['nullable'],
             'name'              => ['required', 'string', 'max:128'],
-            'thumbnail'         => ['nullable', 'string', 'url'],
-            'sub_img1'          => ['nullable', 'string', 'url'],
-            'sub_img2'          => ['nullable', 'string', 'url'],
-            'sub_img3'          => ['nullable', 'string', 'url'],
-            'sub_img4'          => ['nullable', 'string', 'url'],
+            'main_img'          => ['nullable', 'image'],
+            'thumbnail'         => ['nullable', 'image'],
+            'sub_img1'          => ['nullable', 'image'],
+            'sub_img2'          => ['nullable', 'image'],
+            'sub_img3'          => ['nullable', 'image'],
+            'sub_img4'          => ['nullable', 'image'],
             'content1'          => ['nullable', 'string'],
             'content2'          => ['nullable', 'string'],
             'content3'          => ['nullable', 'string'],

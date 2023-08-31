@@ -1,4 +1,4 @@
-import { ProductType, Role, Sex, UserStatus } from '@/Types/config'
+import { Role, Sex, UserStatus } from '@/Types/config'
 import type { AlertColor } from '@mui/material'
 
 export type FlashMessage = {
@@ -29,7 +29,7 @@ export interface User {
   birth_month: string
   birth_day: string
   memo: string
-  status: UserStatus
+  status: string
 }
 
 export type UserAuth = {

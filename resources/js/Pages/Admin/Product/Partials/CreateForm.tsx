@@ -394,7 +394,29 @@ export default function ProductCreateForm({
               )}
             />
           </Grid>
-          <Grid style={{ width: 'calc(100% - 600px)' }}></Grid>
+          {/* サブ画像4 */}
+          <Grid style={{ width: '150px' }} css={space}>
+            <label htmlFor="sub_img4" css={forms.label}>
+              サブ画像4
+            </label>
+            <Controller
+              control={control}
+              name="sub_img4"
+              rules={{ required: true }}
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <InputImage
+                  images={value ?? []}
+                  width={'140px'}
+                  height={'140px'}
+                  onChange={onChange}
+                />
+              )}
+            />
+          </Grid>
+          <Grid style={{ width: 'calc(100% - 750px)' }}></Grid>
 
           {/* 商品説明1 */}
           <Grid xs={8}>
