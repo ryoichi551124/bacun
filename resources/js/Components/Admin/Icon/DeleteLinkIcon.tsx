@@ -15,6 +15,7 @@ type DeleteLinkProps = {
   deleteLink: string
   id: number
   target: string
+  disabled?: boolean
 }
 
 const icon = css`
@@ -25,11 +26,19 @@ const icon = css`
     transition: 0.5s;
   }
 `
+const noEvent = css`
+  pointer-events: none;
+  color: ${colors.gray};
+  &:hover {
+    transform: none;
+  }
+`
 
 export default function DeleteLinkIcon({
   deleteLink,
   id,
   target,
+  disabled,
 }: DeleteLinkProps) {
   const [open, setOpen] = useState<boolean>(false)
 
@@ -48,8 +57,8 @@ export default function DeleteLinkIcon({
 
   return (
     <>
-      <button onClick={handleClickOpen}>
-        <DeleteIcon css={icon} />
+      <button onClick={handleClickOpen} disabled={disabled}>
+        <DeleteIcon css={[icon, disabled && noEvent]} />
       </button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{target}を削除してもよろしいですか？</DialogTitle>

@@ -59,6 +59,7 @@ export default function AdminListTable() {
                       deleteLink="/admin/admin/list/delete/"
                       id={admin.id}
                       target={admin.name}
+                      disabled={admin.id === 1}
                     />
                   </TableCell>
                 </TableRow>
