@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // パスワードバリデーションのデフォルト設定
         Password::defaults(
             fn () => Password::min(8)
                 ->letters()

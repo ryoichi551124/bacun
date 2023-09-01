@@ -3,10 +3,14 @@ import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/UpdateSchema'
 import { Product } from '@/Types'
 import type { FileData } from '@/Components/Admin/Form/Image/InputImage'
 
+/**
+ * フォームのファイルデータを取得
+ * @param file
+ * @returns
+ */
 function getFile(file: FileData[]): File | undefined {
   return file?.length > 0 && file[0].file ? file[0].file : undefined
 }
-
 
 export function formDataToProduct(
   data: CreateProductSchemaType | UpdateProductSchemaType,
