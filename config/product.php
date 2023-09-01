@@ -15,4 +15,12 @@ return [
         0 => '非公開',
         1 => '公開',
     ],
+    'img_attribute' => [
+        'main_img',
+        'thumbnail',
+        'sub_img1',
+        'sub_img2',
+        'sub_img3',
+        'sub_img4',
+    ],
 ];

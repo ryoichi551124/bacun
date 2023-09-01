@@ -8,13 +8,17 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Delivery;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class IndexController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * 商品の編集ページ
+     *
+     * @param Request $request
+     * @return Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         $product = Product::Id($request->route('id'))->first();
         $categories = Category::all();

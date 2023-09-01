@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\Admin\CreateRequest;
 use App\Models\Admin;
+use Illuminate\Http\RedirectResponse;
 
 class CreateController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * 管理者新規作成
+     *
+     * @param CreateRequest $request
+     * @return RedirectResponse
      */
-    public function __invoke(CreateRequest $request)
+    public function __invoke(CreateRequest $request): RedirectResponse
     {
         Admin::create(array_merge(
             $request->validated(),

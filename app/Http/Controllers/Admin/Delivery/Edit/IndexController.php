@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Delivery;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class IndexController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * 送料編集ページ
+     *
+     * @param Request $request
+     * @return Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Response
     {
         $delivery = Delivery::Id($request->route('id'))->first();
 

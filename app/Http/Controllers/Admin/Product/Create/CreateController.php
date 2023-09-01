@@ -6,25 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Product\CreateRequest;
 use App\Models\Product;
 use App\Services\FileService;
+use Illuminate\Http\RedirectResponse;
 
 class CreateController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * 商品の新規作成
+     *
+     * @param CreateRequest $request
+     * @return RedirectResponse
      */
-    public function __invoke(CreateRequest $request)
+    public function __invoke(CreateRequest $request): RedirectResponse
     {
-        $img_attributes = ['main_img', 'thumbnail', 'sub_img1', 'sub_img2', 'sub_img3'];
+        // 画像保存ディレクトリ
         $directory = 'product';
 
+        // 画像の属性はストレージに保存・保存先URLを設定
         $img_urls = [];
-        foreach ($img_attributes as $attribute) {
+        foreach (config('product.img_attribute') as $attribute) {
             if (isset($request->validated()[$attribute]) && $request->validated()[$attribute]) {
                 $img_url = FileService::store($request->validated()[$attribute], $directory);
                 $img_urls[$attribute] = $img_url;
             }
         }
 
+        // 画像ファイルは取得したURLで上書きして保存
         Product::create(array_merge($request->validated(), $img_urls));
 
         return redirect()

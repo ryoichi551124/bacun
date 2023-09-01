@@ -6,13 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class IndexController extends Controller
 {
     /**
-     * 商品一覧
+     * 商品一覧ページ
+     *
+     * @return Response
      */
-    public function __invoke()
+    public function __invoke(): Response
     {
         $products = Product::all();
         $categories = Category::all();

@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\Admin\UpdateRequest;
 use App\Models\Admin;
+use Illuminate\Http\RedirectResponse;
 
 class UpdateController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * 管理者編集
+     *
+     * @param UpdateRequest $request
+     * @return RedirectResponse
      */
-    public function __invoke(UpdateRequest $request)
+    public function __invoke(UpdateRequest $request): RedirectResponse
     {
         Admin::Id($request->id)->update(array_merge(
             $request->validated(),

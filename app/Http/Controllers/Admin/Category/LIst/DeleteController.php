@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin\Category\List;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 
 class DeleteController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * カテゴリーの削除
+     *
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): RedirectResponse
     {
         $category = Category::Id($request->route('id'))->first();
         $name = $category->name;
