@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import DeliveryCreateForm from '@/Pages/Admin/Delivery/Partials/CreateForm'
 
@@ -16,4 +16,4 @@ export default function DeliveryCreate() {
   )
 }
 
-DeliveryCreate.layout = (page: ReactNode) => <DashboardLayout children={page} />
+DeliveryCreate.layout = (page: ReactNode) => <AdminLayout children={page} />

@@ -1,6 +1,6 @@
 import { Head } from '@inertiajs/react'
 import type { PageProps } from '@/Types'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import { usePage } from '@inertiajs/react'
 
 export default function Edit({
@@ -11,11 +11,11 @@ export default function Edit({
   const props = usePage().props
 
   return (
-    <DashboardLayout>
+    <AdminLayout>
       <Head title="Admin Dashboard" />
       <div>{auth.user.name}</div>
       <div>{mustVerifyEmail}</div>
       <div>{status}</div>
-    </DashboardLayout>
+    </AdminLayout>
   )
 }

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Head, usePage, router } from '@inertiajs/react'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import ProductUpdateForm from '@/Pages/Admin/Product/Partials/UpdateForm'
 import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/UpdateSchema'
@@ -35,4 +35,4 @@ export default function ProductEdit() {
   )
 }
 
-ProductEdit.layout = (page: ReactNode) => <DashboardLayout children={page} />
+ProductEdit.layout = (page: ReactNode) => <AdminLayout children={page} />

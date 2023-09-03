@@ -1,6 +1,6 @@
 import { ReactNode, memo } from 'react'
 import { Head, router, usePage } from '@inertiajs/react'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import ProductCreateForm from '@/Pages/Admin/Product/Partials/CreateForm'
 import { formDataToProduct } from '@/Services/productSevice'
@@ -23,4 +23,4 @@ export default function ProductCreate() {
   )
 }
 
-ProductCreate.layout = (page: ReactNode) => <DashboardLayout children={page} />
+ProductCreate.layout = (page: ReactNode) => <AdminLayout children={page} />

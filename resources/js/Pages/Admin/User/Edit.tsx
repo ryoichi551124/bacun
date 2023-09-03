@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import UserUpdateForm from '@/Pages/Admin/User/Partials/UpdateForm'
 
@@ -16,4 +16,4 @@ export default function UserEdit() {
   )
 }
 
-UserEdit.layout = (page: ReactNode) => <DashboardLayout children={page} />
+UserEdit.layout = (page: ReactNode) => <AdminLayout children={page} />

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import AdminListTable from '@/Pages/Admin/Admin/Partials/ListTable'
 
@@ -16,4 +16,4 @@ export default function AdminList() {
   )
 }
 
-AdminList.layout = (page: ReactNode) => <DashboardLayout children={page} />
+AdminList.layout = (page: ReactNode) => <AdminLayout children={page} />

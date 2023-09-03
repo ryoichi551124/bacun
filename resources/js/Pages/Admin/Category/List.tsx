@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Head, usePage } from '@inertiajs/react'
 import AlertMessage from '@/Components/Admin/FeedBack/AlertMessage'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import CategoryCreateForm from '@/Pages/Admin/Category/Partials/CreateForm'
 import CategoryListTable from '@/Pages/Admin/Category/Partials/ListTable'
@@ -27,4 +27,4 @@ export default function CategoryList() {
   )
 }
 
-CategoryList.layout = (page: ReactNode) => <DashboardLayout children={page} />
+CategoryList.layout = (page: ReactNode) => <AdminLayout children={page} />

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Head, usePage } from '@inertiajs/react'
 import AlertMessage from '@/Components/Admin/FeedBack/AlertMessage'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import CompanyUpdateForm from '@/Pages/Admin/Basic/Partials/CompanyUpdateForm'
 import ShopUpdateForm from '@/Pages/Admin/Basic/Partials/ShopUpdateForm'
@@ -27,4 +27,4 @@ export default function BasicEdit() {
   )
 }
 
-BasicEdit.layout = (page: ReactNode) => <DashboardLayout children={page} />
+BasicEdit.layout = (page: ReactNode) => <AdminLayout children={page} />

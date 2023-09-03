@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Head } from '@inertiajs/react'
-import DashboardLayout from '@/Layouts/Admin/DashboardLayout'
+import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import DeliveryUpdateForm from '@/Pages/Admin/Delivery/Partials/UpdateForm'
 
@@ -16,4 +16,4 @@ export default function DeliveryEdit() {
   )
 }
 
-DeliveryEdit.layout = (page: ReactNode) => <DashboardLayout children={page} />
+DeliveryEdit.layout = (page: ReactNode) => <AdminLayout children={page} />

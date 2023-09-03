@@ -21,7 +21,10 @@ const mainContainer = css`
   padding: 1rem 2rem;
 `
 
-export default function DashboardLayout({ children }: PropsWithChildren) {
+/**
+ *
+ */
+export default function AdminLayout({ children }: PropsWithChildren) {
   return (
     <>
       <Global styles={global} />
