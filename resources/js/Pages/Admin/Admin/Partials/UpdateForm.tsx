@@ -32,11 +32,7 @@ export default function AdminUpdateForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<UpdateAdminSchemaType>({
-    defaultValues: {
-      name: admin.name,
-      email: admin.email,
-      role: admin.role,
-    },
+    defaultValues: admin,
     reValidateMode: 'onBlur',
     resolver: zodResolver(updateAdminSchema),
   })

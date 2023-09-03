@@ -3,15 +3,27 @@
 namespace App\Http\Controllers\Admin\MailTemplate\Edit;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\MailTemplate\UpdateRequest;
+use App\Models\MailTemplate;
+use Illuminate\Http\RedirectResponse;
 
 class UpdateController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * メールテンプレート編集
+     *
+     * @param UpdateRequest $request
+     * @return RedirectResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(UpdateRequest $request): RedirectResponse
     {
-        //
+        MailTemplate::Id($request->id)->update($request->validated());
+
+        return redirect()
+            ->route('admin.mailtemplate.list')
+            ->with([
+                'severity' => 'success',
+                'message' => 'メールテンプレートを編集しました',
+            ]);
     }
 }

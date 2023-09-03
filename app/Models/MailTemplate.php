@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -45,5 +46,18 @@ class MailTemplate extends Model
     public function mail_logs(): HasMany
     {
         return $this->hasMany(MailLog::class);
+    }
+
+    /**
+     * IDによるスコープ
+     *
+     * @param Builder $query
+     * @param integer|null $id
+     * @return void
+     */
+    public function scopeId(Builder $query, int $id = null): void
+    {
+        if (empty($id)) return;
+        $query->where('id', $id);
     }
 }

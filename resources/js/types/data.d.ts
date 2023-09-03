@@ -126,3 +126,17 @@ export type Delivery = {
   category?: string
   rank?: number
 }
+
+// メールテンプレート
+export type MailTemplate = {
+  id: number
+  name: string
+  subject: string
+  body: string
+  from_name: string
+  from_address: string
+  reply_to_name: string
+  reply_to_address: string
+  cc_address: string
+  bcc_address: string
+}

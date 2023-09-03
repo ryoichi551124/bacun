@@ -1,0 +1,26 @@
+import * as z from 'zod'
+
+const updateMailTemplateSchema = z.object({
+  name: z.string().min(1, '入力が必須の項目です'),
+  subject: z.string().min(1, '入力が必須の項目です'),
+  body: z.string().min(1, '入力が必須の項目です'),
+  from_name: z.string().min(1, '入力が必須の項目です'),
+  from_address: z
+    .string()
+    .min(1, '入力が必須の項目です')
+    .email({ message: 'メールアドレスの形式ではありません' }),
+  reply_to_name: z.string().optional().nullable(),
+  reply_to_address: z
+    .string()
+    .email({ message: 'メールアドレスの形式ではありません' })
+    .optional()
+    .nullable(),
+  cc_address: z.string().optional().nullable(),
+  bcc_address: z.string().optional().nullable(),
+})
+
+export type UpdateMailTemplateSchemaType = z.infer<
+  typeof updateMailTemplateSchema
+>
+
+export default updateMailTemplateSchema
