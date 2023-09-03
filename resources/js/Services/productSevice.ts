@@ -5,13 +5,14 @@ import type { FileData } from '@/Components/Admin/Form/Image/InputImage'
 
 /**
  * フォームのファイルデータを取得
- * @param file
- * @returns
  */
 function getFile(file: FileData[]): File | undefined {
   return file?.length > 0 && file[0].file ? file[0].file : undefined
 }
 
+/**
+ * 商品フォームのデータを登録出来る形に変換
+ */
 export function formDataToProduct(
   data: CreateProductSchemaType | UpdateProductSchemaType,
 ) {
@@ -42,6 +43,9 @@ export function formDataToProduct(
   return product
 }
 
+/**
+ * 商品データをフォームで使える形に変換
+ */
 export function productToFormData(product: Product) {
   const productFormData = {
     cateogry_id: product.category_id,

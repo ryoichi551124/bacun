@@ -17,6 +17,9 @@ type DeliveryData = {
   flash: FlashMessage
 }
 
+/**
+ * 送料一覧
+ */
 export default function DeliveryListTable() {
   const { deliveries, flash } = usePage<DeliveryData>().props
 

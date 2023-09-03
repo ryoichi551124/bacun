@@ -9,7 +9,7 @@ const initialState: IsSideOpen = {
   isOpen: true,
 }
 
-// グループデータ
+// サイドバーのオープンクローズ管理
 export const isSideOpenSlice = createSlice({
   name: 'isSideOpen',
   initialState,

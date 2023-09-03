@@ -1,11 +1,13 @@
 import { Role, Sex, UserStatus } from '@/Types/config'
 import type { AlertColor } from '@mui/material'
 
+// フラッシュメッセージ
 export type FlashMessage = {
   severity: AlertColor
   message: string
 }
 
+// 顧客
 export interface User {
   id: number
   email: string
@@ -32,12 +34,14 @@ export interface User {
   status: string
 }
 
+// ユーザーのログイン情報
 export type UserAuth = {
   auth: {
     user: User
   }
 }
 
+// 管理者
 export type Admin = {
   id: number
   name: string
@@ -46,12 +50,14 @@ export type Admin = {
   role: Role
 }
 
+// 管理者のログイン情報
 export type AdminAuth = {
   auth: {
     user: Admin
   }
 }
 
+// 会社情報
 export type Company = {
   company_name: string
   company_kana: string
@@ -65,21 +71,25 @@ export type Company = {
   email2: string
 }
 
+// ショップ情報
 export type Shop = {
   shop_name: string
   shop_kana: string
   shop_message: string
 }
 
+// 基本情報（会社情報 & ショップ情報）
 export type Basic = {
   basic: Partial<Company> & Partial<Shop>
 }
 
+// 商品カテゴリー
 export type Category = {
   id: number
   name: string
 }
 
+// 商品
 export type Product = {
   id: number
   category_id?: number
@@ -105,6 +115,7 @@ export type Product = {
   delivery_id?: number
 }
 
+// 送料
 export type Delivery = {
   id: number
   name: string
