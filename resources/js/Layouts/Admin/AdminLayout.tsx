@@ -22,7 +22,7 @@ const mainContainer = css`
 `
 
 /**
- *
+ * 管理画面レイアウト
  */
 export default function AdminLayout({ children }: PropsWithChildren) {
   return (

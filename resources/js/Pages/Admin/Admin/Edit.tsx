@@ -6,6 +6,9 @@ import AdminUpdateForm from '@/Pages/Admin/Admin/Partials/UpdateForm'
 
 const title = '管理者設定'
 
+/**
+ * 管理者編集ページ
+ */
 export default function AdminEdit() {
   return (
     <>

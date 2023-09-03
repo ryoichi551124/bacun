@@ -13,6 +13,9 @@ type Message = {
   flash: FlashMessage
 }
 
+/**
+ * 基本情報作成・編集ページ
+ */
 export default function BasicEdit() {
   const { flash } = usePage<Message>().props
 

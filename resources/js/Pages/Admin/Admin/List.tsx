@@ -6,6 +6,9 @@ import AdminListTable from '@/Pages/Admin/Admin/Partials/ListTable'
 
 const title = '管理者設定'
 
+/**
+ * 管理者一覧ページ
+ */
 export default function AdminList() {
   return (
     <>

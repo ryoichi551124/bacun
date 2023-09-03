@@ -6,6 +6,9 @@ import AdminCreateForm from '@/Pages/Admin/Admin/Partials/CreateForm'
 
 const title = '管理者設定'
 
+/**
+ * 管理者作成ページ
+ */
 export default function AdminCreate() {
   return (
     <>

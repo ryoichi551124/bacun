@@ -6,6 +6,9 @@ import DeliveryListTable from '@/Pages/Admin/Delivery/Partials/ListTable'
 
 const title = '送料管理'
 
+/**
+ * 送料一覧ページ
+ */
 export default function DeliveryList() {
   return (
     <>

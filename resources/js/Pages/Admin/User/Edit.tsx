@@ -6,6 +6,9 @@ import UserUpdateForm from '@/Pages/Admin/User/Partials/UpdateForm'
 
 const title = '顧客管理'
 
+/**
+ * 顧客編集ページ
+ */
 export default function UserEdit() {
   return (
     <>

@@ -49,6 +49,9 @@ type ProductCreateFormProps = {
   onCreateProduct?: (data: CreateProductSchemaType) => void
 }
 
+/**
+ * 商品作成フォーム
+ */
 export default function ProductCreateForm({
   onCreateProduct,
 }: ProductCreateFormProps) {
@@ -58,6 +61,7 @@ export default function ProductCreateForm({
   const [isStockOut, setIsStockOut] = useState<boolean>(false)
   const [isDownload, setIsDownload] = useState<boolean>(false)
 
+  /** 無制限の場合 */
   const handleUnLimited = () => {
     if (isStockOut) {
       setIsStockOut(false)
@@ -66,6 +70,7 @@ export default function ProductCreateForm({
       setIsUnLimited(!isUnLimited)
     }
   }
+  /** 在庫切れの場合 */
   const handleStockOut = () => {
     if (isUnLimited) {
       setIsUnLimited(false)
@@ -74,6 +79,7 @@ export default function ProductCreateForm({
       setIsStockOut(!isStockOut)
     }
   }
+  /** 商品タイプの選択 */
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value === '2' ? setIsDownload(true) : setIsDownload(false)
   }
@@ -89,6 +95,7 @@ export default function ProductCreateForm({
     resolver: zodResolver(createProductSchema),
   })
 
+  /** 商品作成 */
   const onSubmit = (data: CreateProductSchemaType) => {
     data.stock = isUnLimited || isDownload ? '999' : data.stock
     data.stock = isStockOut && !isDownload ? '0' : data.stock

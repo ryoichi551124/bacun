@@ -13,6 +13,6 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return Inertia::render('Admin/Mail/Index');
+        return Inertia::render('Admin/Mail/List');
     }
 }

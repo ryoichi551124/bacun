@@ -26,6 +26,9 @@ type ProductData = {
   flash: FlashMessage
 }
 
+/**
+ * 商品一覧
+ */
 export default function ProductListTable() {
   const { products, categories, types, statuses, flash } =
     usePage<ProductData>().props
@@ -72,7 +75,11 @@ export default function ProductListTable() {
                   <TableCell>{types[product.type[0]]}</TableCell>
                   <TableCell>{statuses[product.status[0]]}</TableCell>
                   <TableCell align="right">
-                    {product.stock > 99 ? '無制限' : product.stock}
+                    {product.stock > 99
+                      ? '無制限'
+                      : product.stock === 0
+                      ? '在庫なし'
+                      : product.stock}
                   </TableCell>
                   <TableCell align="right" width="150">
                     <EditLinkIcon

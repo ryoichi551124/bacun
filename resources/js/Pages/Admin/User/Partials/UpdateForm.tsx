@@ -26,6 +26,9 @@ type UserData = {
   prefs: Pref
 }
 
+/**
+ * 顧客編集ページ
+ */
 export default function UserUpdateForm() {
   const { user, statuses, prefs } = usePage<UserData>().props
 

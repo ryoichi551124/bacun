@@ -12,6 +12,9 @@ import updateShopSchema, {
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Basic } from '@/Types'
 
+/**
+ * ショップ情報作成・編集フォーム
+ */
 export default function ShopUpdateForm() {
   const { basic } = usePage<Basic>().props
 
@@ -20,15 +23,12 @@ export default function ShopUpdateForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      shop_name: basic?.shop_name,
-      shop_kana: basic?.shop_kana,
-      shop_message: basic?.shop_message,
-    },
+    defaultValues: basic,
     reValidateMode: 'onBlur',
     resolver: zodResolver(updateShopSchema),
   })
 
+  /** ショップ情報作成・編集 */
   const updateShop = (data: UpdateShopSchemaType) => {
     router.put('/admin/basic/edit/update', data)
   }

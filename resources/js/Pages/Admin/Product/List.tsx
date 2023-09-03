@@ -6,6 +6,9 @@ import ProductListTable from '@/Pages/Admin/Product/Partials/ListTable'
 
 const title = '商品管理'
 
+/**
+ * 商品一覧ページ
+ */
 export default function ProductList() {
   return (
     <>

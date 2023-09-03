@@ -15,6 +15,9 @@ const button = css`
   margin-right: 2rem;
 `
 
+/**
+ * 送料新規作成フォーム
+ */
 export default function DeliveryCreateForm() {
   const {
     register,
@@ -25,6 +28,7 @@ export default function DeliveryCreateForm() {
     resolver: zodResolver(createDeliverySchema),
   })
 
+  /** 送料新規作成 */
   const createDelivery = (data: CreateDeliverySchemaType) => {
     router.post('/admin/delivery/create/create', data)
   }

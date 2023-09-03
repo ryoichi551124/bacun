@@ -12,6 +12,9 @@ import updateCompanySchema, {
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Basic } from '@/Types'
 
+/**
+ * 会社情報作成・編集フォーム
+ */
 export default function CompanyUpdateForm() {
   const { basic } = usePage<Basic>().props
 
@@ -20,22 +23,12 @@ export default function CompanyUpdateForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      company_name: basic?.company_name,
-      company_kana: basic?.company_kana,
-      zip_code1: basic?.zip_code1,
-      zip_code2: basic?.zip_code2,
-      address1: basic?.address1,
-      address2: basic?.address2,
-      tel1: basic?.tel1,
-      tel2: basic?.tel2,
-      email1: basic?.email1,
-      email2: basic?.email2,
-    },
+    defaultValues: basic,
     reValidateMode: 'onBlur',
     resolver: zodResolver(updateCompanySchema),
   })
 
+  /** 会社情報作成・編集 */
   const updateCompany = (data: UpdateCompanySchemaType) => {
     router.put('/admin/basic/edit/update', data)
   }

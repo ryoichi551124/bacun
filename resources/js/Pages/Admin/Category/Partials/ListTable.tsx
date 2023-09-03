@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import { usePage } from '@inertiajs/react'
 import NoTableData from '@/Components/Admin/Common/NoTableData'
 import Card from '@/Components/Admin/Common/Card'
@@ -8,13 +6,15 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import EditLinkIcon from '@/Components/Admin/Icon/EditLinkIcon'
 import CategoryUpdateModal from '@/Pages/Admin/Category/Partials/UpdateModal'
 import DeleteLinkIcon from '@/Components/Admin/Icon/DeleteLinkIcon'
 import type { Category } from '@/Types'
 
 type CategoryData = { categories: Category[] }
 
+/**
+ * カテゴリー一覧
+ */
 export default function CategoryListTable() {
   const { categories } = usePage<CategoryData>().props
 

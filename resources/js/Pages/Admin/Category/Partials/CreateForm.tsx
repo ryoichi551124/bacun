@@ -11,6 +11,9 @@ import createCategorySchema, {
 } from '@/Schemas/Admin/Category/CreateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+/**
+ * カテゴリー作成フォーム
+ */
 export default function CategoryCreateForm() {
   const {
     register,
@@ -22,6 +25,7 @@ export default function CategoryCreateForm() {
     resolver: zodResolver(createCategorySchema),
   })
 
+  /** カテゴリー作成 */
   const createCategory = (data: CreateCategorySchemaType) => {
     router.post('/admin/category/create/create', data)
     reset()

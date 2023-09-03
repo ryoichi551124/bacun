@@ -20,6 +20,9 @@ type AdminData = {
   roles: AdminRoles
 }
 
+/**
+ * 管理者作成フォーム
+ */
 export default function AdminCreateForm() {
   const { roles } = usePage<AdminData>().props
 
@@ -32,6 +35,7 @@ export default function AdminCreateForm() {
     resolver: zodResolver(createAdminSchema),
   })
 
+  /** 管理者新規作成 */
   const createAdmin = (data: CreateAdminSchemaType) => {
     router.post('/admin/admin/create/create', data)
   }

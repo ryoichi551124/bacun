@@ -6,6 +6,9 @@ import UserCreateForm from '@/Pages/Admin/User/Partials/CreateForm'
 
 const title = '顧客管理'
 
+/**
+ * 顧客作成ページ
+ */
 export default function UserCreate() {
   return (
     <>

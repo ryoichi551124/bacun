@@ -6,6 +6,9 @@ import DeliveryUpdateForm from '@/Pages/Admin/Delivery/Partials/UpdateForm'
 
 const title = '送料管理'
 
+/**
+ * 送料編集ページ
+ */
 export default function DeliveryEdit() {
   return (
     <>

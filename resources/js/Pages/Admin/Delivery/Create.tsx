@@ -6,6 +6,9 @@ import DeliveryCreateForm from '@/Pages/Admin/Delivery/Partials/CreateForm'
 
 const title = '送料管理'
 
+/**
+ * 送料作成ページ
+ */
 export default function DeliveryCreate() {
   return (
     <>

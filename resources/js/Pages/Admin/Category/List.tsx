@@ -13,6 +13,9 @@ type Message = {
   flash: FlashMessage
 }
 
+/**
+ * カテゴリー一覧ページ
+ */
 export default function CategoryList() {
   const { flash } = usePage<Message>().props
 

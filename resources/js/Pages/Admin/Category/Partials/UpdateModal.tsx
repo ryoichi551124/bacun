@@ -32,6 +32,9 @@ const button = css`
   margin-top: 1rem;
 `
 
+/**
+ * カテゴリー編集モーダル
+ */
 export default function CategoryUpdateModal({ id, name }: Category) {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
@@ -51,6 +54,7 @@ export default function CategoryUpdateModal({ id, name }: Category) {
     resolver: zodResolver(updateCategorySchema),
   })
 
+  /** カテゴリー編集 */
   const updateCategory = (data: UpdateCategorySchemaType) => {
     setOpen(false)
     router.put(`/admin/category/edit/update/${id}`, data)
@@ -58,9 +62,11 @@ export default function CategoryUpdateModal({ id, name }: Category) {
 
   return (
     <>
+      {/* カテゴリー編集モーダルボタン */}
       <Button onClick={handleOpen}>
         <EditIcon css={icon} />
       </Button>
+      {/* カテゴリー編集モーダル */}
       <Modal open={open} onClose={handleClose}>
         <Box css={modal}>
           <form onSubmit={handleSubmit(updateCategory)}>

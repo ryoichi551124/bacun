@@ -21,10 +21,11 @@ type AdminData = {
   roles: AdminRoles
 }
 
+/**
+ * 管理者編集フォーム
+ */
 export default function AdminUpdateForm() {
-  const { props } = usePage<AdminData>()
-  const admin = props.admin
-  const roles = Object.entries(props.roles)
+  const { admin, roles } = usePage<AdminData>().props
 
   const {
     register,
@@ -40,6 +41,7 @@ export default function AdminUpdateForm() {
     resolver: zodResolver(updateAdminSchema),
   })
 
+  /** 管理者の編集 */
   const updateAdmin = (data: UpdateAdminSchemaType) => {
     router.put(`/admin/admin/edit/update/${admin.id}`, data)
   }
@@ -124,7 +126,7 @@ export default function AdminUpdateForm() {
               権限
             </label>
             <select css={forms.input} {...register('role')}>
-              {roles.map((role) => (
+              {Object.entries(roles).map((role) => (
                 <option key={role[0]} value={role[0]}>
                   {role[1]}
                 </option>

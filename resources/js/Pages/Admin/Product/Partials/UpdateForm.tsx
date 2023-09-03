@@ -52,6 +52,9 @@ type ProductUpdateFormProps = {
   onUpdateProduct?: (data: UpdateProductSchemaType) => void
 }
 
+/**
+ * 商品編集フォーム
+ */
 export default function ProcutUpdateForm({
   onUpdateProduct,
 }: ProductUpdateFormProps) {
@@ -61,6 +64,7 @@ export default function ProcutUpdateForm({
   const [isStockOut, setIsStockOut] = useState<boolean>(product.stock === 0)
   const [isDownload, setIsDownload] = useState<boolean>(product.type === '2')
 
+  /** 無制限の場合 */
   const handleUnLimited = () => {
     if (isStockOut) {
       setIsStockOut(false)
@@ -69,6 +73,7 @@ export default function ProcutUpdateForm({
       setIsUnLimited(!isUnLimited)
     }
   }
+  /** 在庫切れの場合 */
   const handleStockOut = () => {
     if (isUnLimited) {
       setIsUnLimited(false)
@@ -77,12 +82,12 @@ export default function ProcutUpdateForm({
       setIsStockOut(!isStockOut)
     }
   }
+  /** 商品タイプの選択 */
   const handleType = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value === '2' ? setIsDownload(true) : setIsDownload(false)
   }
 
-  product.main_img =
-    'https://yamani.itembox.design/product/000/000000000053/000000000053-01-l.jpg?t=20230808174428'
+  // 商品データをフォームに入力出来る形に変換
   const defaultProductValue = productToFormData(product)
 
   const {
@@ -96,6 +101,7 @@ export default function ProcutUpdateForm({
     resolver: zodResolver(updateProductSchema),
   })
 
+  /** 商品編集 */
   const onSubmit = (data: UpdateProductSchemaType) => {
     data.stock = isUnLimited || isDownload ? '999' : data.stock
     data.stock = isStockOut && !isDownload ? '0' : data.stock

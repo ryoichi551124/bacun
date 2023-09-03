@@ -18,6 +18,9 @@ type AdminData = {
   flash: FlashMessage
 }
 
+/**
+ * 管理者一覧
+ */
 export default function AdminListTable() {
   const { admins, roles, flash } = usePage<AdminData>().props
 

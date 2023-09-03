@@ -13,13 +13,17 @@ type ProductData = {
   product: Product
 }
 
+/**
+ * 商品編集ページ
+ */
 export default function ProductEdit() {
   const id = usePage<ProductData>().props.product.id
-  const { errors } = usePage().props
 
+  /** 商品の編集 */
   const handleUpdateProduct = (data: UpdateProductSchemaType) => {
+    // フォームデータを登録出来る形に変換
     const product = formDataToProduct(data)
-    // ファイルを含む場合はPOST送信でmethodを指定する
+    // ファイルを含むPUTメソッドの場合はPOST送信で_methodを指定する
     router.post(`/admin/product/edit/update/${id}`, {
       _method: 'put',
       ...product,

@@ -8,8 +8,13 @@ import type { CreateProductSchemaType } from '@/Schemas/Admin/Product/CreateSche
 
 const title = '商品管理'
 
+/**
+ * 商品作成ページ
+ */
 export default function ProductCreate() {
+  /** 商品作成 */
   const handleCreateProduct = (data: CreateProductSchemaType) => {
+    // フォームデータを登録出来る形に変換
     const product = formDataToProduct(data)
     router.post('/admin/product/create/create', product)
   }

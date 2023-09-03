@@ -20,9 +20,11 @@ type DliveryData = {
   delivery: Delivery
 }
 
+/**
+ * 送料編集フォーム
+ */
 export default function DeliveryUpdateFrom() {
-  const { props } = usePage<DliveryData>()
-  const delivery = props.delivery
+  const { delivery } = usePage<DliveryData>().props
 
   const {
     register,
@@ -34,6 +36,7 @@ export default function DeliveryUpdateFrom() {
     resolver: zodResolver(updateDeliverySchema),
   })
 
+  /** 送料編集 */
   const updateDelivery = (data: UpdateDeliverySchemaType) => {
     router.put(`/admin/delivery/edit/update/${delivery.id}`, data)
   }

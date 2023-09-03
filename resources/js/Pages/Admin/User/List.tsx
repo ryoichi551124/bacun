@@ -6,6 +6,9 @@ import UserListTable from '@/Pages/Admin/User/Partials/ListTable'
 
 const title = '顧客管理'
 
+/**
+ * 顧客一覧ページ
+ */
 export default function UserList() {
   return (
     <>

@@ -25,6 +25,9 @@ type UserData = {
   prefs: Pref
 }
 
+/**
+ * 顧客作成フォーム
+ */
 export default function UserCreateForm() {
   const { statuses, prefs } = usePage<UserData>().props
 
@@ -38,6 +41,7 @@ export default function UserCreateForm() {
     resolver: zodResolver(createUserSchema),
   })
 
+  /** 顧客作成 */
   const createUser = (data: CreateUserSchemaType) => {
     router.post('/admin/user/create/create', data)
   }

@@ -18,6 +18,9 @@ type UserData = {
   flash: FlashMessage
 }
 
+/**
+ * 顧客一覧
+ */
 export default function UserListTable() {
   const { users, statuses, flash } = usePage<UserData>().props
 
@@ -51,8 +54,9 @@ export default function UserListTable() {
                     {user.last_name} {user.first_name}
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
-                  <TableCell>{statuses[user.status]}</TableCell>
+                  <TableCell>{statuses[Number(user.status)]}</TableCell>
                   <TableCell align="right" width="150">
+                    {user.status}
                     <EditLinkIcon editLink="/admin/user/edit/" id={user.id} />
                     <DeleteLinkIcon
                       deleteLink="/admin/user/list/delete/"
