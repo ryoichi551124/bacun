@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Mail\Edit;
+namespace App\Http\Controllers\Admin\MailTemplate\Create;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UpdateController extends Controller
+class CreateController extends Controller
 {
     /**
      * Handle the incoming request.

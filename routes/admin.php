@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\Basic;
 use App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Admin\Dashboard;
-use App\Http\Controllers\Admin\Mail;
+use App\Http\Controllers\Admin\MailTemplate;
 use App\Http\Controllers\Admin\Order;
 use App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Admin\Shipping;
@@ -153,9 +153,19 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // メール管理
-    Route::prefix('mail')->name('mail.')->group(function () {
-        Route::get('/list', Mail\List\IndexController::class)
+    Route::prefix('mailtemplate')->name('mailtemplate.')->group(function () {
+        Route::get('/list', MailTemplate\List\IndexController::class)
             ->name('list');
+        Route::delete('/list/delete/{id}', MailTemplate\List\DeleteController::class)
+            ->name('/list.delete');
+        Route::get('/create', MailTemplate\Create\IndexController::class)
+            ->name('create');
+        Route::post('/create/create', MailTemplate\Create\CreateController::class)
+            ->name('create.create');
+        Route::get('/edit/{id}', MailTemplate\Edit\IndexController::class)
+            ->name('edit');
+        Route::put('/edit/update/{id}', MailTemplate\Edit\UpdateController::class)
+            ->name('edit.update');
     });
 
     // 顧客管理

@@ -53,7 +53,7 @@ const navigations: NavMenu[] = [
   { title: 'カテゴリー管理', link: 'category', icon: CategoryIcon },
   { title: '配送管理', link: 'shipping', icon: LocalShippingIcon },
   { title: '送料管理', link: 'delivery', icon: CurrencyYenIcon },
-  { title: 'メール管理', link: 'mail', icon: EmailIcon },
+  { title: 'メールテンプレート', link: 'mailtemplate', icon: EmailIcon },
   { title: '顧客管理', link: 'user', icon: PersonIcon },
   { title: '管理者設定', link: 'admin', icon: ManageAccountsIcon },
   { title: '基本情報', link: 'basic', icon: SettingsIcon },

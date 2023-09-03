@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Mail\Edit;
+namespace App\Http\Controllers\Admin\MailTemplate\Edit;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
