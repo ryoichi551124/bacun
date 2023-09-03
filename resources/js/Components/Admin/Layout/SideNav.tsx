@@ -11,6 +11,7 @@ import PersonIcon from '@mui/icons-material/Person'
 import SettingsIcon from '@mui/icons-material/Settings'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import SideNavLink from '@/Components/Admin/Layout/SideNavLink'
+import SvgIcon from '@mui/material/SvgIcon'
 
 const container = css`
   width: ${utils.width.sideOpen};
@@ -38,82 +39,47 @@ const title = css`
   width: 100%;
 `
 
+// ナビゲーションメニューの型
+type NavMenu = {
+  title: string
+  link: string
+  icon: typeof SvgIcon
+}
+
+// ナビゲーションメニュー配列
+const navigations: NavMenu[] = [
+  { title: '受注管理', link: 'order', icon: ShoppingBagIcon },
+  { title: '商品管理', link: 'product', icon: SellIcon },
+  { title: 'カテゴリー管理', link: 'category', icon: CategoryIcon },
+  { title: '配送管理', link: 'shipping', icon: LocalShippingIcon },
+  { title: '送料管理', link: 'delivery', icon: CurrencyYenIcon },
+  { title: 'メール管理', link: 'mail', icon: EmailIcon },
+  { title: '顧客管理', link: 'user', icon: PersonIcon },
+  { title: '管理者設定', link: 'admin', icon: ManageAccountsIcon },
+  { title: '基本情報', link: 'basic', icon: SettingsIcon },
+]
+
+/**
+ * サイドバーナビ
+ */
 export default function SideNav() {
   return (
     <div css={container}>
       <div css={inner}>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.order.*')}
-          href={route('admin.order.list')}
-        >
-          <ShoppingBagIcon css={icon} />
-          <div css={title}>受注管理</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.product.*')}
-          href={route('admin.product.list')}
-        >
-          <SellIcon css={icon} />
-          <div>商品管理</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.category.*')}
-          href={route('admin.category.list')}
-        >
-          <CategoryIcon css={icon} />
-          <div>カテゴリー</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.shipping.*')}
-          href={route('admin.shipping.list')}
-        >
-          <LocalShippingIcon css={icon} />
-          <div>配送管理</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.delivery.*')}
-          href={route('admin.delivery.list')}
-        >
-          <CurrencyYenIcon css={icon} />
-          <div>送料管理</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.mail.*')}
-          href={route('admin.mail')}
-        >
-          <EmailIcon css={icon} />
-          <div>メール管理</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.user.*')}
-          href={route('admin.user.list')}
-        >
-          <PersonIcon css={icon} />
-          <div>顧客管理</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.admin.*')}
-          href={route('admin.admin.list')}
-        >
-          <ManageAccountsIcon css={icon} />
-          <div>管理者設定</div>
-        </SideNavLink>
-        <SideNavLink
-          css={navMenu}
-          active={route().current('admin.basic.*')}
-          href={route('admin.basic.edit')}
-        >
-          <SettingsIcon css={icon} />
-          <div>基本情報</div>
-        </SideNavLink>
+        {navigations &&
+          navigations.map((nav) => (
+            <SideNavLink
+              key={nav.title}
+              css={navMenu}
+              active={route().current(`admin.${nav.link}.*`)}
+              href={route(
+                `admin.${nav.link}.${nav.link !== 'basic' ? 'list' : 'edit'}`,
+              )}
+            >
+              <SvgIcon component={nav.icon} css={icon} />
+              <div css={title}>{nav.title}</div>
+            </SideNavLink>
+          ))}
       </div>
     </div>
   )
