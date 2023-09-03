@@ -10,7 +10,7 @@ import AdminMenu from '@/Components/Admin/Layout/AdminMenu'
 
 const container = css`
   position: fixed;
-  z-index: 99999;
+  z-index: 999;
   width: calc(100% - ${utils.width.sideOpen});
   height: ${utils.height.headerHeight};
   background: ${colors.lightGray};
@@ -28,7 +28,11 @@ const inner = css`
   padding: 0.5rem 1rem;
 `
 
+/**
+ * 管理画面ヘッダー
+ */
 export default function Header() {
+  // サイドバーの状態管理
   const isOpen = useSelector(
     (state: RootState) => state.isSideOpenReducer.isOpen,
   )
@@ -41,6 +45,7 @@ export default function Header() {
     <header css={[container, !isOpen && open]}>
       <div css={inner}>
         <div>
+          {/* サイドバーオープンクローズ */}
           <button onClick={changeSide}>
             <MenuIcon />
           </button>

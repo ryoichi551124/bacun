@@ -22,6 +22,9 @@ type InputImageProps = {
   onChange: (images: FileData[]) => void
 }
 
+/**
+ * 画像の入力・表示
+ */
 export default function InputImage(props: InputImageProps) {
   const {
     name,
@@ -34,18 +37,22 @@ export default function InputImage(props: InputImageProps) {
 
   const isDropZoneDisplay = images.length === 0 ? 'block' : 'none'
 
+  /** 入力されているファイルをFile型として扱う */
   const files = useMemo(
     () => images.map((img: FileData) => img.file as File),
     [images],
   )
 
+  /** 表示しているファイル（URL)の削除 */
   const onRemove = useCallback(
     (src: string) => {
+      // 入力済みのファイルURLと同じか判定
       const image = images.find((img: FileData) => img.src === src)
       const newImages = images.filter((img: FileData) => img.src !== src)
-
+      // 同じファイルであれば削除
       if (image) {
         if (image.file && image.src) {
+          // 一時的に作ったファイルのURLを削除
           URL.revokeObjectURL(image.src)
           delete image.src
         }
@@ -55,12 +62,14 @@ export default function InputImage(props: InputImageProps) {
     [images, onChange],
   )
 
+  /** 選択されているファイルと同じで無ければ変更する */
   const onDrop = useCallback(
     (files: File[]) => {
       const newImages = []
-
+      // 入力されているファイルの変更を確認
       for (const file of files) {
         const img = images.find((img: FileData) => img.file === file)
+        // 一時的なファイルのURLを作成
         !img && newImages.push({ file, src: URL.createObjectURL(file) })
       }
       onChange && onChange(newImages)
@@ -68,6 +77,7 @@ export default function InputImage(props: InputImageProps) {
     [images, onChange],
   )
 
+  // ファイル未選択ならドロップゾーン、選択済みであればプレビュー表示
   return (
     <div css={container}>
       {/* 画像プレビュー表示 */}

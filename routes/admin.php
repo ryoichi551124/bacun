@@ -153,8 +153,9 @@ Route::middleware('auth:admin')->group(function () {
     });
 
     // メール管理
-    Route::prefix('mail')->name('mail')->group(function () {
-        Route::get('/', Mail\IndexController::class);
+    Route::prefix('mail')->name('mail.')->group(function () {
+        Route::get('/list', Mail\List\IndexController::class)
+            ->name('list');
     });
 
     // 顧客管理

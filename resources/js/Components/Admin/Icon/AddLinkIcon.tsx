@@ -4,10 +4,6 @@ import { Link } from '@inertiajs/react'
 import { colors } from '@/Styles'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 
-type AddLinkProps = {
-  addLink: string
-}
-
 const icon = css`
   color: ${colors.primary};
   &:hover {
@@ -16,6 +12,13 @@ const icon = css`
   }
 `
 
+type AddLinkProps = {
+  addLink: string
+}
+
+/**
+ * 新規作成ボタン
+ */
 export default function AddLinkIcon({ addLink }: AddLinkProps) {
   return (
     <Link href={route(addLink)}>

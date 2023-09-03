@@ -26,6 +26,9 @@ type CardProps = {
   icon?: ReactNode
 }
 
+/**
+ * 管理画面用カード（各コンテンツ表示用）
+ */
 export default function Card({
   title,
   icon,

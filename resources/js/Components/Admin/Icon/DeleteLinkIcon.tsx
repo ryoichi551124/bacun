@@ -11,13 +11,6 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 
-type DeleteLinkProps = {
-  deleteLink: string
-  id: number
-  target: string
-  disabled?: boolean
-}
-
 const icon = css`
   color: ${colors.delete};
   margin: 0 0.5rem;
@@ -34,6 +27,16 @@ const noEvent = css`
   }
 `
 
+type DeleteLinkProps = {
+  deleteLink: string
+  id: number
+  target: string
+  disabled?: boolean
+}
+
+/**
+ * 削除ボタン
+ */
 export default function DeleteLinkIcon({
   deleteLink,
   id,
@@ -45,11 +48,11 @@ export default function DeleteLinkIcon({
   const handleClickOpen = () => {
     setOpen(true)
   }
-
   const handleClose = () => {
     setOpen(false)
   }
 
+  /** 削除処理のリンク */
   const deleteAdmin = () => {
     setOpen(false)
     router.delete(`${deleteLink}${id}`)
@@ -57,9 +60,11 @@ export default function DeleteLinkIcon({
 
   return (
     <>
+      {/* 削除ボタン */}
       <button onClick={handleClickOpen} disabled={disabled}>
         <DeleteIcon css={[icon, disabled && noEvent]} />
       </button>
+      {/* 確認ダイアログ */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{target}を削除してもよろしいですか？</DialogTitle>
         <DialogContent>

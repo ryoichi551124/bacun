@@ -6,6 +6,9 @@ const container = css`
   align-items: center;
 `
 
+/**
+ * パンくず（仮）
+ */
 export default function BreadCrumbs() {
   return (
     <div css={container}>

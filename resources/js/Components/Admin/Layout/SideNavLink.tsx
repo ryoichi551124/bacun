@@ -10,6 +10,9 @@ const activeLink = css`
   color: #212529;
 `
 
+/**
+ * サイドバーナビ、Linkのラッパー
+ */
 export default function SideNavLink({
   active = false,
   children,

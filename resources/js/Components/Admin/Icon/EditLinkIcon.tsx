@@ -4,11 +4,6 @@ import { router } from '@inertiajs/react'
 import { colors } from '@/Styles'
 import EditIcon from '@mui/icons-material/Edit'
 
-type EditLinkProps = {
-  editLink: string
-  id: number
-}
-
 const icon = css`
   color: ${colors.secondary};
   margin: 0 0.5rem;
@@ -18,7 +13,16 @@ const icon = css`
   }
 `
 
+type EditLinkProps = {
+  editLink: string
+  id: number
+}
+
+/**
+ * 編集ボタン
+ */
 export default function EditLinkIcon({ editLink, id }: EditLinkProps) {
+  /** 編集処理のリンク */
   const editAdmin = () => {
     router.get(`${editLink}${id}`)
   }

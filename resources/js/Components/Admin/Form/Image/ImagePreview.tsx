@@ -34,6 +34,9 @@ type ImagePreviewProps = {
   onRemove?: (src: string) => void
 }
 
+/**
+ * 画像のプレビュー表示
+ */
 export default function ImagePreview({
   src,
   width,
@@ -47,6 +50,7 @@ export default function ImagePreview({
     height: ${height};
   `
 
+  /** クローズボタンで削除 */
   const handleCloseClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
     e.stopPropagation()

@@ -17,7 +17,11 @@ const open = css`
   width: ${utils.width.sideOpen};
 `
 
+/**
+ * 管理画面サイドバー
+ */
 export default function SideBar() {
+  // サイドバーの状態管理
   const isOpen = useSelector(
     (state: RootState) => state.isSideOpenReducer.isOpen,
   )

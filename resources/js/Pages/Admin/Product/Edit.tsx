@@ -20,7 +20,10 @@ export default function ProductEdit() {
   const handleUpdateProduct = (data: UpdateProductSchemaType) => {
     const product = formDataToProduct(data)
     // ファイルを含む場合はPOST送信でmethodを指定する
-    router.post(`/admin/product/edit/update/${id}`, { _method: 'put', ...product })
+    router.post(`/admin/product/edit/update/${id}`, {
+      _method: 'put',
+      ...product,
+    })
   }
 
   return (

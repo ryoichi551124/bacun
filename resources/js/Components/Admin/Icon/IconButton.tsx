@@ -16,11 +16,11 @@ import {
 import SvgIcon from '@mui/material/SvgIcon'
 import { colors, fontSizes } from '@/Styles'
 
-// list out color types
+// 色とサイズの種類
 export type Colors = keyof typeof colors
 export type fontSizes = keyof typeof fontSizes
 
-interface IconWrapperProps {
+type IconWrapperProps = {
   size: fontSizes
   cursor?: string
   color?: Colors
@@ -58,8 +58,10 @@ export type IconButtonProps = {
 function withIconStyle(
   Icon: typeof SvgIcon,
 ): React.ComponentType<IconButtonProps> {
+  /** アイコンにスタイルを設定 */
   const IconWithStyle = (props: IconButtonProps) => {
     const { onClick, className, size = 'sm', ...rest } = props
+    // クリックイベントがあればホバーでポインター表示
     const cursor = onClick ? 'pointer' : ''
 
     return (
@@ -78,21 +80,12 @@ function withIconStyle(
 }
 
 export const CloseIcon = withIconStyle(Close)
-
 export const SearchIcon = withIconStyle(Search)
-
 export const CloudUploadIcon = withIconStyle(CloudUpload)
-
 export const CancelIcon = withIconStyle(Cancel)
-
 export const CheckBoxOutlineBlankIcon = withIconStyle(CheckBoxOutlineBlank)
-
 export const CheckBoxIcon = withIconStyle(CheckBox)
-
 export const PersonIcon = withIconStyle(Person)
-
 export const GitHubIcon = withIconStyle(GitHub)
-
 export const PersonOutlineIcon = withIconStyle(PersonOutline)
-
 export const ShoppingCartIcon = withIconStyle(ShoppingCart)

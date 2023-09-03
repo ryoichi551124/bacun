@@ -16,6 +16,9 @@ const titleText = css`
   font-size: ${fontSizes.lg};
 `
 
+/**
+ * 管理画面タイトル部分
+ */
 export default function Title({ title }: TitleProps) {
   return (
     <div css={container}>

@@ -21,6 +21,9 @@ const icon = css`
   margin-right: 1.5rem;
 `
 
+/**
+ * 管理画面のロゴ
+ */
 export default function AdminLogo() {
   return (
     <div css={container}>

@@ -5,6 +5,9 @@ import { useState } from 'react'
 import { usePage } from '@inertiajs/react'
 import type { AdminAuth } from '@/Types'
 
+/**
+ * 管理者メニュー（ログアウトなど）
+ */
 export default function AdminMenu() {
   const { props } = usePage<AdminAuth>()
   const admin = props.auth.user
@@ -20,7 +23,9 @@ export default function AdminMenu() {
 
   return (
     <div>
+      {/* 管理者名（ボタン） */}
       <button onClick={handleClick}>{admin.name}</button>
+      {/* ドロップダウンメニュー */}
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -30,8 +35,9 @@ export default function AdminMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
+        {/* メニュー項目 */}
         <MenuItem onClick={handleClose}>
-          <Link href={route('admin.profile.edit')}>登録情報の編集</Link>
+          <Link href={route('admin.admin.edit', admin.id)}>登録情報の編集</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link method="post" href={route('admin.logout')} as="button">

@@ -13,6 +13,9 @@ const wrap = css`
   padding-top: 0.5rem;
 `
 
+/**
+ * アラートメッセージ
+ */
 export default function AlertMessage({ severity, message }: FlashMessage) {
   const [open, setOpen] = useState<boolean>(true)
 
