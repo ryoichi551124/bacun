@@ -41,6 +41,26 @@ export type UserAuth = {
   }
 }
 
+// 配送先情報
+export type Shipping = {
+  id: number
+  user_id: number
+  shipping_last_name: string
+  shipping_first_name: string
+  shipping_last_kana: string
+  shipping_first_kana: string
+  shipping_zip_code: string
+  shipping_pref: string
+  shipping_city: string
+  shipping_address: string
+  shipping_building?: string
+  shipping_tel?: string
+  shipping_email: string
+  shipping_date?: Date
+  shipping_memo?: string
+  tracking_number?: string
+}
+
 // 管理者
 export type Admin = {
   id: number

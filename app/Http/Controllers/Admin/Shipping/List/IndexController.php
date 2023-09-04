@@ -3,16 +3,23 @@
 namespace App\Http\Controllers\Admin\Shipping\List;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Shipping;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class IndexController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * 配送情報一覧
+     *
+     * @return Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(): Response
     {
-        return Inertia::render('Admin/Shipping/Index');
+        $shippings = Shipping::all();
+
+        return Inertia::render('Admin/Shipping/List', [
+            'shippings' => $shippings,
+        ]);
     }
 }

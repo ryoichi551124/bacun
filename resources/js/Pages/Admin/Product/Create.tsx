@@ -1,5 +1,5 @@
-import { ReactNode, memo } from 'react'
-import { Head, router, usePage } from '@inertiajs/react'
+import { ReactNode } from 'react'
+import { Head, router } from '@inertiajs/react'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import ProductCreateForm from '@/Pages/Admin/Product/Partials/CreateForm'

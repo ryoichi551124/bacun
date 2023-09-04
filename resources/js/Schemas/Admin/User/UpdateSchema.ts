@@ -29,7 +29,11 @@ const updateUserSchema = z
       .string()
       .min(1, '入力が必須の項目です')
       .max(128, '128文字以内で入力してください'),
-    building: z.string().max(128, '128文字以内で入力してください'),
+    building: z
+      .string()
+      .max(128, '128文字以内で入力してください')
+      .optional()
+      .nullable(),
     tel1: z.string().min(1, '入力が必須の項目です'),
     tel2: z.string().min(1, '入力が必須の項目です'),
     tel3: z.string().min(1, '入力が必須の項目です'),

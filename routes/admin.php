@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Admin\Shipping;
 use App\Http\Controllers\Admin\Delivery;
 use App\Http\Controllers\Admin\User;
+use App\Http\Controllers\Admin\Api;
 
 Route::middleware('guest:admin')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -206,5 +207,12 @@ Route::middleware('auth:admin')->group(function () {
             ->name('edit');
         Route::put('/edit/update', Basic\Edit\UpdateController::class)
             ->name('edit.update');
+    });
+
+    // API
+    Route::prefix('api')->name('api.')->group(function () {
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::post('/search', Api\User\SearchController::class);
+        });
     });
 });

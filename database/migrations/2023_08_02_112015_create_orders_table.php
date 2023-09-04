@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->comment('ユーザーID');
+            $table->foreignId('shipping_id')->constrained()->nullable()->onDelete('cascade')->comment('配送ID');
             // 注文者情報
             $table->string('order_last_name', 64)->comment('姓');
             $table->string('order_first_name', 64)->comment('名');
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->enum('order_sex', [1, 2])->nullable()->comment('性別 [1 => "男性", 2 => "女性"]');
             $table->text('order_memo')->nullable()->comment('オーダーメモ');
             $table->unsignedTinyInteger('order_status')->comment('ステータス');
+            $table->string('tracking_number', 128)->nullable()->comment('トラッキングナンバー');
             // 料金
             $table->unsignedMediumInteger('subtotal')->comment('小計');
             $table->unsignedMediumInteger('total_deliv_fee')->comment('送料合計');

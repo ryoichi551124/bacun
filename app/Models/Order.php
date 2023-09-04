@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,6 +21,7 @@ class Order extends Model
      */
     protected $fillable = [
         'user_id',
+        'shipping_id',
         'order_last_name',
         'order_first_name',
         'order_last_kana',
@@ -34,6 +36,7 @@ class Order extends Model
         'order_sex',
         'order_memo',
         'order_status',
+        'tracking_number',
         'subtotal',
         'total_deliv_fee',
         'tax',
@@ -59,7 +62,7 @@ class Order extends Model
      */
     public function shipping(): HasOne
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Shipping::class);
     }
 
     /**
@@ -90,5 +93,18 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * IDによるスコープ
+     *
+     * @param Builder $query
+     * @param integer|null $id
+     * @return void
+     */
+    public function scopdId(Builder $query, int $id = null): void
+    {
+        if (empty($id)) return;
+        $query->where('id', $id);
     }
 }

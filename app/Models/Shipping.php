@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Shipping extends Model
@@ -18,7 +19,6 @@ class Shipping extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'order_id',
         'user_id',
         'shipping_last_name',
         'shipping_first_name',
@@ -33,17 +33,16 @@ class Shipping extends Model
         'shipping_email',
         'shipping_date',
         'shipping_memo',
-        'tracking_number',
     ];
 
     /**
      * 配送先の受注
      *
-     * @return HasOne
+     * @return HasMany
      */
-    public function order(): HasOne
+    public function order(): HasMany
     {
-        return $this->hasOne(Order::class);
+        return $this->hasMany(Order::class);
     }
 
     /**
@@ -54,5 +53,18 @@ class Shipping extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * IDによるスコープ
+     *
+     * @param Builder $query
+     * @param integer|null $id
+     * @return void
+     */
+    public function scopeId(Builder $query, int $id = null): void
+    {
+        if (empty($id)) return;
+        $query->where('id', $id);
     }
 }

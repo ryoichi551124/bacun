@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Order\Detail;
+namespace App\Http\Requests\Admin\OrderDetail;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\UnsignedMediumInteger;

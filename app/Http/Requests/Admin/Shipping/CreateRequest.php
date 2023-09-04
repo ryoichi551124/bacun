@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin\shipping;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class CreateRequest extends FormRequest
 {
@@ -23,7 +22,6 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order_id'              => ['required'],
             'user_id'               => ['required'],
             'shipping_last_name'    => ['required', 'string', 'max:64'],
             'shipping_first_name'   => ['required', 'string', 'max:64'],
@@ -36,10 +34,8 @@ class CreateRequest extends FormRequest
             'shipping_building'     => ['nullable', 'string', 'max:128'],
             'shipping_tel'          => ['nullable', 'regex:/^\d{10,11}$/i'],
             'shipping_email'        => ['nullable', 'email', 'max:128'],
-            'shipping_sex'          => ['nullable', Rule::in(1, 2)],
             'shipping_date'         => ['nullable', 'date'],
             'shipping_memo'         => ['nullable', 'string'],
-            'tracking_number'       => ['nullable', 'string', 'max:128'],
         ];
     }
 
@@ -64,10 +60,8 @@ class CreateRequest extends FormRequest
             'shipping_building'     => '建物名',
             'sihpping_tel'          => '電話番号',
             'shipping_email'        => 'メールアドレス',
-            'shipping_sex'          => '性別',
             'shipping_date'         => '配送日',
             'shipping_memo'         => '配送メモ',
-            'tracking_number'       => 'トラッキングナンバー',
         ];
     }
 
@@ -85,7 +79,35 @@ class CreateRequest extends FormRequest
             'max'           => ':attributeは:max文字以内で入力してください',
             'regex'         => ':attributeは不正な値です',
             'date'          => ':attributeは無効な日付です',
-            'in'            => ':attributeは無効な値です',
         ];
+    }
+
+    /**
+     * 誕生日、郵便番号、電話番号の結合
+     */
+    public function getValidatorInstance()
+    {
+        $input = $this->all();
+
+        // 郵便番号
+        $zip_code = array_values(
+            combine_zip(
+                $input['shipping_zip_code1'],
+                $input['shipping_zip_code2']
+            )
+        )[0];
+        $this->merge(['shipping_zip_code' => $zip_code]);
+
+        // 電話番号
+        $tel = array_values(
+            combine_tel(
+                $input['shipping_tel1'],
+                $input['shipping_tel2'],
+                $input['shipping_tel3']
+            )
+        )[0];
+        $this->merge(['shipping_tel' => $tel]);
+
+        return parent::getValidatorInstance();
     }
 }
