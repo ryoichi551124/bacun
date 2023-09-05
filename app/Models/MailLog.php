@@ -32,7 +32,7 @@ class MailLog extends Model
      *
      * @return BelongsTo
      */
-    public function mail_template(): BelongsTo
+    public function mailTemplate(): BelongsTo
     {
         return $this->belongsTo(MailTemplate::class);
     }

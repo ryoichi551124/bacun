@@ -96,7 +96,7 @@ class User extends Authenticatable
      *
      * @return HasMany
      */
-    public function mail_histories(): HasMany
+    public function mailHistories(): HasMany
     {
         return $this->hasMany(MailHistory::class);
     }
@@ -106,7 +106,7 @@ class User extends Authenticatable
      *
      * @return HasMany
      */
-    public function mail_logs(): HasMany
+    public function mailLogs(): HasMany
     {
         return $this->hasMany(MailLog::class);
     }

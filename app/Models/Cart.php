@@ -29,7 +29,7 @@ class Cart extends Model
      *
      * @return HasMany
      */
-    public function cart_items(): HasMany
+    public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
     }

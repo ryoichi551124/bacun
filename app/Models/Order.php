@@ -50,7 +50,7 @@ class Order extends Model
      *
      * @return HasMany
      */
-    public function order_details(): HasMany
+    public function orderDetails(): HasMany
     {
         return $this->hasMany(OrderDetail::class);
     }
@@ -70,7 +70,7 @@ class Order extends Model
      *
      * @return HasMany
      */
-    public function mail_history(): HasMany
+    public function mailHistory(): HasMany
     {
         return $this->hasMany(MailHistory::class);
     }
@@ -80,7 +80,7 @@ class Order extends Model
      *
      * @return HasMany
      */
-    public function mail_logs(): HasMany
+    public function mailLogs(): HasMany
     {
         return $this->hasMany(MailLog::class);
     }

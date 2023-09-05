@@ -47,7 +47,7 @@ class Product extends Model
      *
      * @return HasMany
      */
-    public function cart_items(): HasMany
+    public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class);
     }
@@ -57,7 +57,7 @@ class Product extends Model
      *
      * @return HasMany
      */
-    public function order_details(): HasMany
+    public function orderDetails(): HasMany
     {
         return $this->hasMany(OrderDetail::class);
     }
