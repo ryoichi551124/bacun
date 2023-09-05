@@ -1,14 +1,14 @@
 import React, { ReactNode, useState } from 'react'
 import { Head, router, usePage } from '@inertiajs/react'
+import axios from 'axios'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import SearchUser from '@/Pages/Admin/Shipping/Partials/SearchUser'
 import ShippingCreateForm from '@/Pages/Admin/Shipping/Partials/CreateForm'
-import { SearchUserSchemaType } from '@/Schemas/Admin/Shipping/SearchUser'
-import type { User } from '@/Types'
-import axios from 'axios'
 import ResultUsers from './Partials/ResultUsers'
-import { CreateShippingSchemaType } from '@/Schemas/Admin/Shipping/CreateSchema'
+import type { SearchUserSchemaType } from '@/Schemas/Admin/Shipping/SearchUser'
+import type { User } from '@/Types'
+import type { CreateShippingSchemaType } from '@/Schemas/Admin/Shipping/CreateSchema'
 
 const title = '配送管理'
 

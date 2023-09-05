@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Shipping;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
@@ -20,11 +21,9 @@ class UpdateRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules(): array
+    public function rules(Request $request): array
     {
         return [
-            'order_id'              => ['nullable'],
-            'user_id'               => ['required'],
             'shipping_last_name'    => ['required', 'string', 'max:64'],
             'shipping_first_name'   => ['required', 'string', 'max:64'],
             'shipping_last_kana'    => ['required', 'string', 'max:64'],
@@ -92,11 +91,22 @@ class UpdateRequest extends FormRequest
         $input = $this->all();
 
         // 郵便番号
-        $zip_code = array_values(combine_zip($input['zip_code1'], $input['zip_code2']))[0];
+        $zip_code = array_values(
+            combine_zip(
+                $input['shipping_zip_code1'],
+                $input['shipping_zip_code2']
+            )
+        )[0];
         $this->merge(['shipping_zip_code' => $zip_code]);
 
         // 電話番号
-        $tel = array_values(combine_tel($input['tel1'], $input['tel2'], $input['tel3']))[0];
+        $tel = array_values(
+            combine_tel(
+                $input['shipping_tel1'],
+                $input['shipping_tel2'],
+                $input['shipping_tel3']
+            )
+        )[0];
         $this->merge(['shipping_tel' => $tel]);
 
         return parent::getValidatorInstance();

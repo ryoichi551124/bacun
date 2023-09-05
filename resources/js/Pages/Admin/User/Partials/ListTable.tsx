@@ -56,7 +56,6 @@ export default function UserListTable() {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{statuses[Number(user.status)]}</TableCell>
                   <TableCell align="right" width="150">
-                    {user.status}
                     <EditLinkIcon editLink="/admin/user/edit/" id={user.id} />
                     <DeleteLinkIcon
                       deleteLink="/admin/user/list/delete/"

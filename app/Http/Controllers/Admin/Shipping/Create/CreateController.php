@@ -17,7 +17,6 @@ class CreateController extends Controller
      */
     public function __invoke(CreateRequest $request): RedirectResponse
     {
-        //dd($request->validated());
         Shipping::create($request->validated());
 
         return redirect()

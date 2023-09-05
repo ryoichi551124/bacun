@@ -12,10 +12,6 @@ import createShippingSchema, {
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Pref } from '@/Types'
 
-const flex = css`
-  display: flex;
-  align-items: center;
-`
 const button = css`
   margin-right: 2rem;
 `
