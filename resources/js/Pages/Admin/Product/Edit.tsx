@@ -4,7 +4,7 @@ import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import ProductUpdateForm from '@/Pages/Admin/Product/Partials/UpdateForm'
 import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/UpdateSchema'
-import { formDataToProduct } from '@/Services/productSevice'
+import { formDataToProduct } from '@/Services/products/productSevice'
 import type { Product } from '@/Types'
 
 const title = '商品管理'

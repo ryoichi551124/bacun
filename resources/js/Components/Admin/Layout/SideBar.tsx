@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { useSelector } from 'react-redux'
-import { RootState } from '@/Stores'
+import type { RootState } from '@/Stores'
 import { colors, utils } from '@/Styles'
 import AdminLogo from '@/Components/Admin/Common/AdminLogo'
 import SideNav from '@/Components/Admin/Layout/SideNav'

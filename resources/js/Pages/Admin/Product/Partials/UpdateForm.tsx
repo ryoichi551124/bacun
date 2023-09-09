@@ -7,7 +7,7 @@ import Card from '@/Components/Admin/Common/Card'
 import InputImage from '@/Components/Admin/Form/Image/InputImage'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
-import { productToFormData } from '@/Services/productSevice'
+import { productToFormData } from '@/Services/products/productSevice'
 import { useForm, Controller } from 'react-hook-form'
 import updateProductSchema, {
   UpdateProductSchemaType,
