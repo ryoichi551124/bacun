@@ -4,7 +4,7 @@ import axios from 'axios'
 import searchUsers from '@/Services/users/searchUsers'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
-import SearchUser from '@/Pages/Admin/Shipping/Partials/SearchUser'
+import SearchUsers from '@/Pages/Admin/Shipping/Partials/SearchUsers'
 import ShippingCreateForm from '@/Pages/Admin/Shipping/Partials/CreateForm'
 import ResultUsers from './Partials/ResultUsers'
 import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
@@ -45,7 +45,7 @@ export default function ShippingCreate() {
     <>
       <Head title={title} />
       <Title title={title} />
-      <SearchUser onSearchUser={handleSearchUsers} noResult={noResult} />
+      <SearchUsers onSearchUsers={handleSearchUsers} noResult={noResult} />
       {users && <ResultUsers users={users} setUserId={setUserId} />}
       <ShippingCreateForm onCreateShipping={handleCreateShipping} />
     </>

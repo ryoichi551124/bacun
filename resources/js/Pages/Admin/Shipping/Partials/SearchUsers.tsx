@@ -17,8 +17,8 @@ const errorText = css`
   color: ${colors.error};
 `
 
-type SearchUserProps = {
-  onSearchUser?: (data: SearchUsersSchemaType) => void
+type SearchUsersProps = {
+  onSearchUsers?: (data: SearchUsersSchemaType) => void
   noResult?: boolean
 }
 
@@ -26,9 +26,9 @@ type SearchUserProps = {
  * 顧客検索フォーム
  */
 export default function SearchUser({
-  onSearchUser,
+  onSearchUsers,
   noResult,
-}: SearchUserProps) {
+}: SearchUsersProps) {
   const {
     register,
     handleSubmit,
@@ -40,7 +40,7 @@ export default function SearchUser({
 
   /** 顧客検索 */
   const onSubmit = (data: SearchUsersSchemaType) => {
-    onSearchUser && onSearchUser(data)
+    onSearchUsers && onSearchUsers(data)
   }
 
   return (
