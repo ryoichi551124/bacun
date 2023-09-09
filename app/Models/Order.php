@@ -21,21 +21,20 @@ class Order extends Model
      */
     protected $fillable = [
         'user_id',
-        'shipping_id',
-        'order_last_name',
-        'order_first_name',
-        'order_last_kana',
-        'order_first_kana',
-        'order_zip_code',
-        'order_pref',
-        'order_city',
-        'order_address',
-        'order_building',
-        'order_tel',
-        'order_email',
-        'order_sex',
-        'order_memo',
-        'order_status',
+        'last_name',
+        'first_name',
+        'last_kana',
+        'first_kana',
+        'zip_code',
+        'pref',
+        'city',
+        'address',
+        'building',
+        'tel',
+        'email',
+        'sex',
+        'memo',
+        'status',
         'tracking_number',
         'subtotal',
         'total_deliv_fee',
@@ -60,9 +59,9 @@ class Order extends Model
      *
      * @return HasOne
      */
-    public function shipping(): HasOne
+    public function orderShipping(): HasOne
     {
-        return $this->hasOne(Shipping::class);
+        return $this->hasOne(OrderShipping::class);
     }
 
     /**

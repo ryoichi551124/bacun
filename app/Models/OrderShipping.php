@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Shipping extends Model
+class OrderShipping extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +17,7 @@ class Shipping extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
+        'order_id',
         'last_name',
         'first_name',
         'last_kana',
@@ -32,13 +31,13 @@ class Shipping extends Model
     ];
 
     /**
-     * 配送先の顧客
+     * 受注配送先の顧客
      *
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(OrderShipping::class);
     }
 
     /**

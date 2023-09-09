@@ -24,8 +24,6 @@ return new class extends Migration
             $table->string('city', 32)->comment('市区町村');
             $table->string('address', 128)->comment('丁目番地号');
             $table->string('building', 128)->nullable()->comment('建物名');
-            $table->string('tel', 20)->nullable()->comment('電話番号');
-            $table->string('email', 128)->comment('メールアドレス');
             $table->text('memo')->nullable()->comment('配送メモ');
             $table->softDeletes();
             $table->timestamps();
