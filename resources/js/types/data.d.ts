@@ -8,7 +8,7 @@ export type FlashMessage = {
 }
 
 // 顧客
-export interface User {
+export type User = {
   id: number
   email: string
   password: string
@@ -17,21 +17,18 @@ export interface User {
   first_name: string
   last_kana: string
   first_kana: string
-  zip_code1: string
-  zip_code2: string
-  pref: string
+  zip_code: string
+  pref: number
   city: string
   address: string
   building?: string
-  tel1: string
-  tel2: string
-  tel3: string
+  tel: string
   sex: Sex
   birth_year: string
   birth_month: string
   birth_day: string
   memo: string
-  status: string
+  status: number
 }
 
 // ユーザーのログイン情報
@@ -101,6 +98,46 @@ export type Shop = {
 // 基本情報（会社情報 & ショップ情報）
 export type Basic = {
   basic: Partial<Company> & Partial<Shop>
+}
+
+// 受注ステータス
+export type OrderStatus = 'new' | 'paid' | 'shipped' | 'cancel' | 'return'
+
+// 受注
+export type Order = {
+  user_id: number
+  shipping_id: number
+  order_last_name: string
+  order_first_name: string
+  order_last_kana: string
+  order_first_kana: string
+  order_zip_code: string
+  order_pref: string
+  order_city: string
+  order_address: string
+  order_building: string
+  order_tel: string
+  order_email: string
+  order_sex?: Sex
+  order_memo?: string
+  order_status: OrderStatus
+  tracking_number?: string
+  sub_total: number
+  total_deliv_fee: number
+  tax: number
+  total: number
+  payment_method: string
+  payment_date: Date
+  order_detail?: OrderDetail[]
+}
+
+// 受注詳細
+export type OrderDetail = {
+  order_id: number
+  product_id: number
+  product_name: string
+  price: number
+  quantity: number
 }
 
 // 商品カテゴリー

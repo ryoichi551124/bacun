@@ -8,7 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
 import createUserSchema, {
   CreateUserSchemaType,
-} from '@/Schemas/Admin/User/CreateSchema'
+} from '@/Schemas/Admin/User/createSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { UserStatus, Pref } from '@/Types'
 

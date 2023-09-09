@@ -1,5 +1,5 @@
-import { CreateProductSchemaType } from '@/Schemas/Admin/Product/CreateSchema'
-import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/UpdateSchema'
+import { CreateProductSchemaType } from '@/Schemas/Admin/Product/createSchema'
+import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/updateSchema'
 import { Product } from '@/Types'
 import type { FileData } from '@/Components/Admin/Form/Image/InputImage'
 

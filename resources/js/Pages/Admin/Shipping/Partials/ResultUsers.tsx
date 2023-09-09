@@ -15,7 +15,7 @@ type ResultUsersProps = {
  */
 export default function ResultUsers({ users, setUserId }: ResultUsersProps) {
   /** 顧客の検索結果から選択 */
-  const handleSelectUser = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectUsers = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.target.value && setUserId(Number(event.target.value))
   }
 
@@ -29,7 +29,7 @@ export default function ResultUsers({ users, setUserId }: ResultUsersProps) {
             </label>
             <select
               defaultValue={users[0].id}
-              onChange={handleSelectUser}
+              onChange={handleSelectUsers}
               css={forms.input}
             >
               {users.map((user) => (

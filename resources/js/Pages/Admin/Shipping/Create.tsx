@@ -1,14 +1,15 @@
 import React, { ReactNode, useState } from 'react'
 import { Head, router, usePage } from '@inertiajs/react'
 import axios from 'axios'
+import searchUsers from '@/Services/users/searchUsers'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
-import SearchUser from '@/Pages/Admin/Shipping/Partials/SearchUser'
+import SearchUsers from '@/Pages/Admin/Shipping/Partials/SearchUsers'
 import ShippingCreateForm from '@/Pages/Admin/Shipping/Partials/CreateForm'
 import ResultUsers from './Partials/ResultUsers'
-import type { SearchUserSchemaType } from '@/Schemas/Admin/Shipping/SearchUser'
+import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
 import type { User } from '@/Types'
-import type { CreateShippingSchemaType } from '@/Schemas/Admin/Shipping/CreateSchema'
+import type { CreateShippingSchemaType } from '@/Schemas/Admin/Shipping/createSchema'
 
 const title = '配送管理'
 
@@ -21,22 +22,17 @@ export default function ShippingCreate() {
   const [noResult, setNoResult] = useState<boolean>(false)
 
   /** 顧客検索 */
-  const handleSearchUser = (data: SearchUserSchemaType) => {
-    axios
-      .post('/admin/api/user/search', data)
-      .then((res) => {
-        if (res.data.length > 0) {
-          setUsers(res.data)
-          setUserId(res.data[0].id)
-          setNoResult(false)
-        } else {
-          setUsers(undefined)
-          setNoResult(true)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  const handleSearchUsers = (data: SearchUsersSchemaType) => {
+    searchUsers(data).then((res) => {
+      if (res && res.length > 0) {
+        setUsers(res)
+        setUserId(res[0].id)
+        setNoResult(false)
+      } else {
+        setUsers(undefined)
+        setNoResult(true)
+      }
+    })
   }
 
   /** 配送先作成 */
@@ -49,7 +45,7 @@ export default function ShippingCreate() {
     <>
       <Head title={title} />
       <Title title={title} />
-      <SearchUser onSearchUser={handleSearchUser} noResult={noResult} />
+      <SearchUsers onSearchUsers={handleSearchUsers} noResult={noResult} />
       {users && <ResultUsers users={users} setUserId={setUserId} />}
       <ShippingCreateForm onCreateShipping={handleCreateShipping} />
     </>

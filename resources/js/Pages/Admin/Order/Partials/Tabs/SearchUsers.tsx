@@ -1,14 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { colors } from '@/Styles'
-import { forms } from '@/Styles'
-import Card from '@/Components/Admin/Common/Card'
+import { forms, colors, mb0, pt0 } from '@/Styles'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
 import searchUserSchema, {
-  SearchUserSchemaType,
-} from '@/Schemas/Admin/Shipping/SearchUser'
+  SearchUsersSchemaType,
+} from '@/Schemas/Admin/User/searchUsersSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const errorText = css`
@@ -18,8 +16,8 @@ const errorText = css`
 `
 
 type SearchUserProps = {
-  onSearchUser?: (data: SearchUserSchemaType) => void
-  noResult: boolean
+  onSearchUser?: (data: SearchUsersSchemaType) => void
+  noResult?: boolean
 }
 
 /**
@@ -33,22 +31,22 @@ export default function SearchUser({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SearchUserSchemaType>({
+  } = useForm<SearchUsersSchemaType>({
     reValidateMode: 'onBlur',
     resolver: zodResolver(searchUserSchema),
   })
 
   /** 顧客検索 */
-  const onSubmit = (data: SearchUserSchemaType) => {
+  const onSubmit = (data: SearchUsersSchemaType) => {
     onSearchUser && onSearchUser(data)
   }
 
   return (
-    <Card title="顧客検索">
-      <form onSubmit={handleSubmit(onSubmit)} css={forms.container}>
+    <div>
+      <form onSubmit={handleSubmit(onSubmit)} css={[forms.container, mb0]}>
         <Grid container spacing={2}>
           {/* 顧客名 */}
-          <Grid xs={6}>
+          <Grid xs={4}>
             <label htmlFor="name" css={forms.label}>
               顧客名
             </label>
@@ -59,9 +57,8 @@ export default function SearchUser({
               {...register('name')}
             />
           </Grid>
-          <Grid xs={6}></Grid>
           {/* メールアドレス */}
-          <Grid xs={6}>
+          <Grid xs={4}>
             <label htmlFor="email" css={forms.label}>
               メールアドレス
             </label>
@@ -72,9 +69,8 @@ export default function SearchUser({
               {...register('email')}
             />
           </Grid>
-          <Grid xs={6}></Grid>
           {/* 電話番号 */}
-          <Grid xs={6}>
+          <Grid xs={4}>
             <label htmlFor="tel" css={forms.label}>
               電話番号
             </label>
@@ -85,7 +81,6 @@ export default function SearchUser({
               {...register('tel')}
             />
           </Grid>
-          <Grid xs={6}></Grid>
           {/* ボタン */}
           <Grid xs={6} css={forms.buttonWrap}>
             <Button type="submit" variant="contained">
@@ -95,6 +90,6 @@ export default function SearchUser({
           </Grid>
         </Grid>
       </form>
-    </Card>
+    </div>
   )
 }

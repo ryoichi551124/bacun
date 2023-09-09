@@ -8,7 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
 import createDeliverySchema, {
   CreateDeliverySchemaType,
-} from '@/Schemas/Admin/Delivery/CreateSchema'
+} from '@/Schemas/Admin/Delivery/createSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const button = css`

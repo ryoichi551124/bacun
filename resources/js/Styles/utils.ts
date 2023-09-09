@@ -15,6 +15,9 @@ export const utils = {
 export const mt0 = css`
   margin-top: 0;
 `
+export const mb0 = css`
+  margin-bottom: 0;
+`
 export const pt0 = css`
   padding-top: 0;
 `

@@ -3,12 +3,12 @@ import { Head, usePage, router } from '@inertiajs/react'
 import axios from 'axios'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
-import SearchUser from '@/Pages/Admin/Shipping/Partials/SearchUser'
+import SearchUsers from '@/Pages/Admin/Shipping/Partials/SearchUsers'
 import ShippingUpdateForm from '@/Pages/Admin/Shipping/Partials/UpdateForm'
 import ResultUsers from './Partials/ResultUsers'
-import type { UpdateShippingSchemaType } from '@/Schemas/Admin/Shipping/UpdateSchema'
+import type { UpdateShippingSchemaType } from '@/Schemas/Admin/Shipping/updateSchema'
 import type { Shipping, User } from '@/Types'
-import type { SearchUserSchemaType } from '@/Schemas/Admin/Shipping/SearchUser'
+import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
 
 const title = '配送管理'
 
@@ -28,7 +28,7 @@ export default function ShippingEdit() {
   const [noResult, setNoResult] = useState<boolean>(false)
 
   /** 顧客検索 */
-  const handleSearchUser = (data: SearchUserSchemaType) => {
+  const handleSearchUsers = (data: SearchUsersSchemaType) => {
     axios
       .post('/admin/api/user/search', data)
       .then((res) => {
@@ -55,7 +55,7 @@ export default function ShippingEdit() {
     <>
       <Head title={title} />
       <Title title={title} />
-      <SearchUser onSearchUser={handleSearchUser} noResult={noResult} />
+      <SearchUsers onSearchUsers={handleSearchUsers} noResult={noResult} />
       {users && <ResultUsers users={users} setUserId={setUserId} />}
       <ShippingUpdateForm onUpdateShipping={handleUpdateShipping} />
     </>

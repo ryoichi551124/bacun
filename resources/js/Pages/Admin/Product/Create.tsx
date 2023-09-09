@@ -3,8 +3,8 @@ import { Head, router } from '@inertiajs/react'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import ProductCreateForm from '@/Pages/Admin/Product/Partials/CreateForm'
-import { formDataToProduct } from '@/Services/productSevice'
-import type { CreateProductSchemaType } from '@/Schemas/Admin/Product/CreateSchema'
+import { formDataToProduct } from '@/Services/products/productSevice'
+import type { CreateProductSchemaType } from '@/Schemas/Admin/Product/createSchema'
 
 const title = '商品管理'
 
