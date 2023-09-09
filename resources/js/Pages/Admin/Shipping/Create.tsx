@@ -9,7 +9,7 @@ import ShippingCreateForm from '@/Pages/Admin/Shipping/Partials/CreateForm'
 import ResultUsers from './Partials/ResultUsers'
 import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
 import type { User } from '@/Types'
-import type { CreateShippingSchemaType } from '@/Schemas/Admin/Shipping/CreateSchema'
+import type { CreateShippingSchemaType } from '@/Schemas/Admin/Shipping/createSchema'
 
 const title = '配送管理'
 

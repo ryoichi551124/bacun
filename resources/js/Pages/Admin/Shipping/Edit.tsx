@@ -6,7 +6,7 @@ import Title from '@/Components/Admin/Common/Title'
 import SearchUser from '@/Pages/Admin/Shipping/Partials/SearchUser'
 import ShippingUpdateForm from '@/Pages/Admin/Shipping/Partials/UpdateForm'
 import ResultUsers from './Partials/ResultUsers'
-import type { UpdateShippingSchemaType } from '@/Schemas/Admin/Shipping/UpdateSchema'
+import type { UpdateShippingSchemaType } from '@/Schemas/Admin/Shipping/updateSchema'
 import type { Shipping, User } from '@/Types'
 import type { SearchUserSchemaType } from '@/Schemas/Admin/Shipping/SearchUser'
 

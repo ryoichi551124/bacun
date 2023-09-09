@@ -8,7 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
 import createShippingSchema, {
   CreateShippingSchemaType,
-} from '@/Schemas/Admin/Shipping/CreateSchema'
+} from '@/Schemas/Admin/Shipping/createSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Pref } from '@/Types'
 

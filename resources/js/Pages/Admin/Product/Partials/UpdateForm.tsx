@@ -11,7 +11,7 @@ import { productToFormData } from '@/Services/products/productSevice'
 import { useForm, Controller } from 'react-hook-form'
 import updateProductSchema, {
   UpdateProductSchemaType,
-} from '@/Schemas/Admin/Product/UpdateSchema'
+} from '@/Schemas/Admin/Product/updateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type {
   Product,

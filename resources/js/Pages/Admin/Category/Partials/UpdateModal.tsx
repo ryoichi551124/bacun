@@ -11,7 +11,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import { useForm } from 'react-hook-form'
 import updateCategorySchema, {
   UpdateCategorySchemaType,
-} from '@/Schemas/Admin/Category/UpdateSchema'
+} from '@/Schemas/Admin/Category/updateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Category } from '@/Types'
 

@@ -10,7 +10,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm, Controller } from 'react-hook-form'
 import createProductSchema, {
   CreateProductSchemaType,
-} from '@/Schemas/Admin/Product/CreateSchema'
+} from '@/Schemas/Admin/Product/createSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type {
   Category,

@@ -8,7 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
 import createMailTemplateSchema, {
   CreateMailTemplateSchemaType,
-} from '@/Schemas/Admin/MailTemplate/CreateSchema'
+} from '@/Schemas/Admin/MailTemplate/createSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const button = css`

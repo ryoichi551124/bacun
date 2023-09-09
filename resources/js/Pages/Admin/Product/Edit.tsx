@@ -3,7 +3,7 @@ import { Head, usePage, router } from '@inertiajs/react'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import ProductUpdateForm from '@/Pages/Admin/Product/Partials/UpdateForm'
-import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/UpdateSchema'
+import { UpdateProductSchemaType } from '@/Schemas/Admin/Product/updateSchema'
 import { formDataToProduct } from '@/Services/products/productSevice'
 import type { Product } from '@/Types'
 

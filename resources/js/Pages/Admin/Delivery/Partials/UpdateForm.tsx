@@ -8,7 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
 import updateDeliverySchema, {
   UpdateDeliverySchemaType,
-} from '@/Schemas/Admin/Delivery/UpdateSchema'
+} from '@/Schemas/Admin/Delivery/updateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Delivery } from '@/Types'
 

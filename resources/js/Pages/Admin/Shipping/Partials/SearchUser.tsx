@@ -6,9 +6,9 @@ import Card from '@/Components/Admin/Common/Card'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
-import searchUserSchema, {
-  SearchUserSchemaType,
-} from '@/Schemas/Admin/Shipping/SearchUser'
+import searchUsersSchema, {
+  SearchUsersSchemaType,
+} from '@/Schemas/Admin/User/searchUsersSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const errorText = css`
@@ -18,7 +18,7 @@ const errorText = css`
 `
 
 type SearchUserProps = {
-  onSearchUser?: (data: SearchUserSchemaType) => void
+  onSearchUser?: (data: SearchUsersSchemaType) => void
   noResult?: boolean
 }
 
@@ -33,13 +33,13 @@ export default function SearchUser({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SearchUserSchemaType>({
+  } = useForm<SearchUsersSchemaType>({
     reValidateMode: 'onBlur',
-    resolver: zodResolver(searchUserSchema),
+    resolver: zodResolver(searchUsersSchema),
   })
 
   /** 顧客検索 */
-  const onSubmit = (data: SearchUserSchemaType) => {
+  const onSubmit = (data: SearchUsersSchemaType) => {
     onSearchUser && onSearchUser(data)
   }
 
