@@ -19,7 +19,7 @@ const errorText = css`
 
 type SearchUserProps = {
   onSearchUser?: (data: SearchUserSchemaType) => void
-  noResult: boolean
+  noResult?: boolean
 }
 
 /**
@@ -48,7 +48,7 @@ export default function SearchUser({
       <form onSubmit={handleSubmit(onSubmit)} css={forms.container}>
         <Grid container spacing={2}>
           {/* 顧客名 */}
-          <Grid xs={6}>
+          <Grid xs={4}>
             <label htmlFor="name" css={forms.label}>
               顧客名
             </label>
@@ -59,9 +59,8 @@ export default function SearchUser({
               {...register('name')}
             />
           </Grid>
-          <Grid xs={6}></Grid>
           {/* メールアドレス */}
-          <Grid xs={6}>
+          <Grid xs={4}>
             <label htmlFor="email" css={forms.label}>
               メールアドレス
             </label>
@@ -72,9 +71,8 @@ export default function SearchUser({
               {...register('email')}
             />
           </Grid>
-          <Grid xs={6}></Grid>
           {/* 電話番号 */}
-          <Grid xs={6}>
+          <Grid xs={4}>
             <label htmlFor="tel" css={forms.label}>
               電話番号
             </label>
@@ -85,7 +83,6 @@ export default function SearchUser({
               {...register('tel')}
             />
           </Grid>
-          <Grid xs={6}></Grid>
           {/* ボタン */}
           <Grid xs={6} css={forms.buttonWrap}>
             <Button type="submit" variant="contained">

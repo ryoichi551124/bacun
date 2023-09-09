@@ -28,7 +28,7 @@ type ShippingUpdateFormProps = {
  * 配送先編集フォーム
  */
 export default function ShippingUpdateForm({
-  onUpdateShipping
+  onUpdateShipping,
 }: ShippingUpdateFormProps) {
   const { shipping, prefs } = usePage<ShippingData>().props
 
