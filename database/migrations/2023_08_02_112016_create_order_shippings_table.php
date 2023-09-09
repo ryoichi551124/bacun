@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * 受注
+     * 受注配送先
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('order_shippings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->comment('ユーザーID');
-            // 注文者情報
+            $table->foreignId('order_id')->constrained()->onDelete('cascade')->comment('オーダーID');
+            // 受注配送先情報
             $table->string('last_name', 64)->comment('姓');
             $table->string('first_name', 64)->comment('名');
             $table->string('last_kana', 64)->comment('姓カナ');
@@ -26,23 +26,11 @@ return new class extends Migration
             $table->string('building', 128)->nullable()->comment('建物名');
             $table->string('tel', 20)->comment('電話番号');
             $table->string('email', 128)->comment('メールアドレス');
-            $table->enum('sex', [1, 2])->nullable()->comment('性別 [1 => "男性", 2 => "女性"]');
-            $table->text('memo')->nullable()->comment('オーダーメモ');
-            $table->string('status')->comment('ステータス');
-            $table->string('tracking_number', 128)->nullable()->comment('トラッキングナンバー');
-            // 料金
-            $table->unsignedMediumInteger('subtotal')->comment('小計');
-            $table->unsignedMediumInteger('total_deliv_fee')->comment('送料合計');
-            $table->unsignedMediumInteger('tax')->comment('消費税');
-            $table->unsignedMediumInteger('total')->comment('合計');
-            // 支払い
-            $table->string('payment_method', 64)->comment('支払い方法');
-            $table->date('payment_date')->nullable()->comment('支払い日');
-
+            $table->text('memo')->nullable()->comment('配送メモ');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index('user_id');
+            $table->index('order_id');
         });
     }
 
@@ -51,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_shippings');
     }
 };
