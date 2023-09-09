@@ -7,7 +7,7 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { useForm } from 'react-hook-form'
 import updateAdminSchema, {
-  UpdateAdminSchemaType
+  UpdateAdminSchemaType,
 } from '@/Schemas/Admin/Admin/updateSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Admin, AdminRoles } from '@/Types'

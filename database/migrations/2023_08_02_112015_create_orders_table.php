@@ -24,12 +24,12 @@ return new class extends Migration
             $table->string('order_pref', 8)->comment('都道府県');
             $table->string('order_city', 32)->comment('市区町村');
             $table->string('order_address', 128)->comment('丁目番地号');
-            $table->string('order_building', 128)->comment('建物名');
+            $table->string('order_building', 128)->nullable()->comment('建物名');
             $table->string('order_tel', 20)->comment('電話番号');
             $table->string('order_email', 128)->comment('メールアドレス');
             $table->enum('order_sex', [1, 2])->nullable()->comment('性別 [1 => "男性", 2 => "女性"]');
             $table->text('order_memo')->nullable()->comment('オーダーメモ');
-            $table->unsignedTinyInteger('order_status')->comment('ステータス');
+            $table->string('order_status')->comment('ステータス');
             $table->string('tracking_number', 128)->nullable()->comment('トラッキングナンバー');
             // 料金
             $table->unsignedMediumInteger('subtotal')->comment('小計');
