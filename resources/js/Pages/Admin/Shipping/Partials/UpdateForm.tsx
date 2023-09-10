@@ -48,7 +48,7 @@ export default function ShippingUpdateForm({
   }
 
   return (
-    <Card title="配送先作成">
+    <Card title="配送先編集">
       <form onSubmit={handleSubmit(onSubmit)} css={forms.container}>
         <Grid container spacing={2}>
           {/* 名前（漢字） */}

@@ -27,12 +27,10 @@ class IndexController extends Controller
             split_zip($shipping['zip_code']),
         );
 
-        $user = User::Id($request->user_id)->first();
         $prefs = config('pref');
 
         return Inertia::render('Admin/Shipping/Edit', [
             'shipping' => $shipping,
-            'user' => $user,
             'prefs' => $prefs,
         ]);
     }
