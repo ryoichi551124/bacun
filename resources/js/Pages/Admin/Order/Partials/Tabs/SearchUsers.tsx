@@ -8,6 +8,7 @@ import searchUserSchema, {
   SearchUsersSchemaType,
 } from '@/Schemas/Admin/User/searchUsersSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import type { User } from '@/Types'
 
 const errorText = css`
   display: inline-block;
@@ -17,16 +18,13 @@ const errorText = css`
 
 type SearchUserProps = {
   onSearchUser?: (data: SearchUsersSchemaType) => void
-  noResult?: boolean
+  users?: User[]
 }
 
 /**
  * 顧客検索フォーム
  */
-export default function SearchUser({
-  onSearchUser,
-  noResult,
-}: SearchUserProps) {
+export default function SearchUser({ onSearchUser, users }: SearchUserProps) {
   const {
     register,
     handleSubmit,
@@ -86,7 +84,9 @@ export default function SearchUser({
             <Button type="submit" variant="contained">
               検索する
             </Button>
-            {noResult && <div css={errorText}>検索結果がありません</div>}
+            {users && users.length === 0 && (
+              <div css={errorText}>検索結果がありません</div>
+            )}
           </Grid>
         </Grid>
       </form>

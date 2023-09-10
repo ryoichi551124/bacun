@@ -77,9 +77,7 @@ export default function ShippingUpdateForm({
               {...register('first_name')}
             />
             {errors.first_name && (
-              <div css={forms.errText}>
-                {errors.first_name.message}
-              </div>
+              <div css={forms.errText}>{errors.first_name.message}</div>
             )}
           </Grid>
           <Grid xs={4}></Grid>
@@ -109,9 +107,7 @@ export default function ShippingUpdateForm({
               {...register('first_kana')}
             />
             {errors.first_kana && (
-              <div css={forms.errText}>
-                {errors.first_kana.message}
-              </div>
+              <div css={forms.errText}>{errors.first_kana.message}</div>
             )}
           </Grid>
           <Grid xs={4}></Grid>
@@ -135,14 +131,10 @@ export default function ShippingUpdateForm({
             </div>
             <div css={forms.flexCenter}>
               {errors.zip_code1 && (
-                <div css={forms.errText}>
-                  {errors.zip_code1.message}
-                </div>
+                <div css={forms.errText}>{errors.zip_code1.message}</div>
               )}
               {errors.zip_code2 && (
-                <div css={forms.errText}>
-                  {errors.zip_code2.message}
-                </div>
+                <div css={forms.errText}>{errors.zip_code2.message}</div>
               )}
             </div>
           </Grid>

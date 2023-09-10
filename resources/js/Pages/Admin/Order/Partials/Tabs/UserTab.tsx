@@ -38,22 +38,25 @@ export default function UserTab({ user, setUser }: UserTabProps) {
   const { prefs, statuses } = usePage<OrderData>().props
   const [users, setUsers] = useState<User[] | undefined>(undefined)
 
+  // 注文者が設定済みであれば、選択した顧客に設定
   useEffect(() => {
     user && setUsers([user])
   }, [])
 
+  /** 顧客検索 */
   const handleSearchUser = (data: SearchUsersSchemaType) => {
     searchUsers(data).then((res) => {
-      if (res && res.length > 0) {
+      if (res) {
         setUsers(res)
         setUser(res[0])
       } else {
-        setUsers(undefined)
+        setUsers([])
         setUser(undefined)
       }
     })
   }
 
+  /** 選択した顧客を注文者に設定 */
   const handleSelectUser = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.target.value &&
       setUser(
@@ -67,8 +70,10 @@ export default function UserTab({ user, setUser }: UserTabProps) {
   return (
     <>
       <div css={lead}>登録済みの顧客を検索</div>
-      <SearchUsers onSearchUser={handleSearchUser} noResult={!users} />
-      {users && (
+      {/* 検索フォーム */}
+      <SearchUsers onSearchUser={handleSearchUser} users={users} />
+      {/* 検索結果から注文者を選ぶ */}
+      {users && users.length > 0 && (
         <>
           <hr />
           <Grid container spacing={2} css={forms.container}>
