@@ -5,9 +5,9 @@ import { forms, colors } from '@/Styles'
 import Card from '@/Components/Admin/Common/Card'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import UserTab from '@/Pages/Admin/Order/Partials/Tabs/UserTab'
-import ShippingTab from '@/Pages/Admin/Order/Partials/Tabs/ShippingTab'
-import OrderTab from '@/Pages/Admin/Order/Partials/Tabs/OrderTab'
+import OrderUserTab from '@/Pages/Admin/Order/Partials/Tabs/OrderUserTab'
+import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab'
+import OrderProductsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderProductsTab'
 import type { User, Shipping, OrderDetail } from '@/Types'
 
 const tabs = css`
@@ -48,13 +48,13 @@ export default function CreateTabs() {
         <Tab label="購入商品" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <UserTab user={user} setUser={setUser} />
+        <OrderUserTab user={user} setUser={setUser} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ShippingTab />
+        <OrderShippingTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <OrderTab />
+        <OrderProductsTab />
       </TabPanel>
     </Card>
   )
