@@ -45,7 +45,6 @@ class UpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'user_id'      => 'ユーザーID',
             'last_name'    => '姓',
             'first_name'   => '名',
             'last_kana'    => '姓カナ',
@@ -69,10 +68,8 @@ class UpdateRequest extends FormRequest
         return [
             'required'      => ':attributeは必須項目です',
             'string'        => ':attributeは文字列を入力してください',
-            'email'         => '不正なメールアドレスです',
             'max'           => ':attributeは:max文字以内で入力してください',
             'regex'         => ':attributeは不正な値です',
-            'date'          => ':attributeは無効な日付です',
         ];
     }
 

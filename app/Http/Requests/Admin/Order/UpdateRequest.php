@@ -25,7 +25,6 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'           => ['required'],
             'last_name'         => ['required', 'string', 'max:64'],
             'first_name'        => ['required', 'string', 'max:64'],
             'last_kana'         => ['required', 'string', 'max64'],
@@ -101,7 +100,7 @@ class UpdateRequest extends FormRequest
     }
 
     /**
-     * 誕生日、郵便番号、電話番号の結合
+     * 郵便番号の結合
      */
     public function getValidatorInstance()
     {
