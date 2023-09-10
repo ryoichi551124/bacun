@@ -35,7 +35,6 @@ export default function ShippingListTable() {
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell>顧客名</TableCell>
-              <TableCell>メール</TableCell>
               <TableCell>住所</TableCell>
               <TableCell align="center"></TableCell>
             </TableRow>
@@ -53,10 +52,9 @@ export default function ShippingListTable() {
                     {shipping.id}
                   </TableCell>
                   <TableCell>
-                    {shipping.shipping_last_name} {shipping.shipping_first_name}
+                    {shipping.last_name} {shipping.first_name}
                   </TableCell>
-                  <TableCell>{shipping.shipping_email}</TableCell>
-                  <TableCell>{shipping.shipping_city}</TableCell>
+                  <TableCell>{shipping.city}</TableCell>
                   <TableCell align="right" width="150">
                     <EditLinkIcon
                       editLink="/admin/shipping/edit/"
@@ -65,7 +63,7 @@ export default function ShippingListTable() {
                     <DeleteLinkIcon
                       deleteLink="/admin/shipping/list/delete/"
                       id={shipping.id}
-                      target={`${shipping.shipping_city}${shipping.shipping_pref}${shipping.shipping_address}`}
+                      target={`${shipping.city}${shipping.pref}${shipping.address}`}
                     />
                   </TableCell>
                 </TableRow>
