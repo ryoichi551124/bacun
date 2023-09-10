@@ -103,20 +103,20 @@ export type OrderStatus = 'new' | 'paid' | 'shipped' | 'cancel' | 'return'
 export type Order = {
   user_id: number
   id: number
-  order_last_name: string
-  order_first_name: string
-  order_last_kana: string
-  order_first_kana: string
-  order_zip_code: string
-  order_pref: string
-  order_city: string
-  order_address: string
-  order_building: string
-  order_tel: string
-  order_email: string
-  order_sex?: Sex
-  order_memo?: string
-  order_status: OrderStatus
+  last_name: string
+  first_name: string
+  last_kana: string
+  first_kana: string
+  zip_code: string
+  pref: string
+  city: string
+  address: string
+  building: string
+  tel: string
+  email: string
+  sex?: Sex
+  memo?: string
+  status: OrderStatus
   tracking_number?: string
   sub_total: number
   total_deliv_fee: number

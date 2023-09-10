@@ -2,9 +2,7 @@ import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUser
 import type { User } from '@/Types'
 
 //
-export function userDataToOrderUser(
-  user: User
-): CreateOrderUserSchemaType {
+export function userDataToOrderUser(user: User): CreateOrderUserSchemaType {
   const orderUser = {
     last_name: user.last_name,
     first_name: user.first_name,

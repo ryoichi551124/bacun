@@ -50,7 +50,7 @@ export default function OrderUserTab({ user, setUser }: UserTabProps) {
     formState: { errors },
   } = useForm<CreateOrderUserSchemaType>({
     reValidateMode: 'onBlur',
-    resolver: zodResolver(createOrderUserSchema)
+    resolver: zodResolver(createOrderUserSchema),
   })
 
   /** 顧客検索 */
@@ -76,9 +76,8 @@ export default function OrderUserTab({ user, setUser }: UserTabProps) {
 
   /** 選択した顧客のデータをフォームにコピーする */
   const handleUserCopy = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const copyData = user && userDataToOrderUser(user)
-    if (copyData) {
-      for (const [key, value] of Object.entries(copyData)) {
+    if (user) {
+      for (const [key, value] of Object.entries(userDataToOrderUser(user))) {
         if (value !== null && value !== undefined) {
           setValue(key as keyof CreateOrderUserSchemaType, value)
         }
@@ -86,9 +85,8 @@ export default function OrderUserTab({ user, setUser }: UserTabProps) {
     }
   }
 
-
   const createOrderUser = (data: CreateOrderUserSchemaType) => {
-
+    console.log(data)
   }
 
   return (
@@ -120,7 +118,11 @@ export default function OrderUserTab({ user, setUser }: UserTabProps) {
             <Grid xs={6}></Grid>
             {/* ボタン */}
             <Grid xs={6} css={forms.buttonWrap}>
-              <Button type="button" variant="contained" onClick={handleUserCopy}>
+              <Button
+                type="button"
+                variant="contained"
+                onClick={handleUserCopy}
+              >
                 顧客情報をコピーする
               </Button>
             </Grid>
@@ -281,6 +283,56 @@ export default function OrderUserTab({ user, setUser }: UserTabProps) {
                 )}
               </Grid>
               <Grid xs={6}></Grid>
+              {/* 電話番号 */}
+              <Grid xs={6}>
+                <label css={forms.label}>電話番号</label>
+                <div css={forms.flexCenter}>
+                  <input
+                    placeholder="000"
+                    css={[forms.input, errors.tel1 && forms.error]}
+                    {...register('tel1')}
+                  />
+                  <input
+                    placeholder="0000"
+                    css={[forms.input, errors.tel2 && forms.error]}
+                    {...register('tel2')}
+                  />
+                  <input
+                    placeholder="0000"
+                    css={[forms.input, errors.tel3 && forms.error]}
+                    {...register('tel3')}
+                  />
+                </div>
+                <div css={forms.flexCenter}>
+                  {(errors.tel1 || errors.tel2 || errors.tel3) && (
+                    <div css={forms.errText}>入力が必須の項目です</div>
+                  )}
+                </div>
+              </Grid>
+              <Grid xs={6}></Grid>
+              {/* 性別 */}
+              <Grid xs={6}>
+                <div css={forms.label}>性別</div>
+                <label css={forms.radioLabel}>
+                  <input
+                    type="radio"
+                    value="1"
+                    css={forms.radioInput}
+                    {...register('sex')}
+                  />
+                  男性
+                </label>
+                <label css={forms.radioLabel}>
+                  <input
+                    type="radio"
+                    value="2"
+                    css={forms.radioInput}
+                    {...register('sex')}
+                  />
+                  女性
+                </label>
+              </Grid>
+              <Grid xs={6}></Grid>
               {/* メモ */}
               <Grid xs={9}>
                 <label htmlFor="memo" css={forms.label}>
@@ -308,7 +360,6 @@ export default function OrderUserTab({ user, setUser }: UserTabProps) {
           </form>
         </>
       )}
-
     </>
   )
 }
