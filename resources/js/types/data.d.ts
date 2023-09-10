@@ -42,20 +42,16 @@ export type UserAuth = {
 export type Shipping = {
   id: number
   user_id: number
-  shipping_last_name: string
-  shipping_first_name: string
-  shipping_last_kana: string
-  shipping_first_kana: string
-  shipping_zip_code: string
-  shipping_pref: string
-  shipping_city: string
-  shipping_address: string
-  shipping_building?: string
-  shipping_tel?: string
-  shipping_email: string
-  shipping_date?: Date
-  shipping_memo?: string
-  tracking_number?: string
+  last_name: string
+  first_name: string
+  last_kana: string
+  first_kana: string
+  zip_code: string
+  pref: string
+  city: string
+  address: string
+  building?: string
+  memo?: string
 }
 
 // 管理者
@@ -106,7 +102,7 @@ export type OrderStatus = 'new' | 'paid' | 'shipped' | 'cancel' | 'return'
 // 受注
 export type Order = {
   user_id: number
-  shipping_id: number
+  id: number
   order_last_name: string
   order_first_name: string
   order_last_kana: string

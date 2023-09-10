@@ -14,49 +14,23 @@ const title = '配送管理'
 
 type ShippingData = {
   shipping: Shipping
-  user: User
 }
 
 /**
  * 配送先編集ページ
  */
 export default function ShippingEdit() {
-  const { shipping, user } = usePage<ShippingData>().props
-
-  const [users, setUsers] = useState<User[] | undefined>([user])
-  const [userId, setUserId] = useState<number | undefined>(shipping.user_id)
-  const [noResult, setNoResult] = useState<boolean>(false)
-
-  /** 顧客検索 */
-  const handleSearchUsers = (data: SearchUsersSchemaType) => {
-    axios
-      .post('/admin/api/user/search', data)
-      .then((res) => {
-        if (res.data.length > 0) {
-          setUsers(res.data)
-          setUserId(res.data[0].id)
-          setNoResult(false)
-        } else {
-          setUsers(undefined)
-          setNoResult(true)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  const { shipping } = usePage<ShippingData>().props
 
   /** 配送先編集 */
   const handleUpdateShipping = (data: UpdateShippingSchemaType) => {
-    router.put(`/admin/shipping/edit/update/${userId}`, data)
+    router.put(`/admin/shipping/edit/update/${shipping.user_id}`, data)
   }
 
   return (
     <>
       <Head title={title} />
       <Title title={title} />
-      <SearchUsers onSearchUsers={handleSearchUsers} noResult={noResult} />
-      {users && <ResultUsers users={users} setUserId={setUserId} />}
       <ShippingUpdateForm onUpdateShipping={handleUpdateShipping} />
     </>
   )
