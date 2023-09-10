@@ -69,7 +69,7 @@ class CreateRequest extends FormRequest
             'address'           => '丁目番地号',
             'building'          => '建物名',
             'tel'               => '電話番号',
-            'oder_eamil'        => 'メールアドレス',
+            'eamil'             => 'メールアドレス',
             'sex'               => '性別',
             'memo'              => 'オーダーメモ',
             'status'            => 'ステータス',
