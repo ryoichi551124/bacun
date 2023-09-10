@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * 顧客の配送先
+     * 受注配送先
      */
     public function up(): void
     {
-        Schema::create('shippings', function (Blueprint $table) {
+        Schema::create('order_shippings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->comment('ユーザーID');
-            // 配送先情報
+            $table->foreignId('order_id')->constrained()->onDelete('cascade')->comment('オーダーID');
+            // 受注配送先情報
             $table->string('last_name', 64)->comment('姓');
             $table->string('first_name', 64)->comment('名');
             $table->string('last_kana', 64)->comment('姓カナ');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->index('user_id');
+            $table->index('order_id');
         });
     }
 
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shippings');
+        Schema::dropIfExists('order_shippings');
     }
 };

@@ -22,20 +22,17 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'               => ['required'],
-            'shipping_last_name'    => ['required', 'string', 'max:64'],
-            'shipping_first_name'   => ['required', 'string', 'max:64'],
-            'shipping_last_kana'    => ['required', 'string', 'max:64'],
-            'shipping_first_kana'   => ['required', 'string', 'max:64'],
-            'shipping_zip_code'     => ['nullable', 'regex:/^\d{7}$/i'],
-            'shipping_pref'         => ['required', 'string', 'max:8'],
-            'shipping_city'         => ['required', 'string', 'max:32'],
-            'shipping_address'      => ['required', 'string', 'max:128'],
-            'shipping_building'     => ['nullable', 'string', 'max:128'],
-            'shipping_tel'          => ['nullable', 'regex:/^\d{10,11}$/i'],
-            'shipping_email'        => ['nullable', 'email', 'max:128'],
-            'shipping_date'         => ['nullable', 'date'],
-            'shipping_memo'         => ['nullable', 'string'],
+            'user_id'      => ['required'],
+            'last_name'    => ['required', 'string', 'max:64'],
+            'first_name'   => ['required', 'string', 'max:64'],
+            'last_kana'    => ['required', 'string', 'max:64'],
+            'first_kana'   => ['required', 'string', 'max:64'],
+            'zip_code'     => ['nullable', 'regex:/^\d{7}$/i'],
+            'pref'         => ['required', 'string', 'max:8'],
+            'city'         => ['required', 'string', 'max:32'],
+            'address'      => ['required', 'string', 'max:128'],
+            'building'     => ['nullable', 'string', 'max:128'],
+            'memo'         => ['nullable', 'string'],
         ];
     }
 
@@ -47,21 +44,17 @@ class CreateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'order_id'              => 'オーダーID',
-            'user_id'               => 'ユーザーID',
-            'shipping_last_name'    => '姓',
-            'shipping_first_name'   => '名',
-            'shipping_last_kana'    => '姓カナ',
-            'shipping_first_kana'   => '名カナ',
-            'shipping_zip_code'     => '郵便番号',
-            'shipping_pref'         => '都道府県',
-            'shipping_city'         => '市区町村',
-            'shipping_address'      => '丁目番地号',
-            'shipping_building'     => '建物名',
-            'sihpping_tel'          => '電話番号',
-            'shipping_email'        => 'メールアドレス',
-            'shipping_date'         => '配送日',
-            'shipping_memo'         => '配送メモ',
+            'user_id'      => 'ユーザーID',
+            'last_name'    => '姓',
+            'first_name'   => '名',
+            'last_kana'    => '姓カナ',
+            'first_kana'   => '名カナ',
+            'zip_code'     => '郵便番号',
+            'pref'         => '都道府県',
+            'city'         => '市区町村',
+            'address'      => '丁目番地号',
+            'building'     => '建物名',
+            'memo'         => '配送メモ',
         ];
     }
 
@@ -90,23 +83,7 @@ class CreateRequest extends FormRequest
         $input = $this->all();
 
         // 郵便番号
-        $zip_code = array_values(
-            combine_zip(
-                $input['shipping_zip_code1'],
-                $input['shipping_zip_code2']
-            )
-        )[0];
-        $this->merge(['shipping_zip_code' => $zip_code]);
-
-        // 電話番号
-        $tel = array_values(
-            combine_tel(
-                $input['shipping_tel1'],
-                $input['shipping_tel2'],
-                $input['shipping_tel3']
-            )
-        )[0];
-        $this->merge(['shipping_tel' => $tel]);
+        $this->merge(combine_zip($input['zip_code1'], $input['zip_code2']));
 
         return parent::getValidatorInstance();
     }
