@@ -10,6 +10,7 @@ import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab
 import OrderProductsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderProductsTab'
 import type { User, Shipping, OrderDetail } from '@/Types'
 import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
+import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
 
 const tabs = css`
   border-bottom: 1px solid ${colors.gray};
@@ -34,13 +35,17 @@ export default function CreateTabs() {
     setValue(newValue)
   }
 
+  // 顧客の検索から選択
   const [user, setUser] = useState<User | undefined>(undefined)
+  // 注文者
   const [orderUser, setOrderUser] = useState<
     CreateOrderUserSchemaType | undefined
   >(undefined)
-  const [orderShipping, setOrderShipping] = useState<Shipping | undefined>(
-    undefined,
-  )
+  // 配送先
+  const [orderShipping, setOrderShipping] = useState<
+    CreateOrderShippingSchemaType | undefined
+  >(undefined)
+  // 購入書品
   const [orderProducts, setOrderProducts] = useState<OrderDetail[] | undefined>(
     undefined,
   )
@@ -61,7 +66,11 @@ export default function CreateTabs() {
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OrderShippingTab />
+        <OrderShippingTab
+          orderUser={orderUser}
+          orderShipping={orderShipping}
+          setOrderShipping={setOrderShipping}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <OrderProductsTab />

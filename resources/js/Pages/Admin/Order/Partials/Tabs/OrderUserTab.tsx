@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { forms, colors } from '@/Styles'
+import { forms } from '@/Styles'
 import { usePage } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import searchUsers from '@/Services/users/searchUsers'
 import SearchUsers from '@/Pages/Admin/Order/Partials/Tabs/SearchUsers'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
+import { Button } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import createOrderUserSchema, {
   CreateOrderUserSchemaType,
@@ -14,7 +15,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { userDataToOrderUser } from '@/Services/orders/orderService'
 import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
 import type { User, Pref, UserStatus } from '@/Types'
-import { Button } from '@mui/material'
 
 const lead = css`
   padding: 1.5rem 0 0 1.5rem;
@@ -29,7 +29,7 @@ type OrderData = {
   prefs: Pref
   statuses: UserStatus
 }
-type UserTabProps = {
+type OrderUserTabProps = {
   user: User | undefined
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>
   orderUser: CreateOrderUserSchemaType | undefined
@@ -38,16 +38,19 @@ type UserTabProps = {
   >
 }
 
+/**
+ * 注文者情報の設定
+ */
 export default function OrderUserTab({
   user,
   setUser,
   orderUser,
   setOrderUser,
-}: UserTabProps) {
+}: OrderUserTabProps) {
   const { prefs, statuses } = usePage<OrderData>().props
   const [users, setUsers] = useState<User[] | undefined>(undefined)
 
-  // 注文者が設定済みであれば、選択した顧客に設定
+  // 顧客が検索済みであれば、選択した顧客を設定
   useEffect(() => {
     user && setUsers([user])
   }, [])

@@ -1,7 +1,8 @@
+import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
 import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
 import type { User } from '@/Types'
 
-//
+// 顧客情報を注文者情報に変換
 export function userDataToOrderUser(user: User): CreateOrderUserSchemaType {
   const orderUser = {
     last_name: user.last_name,
@@ -23,3 +24,23 @@ export function userDataToOrderUser(user: User): CreateOrderUserSchemaType {
   }
   return orderUser
 }
+
+// 注文者情報を配送先情報に変換
+/*
+export function orderUserDataToOrderShipping(orderUser: CreateOrderUserSchemaType): CreateOrderShippingSchemaType {
+  const orderShipping = {
+    last_name: orderUser.last_name,
+    first_name: orderUser.first_name,
+    last_kana: orderUser.last_kana,
+    first_kana: orderUser.first_kana,
+    zip_code1: orderUser.zip_code1,
+    zip_code2: orderUser.zip_code2,
+    pref: orderUser.pref,
+    city: orderUser.city,
+    address: orderUser.address,
+    building: orderUser.building,
+    memo: orderUser.memo,
+  }
+  return orderShipping
+}
+*/
