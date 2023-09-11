@@ -68,6 +68,7 @@ export default function OrderShippingTab({
 
   return (
     <>
+      {/* 注文者情報のコピー */}
       {orderUser ? (
         <Grid container spacing={2} css={copyButton}>
           {/* ボタン */}
