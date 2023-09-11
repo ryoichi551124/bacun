@@ -30,7 +30,7 @@ const createOrderUserSchema = z.object({
   tel2: z.string().min(1, '入力が必須の項目です'),
   tel3: z.string().min(1, '入力が必須の項目です'),
   sex: z.enum(['1', '2']),
-  memo: z.string().optional(),
+  memo: z.string().optional().nullable(),
 })
 
 export type CreateOrderUserSchemaType = z.infer<typeof createOrderUserSchema>

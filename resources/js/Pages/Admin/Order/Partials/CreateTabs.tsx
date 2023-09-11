@@ -9,6 +9,7 @@ import OrderUserTab from '@/Pages/Admin/Order/Partials/Tabs/OrderUserTab'
 import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab'
 import OrderProductsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderProductsTab'
 import type { User, Shipping, OrderDetail } from '@/Types'
+import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
 
 const tabs = css`
   border-bottom: 1px solid ${colors.gray};
@@ -34,11 +35,15 @@ export default function CreateTabs() {
   }
 
   const [user, setUser] = useState<User | undefined>(undefined)
-  const [shipping, setShipping] = useState<Shipping | undefined>(undefined)
-  const [orders, setOrders] = useState<OrderDetail[] | undefined>(undefined)
-
-  //console.log('createTab')
-  //console.log(user)
+  const [orderUser, setOrderUser] = useState<
+    CreateOrderUserSchemaType | undefined
+  >(undefined)
+  const [orderShipping, setOrderShipping] = useState<Shipping | undefined>(
+    undefined,
+  )
+  const [orderProducts, setOrderProducts] = useState<OrderDetail[] | undefined>(
+    undefined,
+  )
 
   return (
     <Card title="受注登録">
@@ -48,7 +53,12 @@ export default function CreateTabs() {
         <Tab label="購入商品" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <OrderUserTab user={user} setUser={setUser} />
+        <OrderUserTab
+          user={user}
+          setUser={setUser}
+          orderUser={orderUser}
+          setOrderUser={setOrderUser}
+        />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <OrderShippingTab />
