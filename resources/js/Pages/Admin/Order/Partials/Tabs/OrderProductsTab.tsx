@@ -3,8 +3,7 @@ import { css } from '@emotion/react'
 import { forms } from '@/Styles'
 import { usePage } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
-import searchUsers from '@/Services/users/searchUsers'
-import SearchUsers from '@/Pages/Admin/Order/Partials/Tabs/SearchUsers'
+import searchProducts from '@/Services/products/searchProducts'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Button } from '@mui/material'
 import { useForm } from 'react-hook-form'
@@ -39,9 +38,9 @@ export default function OrderTab() {
 
   /** カテゴリーから商品を検索 */
   const handleSearchCategoryProducts = () => {
-    console.log(categoryId)
-    // 商品を検索
-    // undefindであれば全て取得
+    searchProducts(Number(categoryId)).then((res) => {
+      console.log(res)
+    })
   }
 
   return (

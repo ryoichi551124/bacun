@@ -2,6 +2,9 @@ import axios from 'axios'
 import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
 import type { User } from '@/Types'
 
+/**
+ * 顧客検索
+ */
 export default async function searchUsers(
   data: SearchUsersSchemaType,
 ): Promise<User[] | undefined> {

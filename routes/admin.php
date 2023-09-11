@@ -211,8 +211,11 @@ Route::middleware('auth:admin')->group(function () {
 
     // API
     Route::prefix('api')->name('api.')->group(function () {
-        Route::prefix('user')->name('user.')->group(function () {
+        Route::prefix('user')->group(function () {
             Route::post('/search', Api\User\SearchController::class);
+        });
+        Route::prefix('product')->group(function () {
+            Route::post('/search', Api\Product\SearchController::class);
         });
     });
 });

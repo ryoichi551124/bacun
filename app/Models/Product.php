@@ -91,7 +91,18 @@ class Product extends Model
      */
     public function scopeId(Builder $query, int $id = null): void
     {
-        if (empty($id)) return;
         $query->where('id', $id);
+    }
+
+    /**
+     * カテゴリーIDによる検索
+     *
+     * @param Builder $query
+     * @param integer|null $category_id
+     * @return void
+     */
+    public function scopeCategoryId(Builder $query, int $category_id = null): void
+    {
+        $query->where('category_id', $category_id);
     }
 }
