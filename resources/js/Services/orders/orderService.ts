@@ -1,6 +1,6 @@
 import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
 import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
-import type { User } from '@/Types'
+import type { OrderDetail, Product, User } from '@/Types'
 
 // 顧客情報を注文者情報に変換
 export function userDataToOrderUser(user: User): CreateOrderUserSchemaType {
@@ -44,3 +44,17 @@ export function orderUserDataToOrderShipping(orderUser: CreateOrderUserSchemaTyp
   return orderShipping
 }
 */
+
+// 商品情報を注文詳細データに変換
+export function productToOrderDetail(
+  product: Product,
+  quantity: number,
+): OrderDetail {
+  const orderDetail = {
+    product_id: product.id,
+    product_name: product.name,
+    price: product.sales_price,
+    quantity: quantity,
+  }
+  return orderDetail
+}

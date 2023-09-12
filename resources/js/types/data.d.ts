@@ -129,7 +129,7 @@ export type Order = {
 
 // 受注詳細
 export type OrderDetail = {
-  order_id: number
+  order_id?: number
   product_id: number
   product_name: string
   price: number

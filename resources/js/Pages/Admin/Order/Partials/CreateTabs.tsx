@@ -7,7 +7,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import OrderUserTab from '@/Pages/Admin/Order/Partials/Tabs/OrderUserTab'
 import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab'
-import OrderProductsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderProductsTab'
+import OrderDetailsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderDetailsTab'
 import type { User, Shipping, OrderDetail } from '@/Types'
 import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
 import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
@@ -46,7 +46,7 @@ export default function CreateTabs() {
     CreateOrderShippingSchemaType | undefined
   >(undefined)
   // 購入書品
-  const [orderProducts, setOrderProducts] = useState<OrderDetail[] | undefined>(
+  const [orderDetails, setOrderDetails] = useState<OrderDetail[] | undefined>(
     undefined,
   )
 
@@ -73,7 +73,10 @@ export default function CreateTabs() {
         />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <OrderProductsTab />
+        <OrderDetailsTab
+          orderDetails={orderDetails}
+          setOrderDetails={setOrderDetails}
+        />
       </TabPanel>
     </Card>
   )
