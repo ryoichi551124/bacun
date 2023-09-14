@@ -8,9 +8,6 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import AddLinkIcon from '@/Components/Admin/Icon/AddLinkIcon'
-import EditLinkIcon from '@/Components/Admin/Icon/EditLinkIcon'
-import DeleteLinkIcon from '@/Components/Admin/Icon/DeleteLinkIcon'
 import type { OrderDetail } from '@/Types'
 
 const borderBottom = css`
@@ -36,8 +33,6 @@ export default function OrderPreviewTable({
     })
     setSubTotal(subTotalTemp)
   }, [orderDetails])
-
-  console.log(orderDetails)
 
   return (
     <>
@@ -84,7 +79,7 @@ export default function OrderPreviewTable({
               <TableCell></TableCell>
               <TableCell>合計</TableCell>
               <TableCell align="right">
-                {(subTotal * 100 * 1.1) / 100}{' '}
+                {Math.ceil(Math.floor(subTotal * 1.1 * 100) / 100)}
               </TableCell>
             </TableRow>
           </TableBody>

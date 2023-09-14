@@ -102,15 +102,16 @@ export default function OrderDetailsTab({
     // 同じのがあれば個数追加、無ければ商品配列に追加
     if (orderDetail && orderDetails.length > 0) {
       let isExistOrder = false
-      orderDetails.map((order) => {
+      const newOrderDetails = orderDetails.map((order) => {
         if (order.product_id === orderDetail.product_id) {
           order.quantity += orderDetail.quantity
           isExistOrder = true
         }
+        return order
       })
       isExistOrder
-        ? setOrderDetails(orderDetails)
-        : setOrderDetails(orderDetails.concat([orderDetail]))
+        ? setOrderDetails(newOrderDetails)
+        : setOrderDetails(newOrderDetails.concat([orderDetail]))
     }
   }
 

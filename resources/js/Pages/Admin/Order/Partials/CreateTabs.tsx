@@ -48,8 +48,6 @@ export default function CreateTabs() {
   // 購入書品
   const [orderDetails, setOrderDetails] = useState<OrderDetail[]>([])
 
-  //console.log(orderDetails)
-
   return (
     <Card title="受注登録">
       <Tabs value={value} onChange={handleTabChange} css={tabs}>
