@@ -13,15 +13,7 @@ import createOrderUserSchema, {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { userDataToOrderUser } from '@/Services/orders/orderService'
 import { productToOrderDetail } from '@/Services/orders/orderService'
-import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
-import type {
-  User,
-  Pref,
-  UserStatus,
-  Category,
-  Product,
-  OrderDetail,
-} from '@/Types'
+import type { Category, Product, OrderDetail } from '@/Types'
 
 const flex = css`
   display: flex;
@@ -37,10 +29,8 @@ type OrderData = {
   categories: Category[]
 }
 type OrderDetailsTabProps = {
-  orderDetails: OrderDetail[] | undefined
-  setOrderDetails: React.Dispatch<
-    React.SetStateAction<OrderDetail[] | undefined>
-  >
+  orderDetails: OrderDetail[]
+  setOrderDetails: React.Dispatch<React.SetStateAction<OrderDetail[]>>
 }
 
 /**
@@ -68,7 +58,7 @@ export default function OrderDetailsTab({
   const [products, setProducts] = useState<Product[] | undefined>(undefined)
   const [product, setProduct] = useState<Product | undefined>(undefined)
   const [quantityArray, setQuantityArray] = useState<number[]>([])
-  const [quantity, setQuantity] = useState<number>(0)
+  const [quantity, setQuantity] = useState<number>(1)
 
   /** カテゴリーの選択 */
   const handleSelectCategory = (
@@ -105,16 +95,33 @@ export default function OrderDetailsTab({
     product && setQuantityArray(createProductQuantityArray(product))
   }
 
+  /** 購入する商品の個数を選択 */
   const handleSelectQuantity = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     event.target.value && setQuantity(Number(event.target.value))
   }
 
+  /** 商品の追加 */
   const handleAddOrderDetails = () => {
-    //setOrderDetails(orderDetails.push(productToOrderDetail(product, quantity)))
+    // 追加商品
+    const orderDetail = product && productToOrderDetail(product, quantity)
+    // 空なら追加
+    orderDetail && orderDetails.length === 0 && setOrderDetails([orderDetail])
+    // 同じのがあれば個数追加
+    if (orderDetail && orderDetails.length > 0) {
+      let isExistOrder = false
+      orderDetails.map((detail) => {
+        if (detail.product_id === orderDetail.product_id) {
+          detail.quantity += orderDetail.quantity
+          isExistOrder = true
+        }
+      })
+      isExistOrder
+        ? setOrderDetails(orderDetails)
+        : setOrderDetails(orderDetails.concat([orderDetail]))
+    }
   }
-  console.log(quantity)
 
   return (
     <>

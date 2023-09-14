@@ -46,9 +46,9 @@ export default function CreateTabs() {
     CreateOrderShippingSchemaType | undefined
   >(undefined)
   // 購入書品
-  const [orderDetails, setOrderDetails] = useState<OrderDetail[] | undefined>(
-    undefined,
-  )
+  const [orderDetails, setOrderDetails] = useState<OrderDetail[]>([])
+
+  //console.log(orderDetails)
 
   return (
     <Card title="受注登録">
