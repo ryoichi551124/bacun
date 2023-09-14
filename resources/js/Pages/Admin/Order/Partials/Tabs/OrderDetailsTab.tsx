@@ -123,10 +123,7 @@ export default function OrderDetailsTab({
             <label htmlFor="users" css={forms.label}>
               商品のカテゴリーを選ぶ
             </label>
-            <select
-              onChange={handleSelectCategory}
-              css={forms.input}
-            >
+            <select onChange={handleSelectCategory} css={forms.input}>
               <option value="">なし</option>
               {categories.map((cateogry) => (
                 <option key={cateogry.id} value={cateogry.id}>

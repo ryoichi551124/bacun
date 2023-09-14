@@ -13,7 +13,6 @@ import EditLinkIcon from '@/Components/Admin/Icon/EditLinkIcon'
 import DeleteLinkIcon from '@/Components/Admin/Icon/DeleteLinkIcon'
 import type { OrderDetail } from '@/Types'
 
-
 const borderBottom = css`
   border-bottom: none;
 `
@@ -26,7 +25,7 @@ type OrderPreviewTableProps = {
  * 購入商品選択結果表示
  */
 export default function OrderPreviewTable({
-  orderDetails
+  orderDetails,
 }: OrderPreviewTableProps) {
   const [subTotal, setSubTotal] = useState<number>(0)
 
@@ -39,7 +38,6 @@ export default function OrderPreviewTable({
   }, [orderDetails])
 
   console.log(orderDetails)
-
 
   return (
     <>
@@ -61,7 +59,9 @@ export default function OrderPreviewTable({
                 </TableCell>
                 <TableCell align="center">{order.quantity}</TableCell>
                 <TableCell>{order.price}</TableCell>
-                <TableCell align="right">{order.quantity * order.price}</TableCell>
+                <TableCell align="right">
+                  {order.quantity * order.price}
+                </TableCell>
               </TableRow>
             ))}
             <TableRow>
@@ -71,7 +71,7 @@ export default function OrderPreviewTable({
               <TableCell align="right">{subTotal}</TableCell>
             </TableRow>
             <TableRow>
-            <TableCell css={borderBottom}></TableCell>
+              <TableCell css={borderBottom}></TableCell>
               <TableCell colSpan={1}>消費税</TableCell>
               <TableCell align="right">{subTotal * 0.1}</TableCell>
             </TableRow>
@@ -80,10 +80,12 @@ export default function OrderPreviewTable({
               <TableCell>送料</TableCell>
               <TableCell align="right">処理未定</TableCell>
             </TableRow>
-            <TableRow sx={{ 'td' : { border: 0 } }}>
+            <TableRow sx={{ td: { border: 0 } }}>
               <TableCell></TableCell>
               <TableCell>合計</TableCell>
-              <TableCell align="right">{(subTotal * 100 * 1.1) / 100} </TableCell>
+              <TableCell align="right">
+                {(subTotal * 100 * 1.1) / 100}{' '}
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
