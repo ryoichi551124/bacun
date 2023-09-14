@@ -2,17 +2,12 @@
 import { css } from '@emotion/react'
 import { forms } from '@/Styles'
 import { usePage } from '@inertiajs/react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import searchProducts from '@/Services/products/searchProducts'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Button } from '@mui/material'
-import { useForm } from 'react-hook-form'
-import createOrderUserSchema, {
-  CreateOrderUserSchemaType,
-} from '@/Schemas/Admin/Order/createOrderUserSchema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { userDataToOrderUser } from '@/Services/orders/orderService'
 import { productToOrderDetail } from '@/Services/orders/orderService'
+import OrderPreviewTable from '@/Pages/Admin/Order/Partials/Tabs/OrderPreviewTable'
 import type { Category, Product, OrderDetail } from '@/Types'
 
 const flex = css`
@@ -50,11 +45,7 @@ export default function OrderDetailsTab({
   setOrderDetails,
 }: OrderDetailsTabProps) {
   const { categories } = usePage<OrderData>().props
-  const [categoryId, setCategoryId] = useState<string | undefined>(
-    categories && categories.length > 0
-      ? categories[0].id.toString()
-      : undefined,
-  )
+  const [categoryId, setCategoryId] = useState<string | undefined>(undefined)
   const [products, setProducts] = useState<Product[] | undefined>(undefined)
   const [product, setProduct] = useState<Product | undefined>(undefined)
   const [quantityArray, setQuantityArray] = useState<number[]>([])
@@ -106,14 +97,14 @@ export default function OrderDetailsTab({
   const handleAddOrderDetails = () => {
     // 追加商品
     const orderDetail = product && productToOrderDetail(product, quantity)
-    // 空なら追加
+    // 商品配列が空なら追加
     orderDetail && orderDetails.length === 0 && setOrderDetails([orderDetail])
-    // 同じのがあれば個数追加
+    // 同じのがあれば個数追加、無ければ商品配列に追加
     if (orderDetail && orderDetails.length > 0) {
       let isExistOrder = false
-      orderDetails.map((detail) => {
-        if (detail.product_id === orderDetail.product_id) {
-          detail.quantity += orderDetail.quantity
+      orderDetails.map((order) => {
+        if (order.product_id === orderDetail.product_id) {
+          order.quantity += orderDetail.quantity
           isExistOrder = true
         }
       })
@@ -133,7 +124,6 @@ export default function OrderDetailsTab({
               商品のカテゴリーを選ぶ
             </label>
             <select
-              defaultValue={categories[0].id}
               onChange={handleSelectCategory}
               css={forms.input}
             >
@@ -223,6 +213,12 @@ export default function OrderDetailsTab({
             </Button>
           </Grid>
         </Grid>
+      )}
+      <hr />
+
+      {/* 購入商品の表示 */}
+      {orderDetails.length > 0 && (
+        <OrderPreviewTable orderDetails={orderDetails} />
       )}
     </>
   )
