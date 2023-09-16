@@ -27,11 +27,12 @@ export default function OrderPreviewTable({
   const [subTotal, setSubTotal] = useState<number>(0)
 
   useEffect(() => {
-    let subTotalTemp: number = 0
+    // 小計の計算
+    let newSubTotal: number = 0
     orderDetails.forEach((order) => {
-      subTotalTemp += order.price * order.quantity
+      newSubTotal += order.price * order.quantity
     })
-    setSubTotal(subTotalTemp)
+    setSubTotal(newSubTotal)
   }, [orderDetails])
 
   return (

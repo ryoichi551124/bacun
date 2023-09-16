@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import searchProducts from '@/Services/products/searchProducts'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Button } from '@mui/material'
-import { productToOrderDetail } from '@/Services/orders/orderService'
+import { productToOrderDetail, makeQuantityArray } from '@/Services/orders/orderService'
 import OrderPreviewTable from '@/Pages/Admin/Order/Partials/Tabs/OrderPreviewTable'
 import type { Category, Product, OrderDetail } from '@/Types'
 
@@ -19,6 +19,10 @@ const quantitySelect = css`
   margin-right: -1rem;
   margin-left: 1rem;
 `
+const marginFix = css`
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+`
 
 type OrderData = {
   categories: Category[]
@@ -26,18 +30,6 @@ type OrderData = {
 type OrderDetailsTabProps = {
   orderDetails: OrderDetail[]
   setOrderDetails: React.Dispatch<React.SetStateAction<OrderDetail[]>>
-}
-
-/**
- * 最大10個まで商品の個数を選択できる配列を作る
- */
-const createProductQuantityArray = (product: Product): number[] => {
-  if (product) {
-    return product.stock > 10
-      ? [...Array(11).keys()].slice(1)
-      : [...Array(product.stock + 1).slice(1)]
-  }
-  return []
 }
 
 export default function OrderDetailsTab({
@@ -66,7 +58,7 @@ export default function OrderDetailsTab({
       if (res) {
         setProducts(res)
         setProduct(res[0])
-        res && setQuantityArray(createProductQuantityArray(res[0]))
+        res && setQuantityArray(makeQuantityArray(res[0].stock))
       } else {
         setProducts([])
         setProduct(undefined)
@@ -83,7 +75,7 @@ export default function OrderDetailsTab({
           (product) => product.id === Number(event.target.value),
         )[0],
       )
-    product && setQuantityArray(createProductQuantityArray(product))
+    product && setQuantityArray(makeQuantityArray(product.stock))
   }
 
   /** 購入する商品の個数を選択 */
@@ -119,7 +111,7 @@ export default function OrderDetailsTab({
     <>
       {/* カテゴリー検索 */}
       {categories && categories.length > 0 ? (
-        <Grid container spacing={2} css={forms.container}>
+        <Grid container spacing={2} css={[forms.container, marginFix]}>
           <Grid xs={6}>
             <label htmlFor="users" css={forms.label}>
               商品のカテゴリーを選ぶ
@@ -163,7 +155,7 @@ export default function OrderDetailsTab({
 
       {/* 商品選択 */}
       {products && products.length > 0 && (
-        <Grid container spacing={2} css={forms.container}>
+        <Grid container spacing={2} css={[forms.container, marginFix]}>
           <Grid xs={9}>
             <label htmlFor="users" css={forms.label}>
               購入する商品を選ぶ
