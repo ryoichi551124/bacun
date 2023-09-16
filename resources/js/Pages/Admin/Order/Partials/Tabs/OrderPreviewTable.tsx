@@ -1,39 +1,73 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { forms } from '@/Styles'
-import { useEffect, useState } from 'react'
+import { colors, forms } from '@/Styles'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@/Stores'
+import { updateOrderQuantity, deleteOrderDetail } from '@/Stores/orderTemp'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
-import type { OrderDetail } from '@/Types'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const borderBottom = css`
   border-bottom: none;
 `
-
-type OrderPreviewTableProps = {
-  orderDetails: OrderDetail[]
-}
+const quantityFlex = css`
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+`
+const icon = css`
+  color: ${colors.delete};
+  margin: 0.5rem 1rem 0;
+  &:hover {
+    transform: scale(1.1, 1.1);
+    transition: 0.5s;
+  }
+`
 
 /**
  * 購入商品選択結果表示
  */
-export default function OrderPreviewTable({
-  orderDetails,
-}: OrderPreviewTableProps) {
+export default function OrderPreviewTable() {
   const [subTotal, setSubTotal] = useState<number>(0)
 
+  const { orderDetails } = useSelector(
+    (state: RootState) => state.orderTempReducer,
+  )
+  const dispatch = useDispatch()
+
+  // 小計の計算
   useEffect(() => {
-    // 小計の計算
     let newSubTotal: number = 0
     orderDetails.forEach((order) => {
       newSubTotal += order.price * order.quantity
     })
     setSubTotal(newSubTotal)
   }, [orderDetails])
+
+  /** 各商品の個数変更 */
+  const handleSelectQuantity = (
+    index: number,
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    dispatch(
+      updateOrderQuantity({
+        index: index,
+        quantity: Number(event.target.value),
+      }),
+    )
+  }
+
+  /** 商品の削除 */
+  const handleDeleteOrder = (index: number) => {
+    dispatch(deleteOrderDetail(index))
+  }
 
   return (
     <>
@@ -48,12 +82,29 @@ export default function OrderPreviewTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {orderDetails.map((order) => (
+            {orderDetails.map((order, index) => (
               <TableRow key={order.product_id}>
                 <TableCell component="th" scope="row">
                   {order.product_name}
                 </TableCell>
-                <TableCell align="center">{order.quantity}</TableCell>
+                <TableCell align="center">
+                  <div css={quantityFlex}>
+                    <select
+                      value={order.quantity}
+                      onChange={(e) => handleSelectQuantity(index, e)}
+                      css={forms.input}
+                    >
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      ))}
+                    </select>
+                    <button onClick={() => handleDeleteOrder(index)}>
+                      <DeleteIcon css={icon} />
+                    </button>
+                  </div>
+                </TableCell>
                 <TableCell>{order.price}</TableCell>
                 <TableCell align="right">
                   {order.quantity * order.price}
