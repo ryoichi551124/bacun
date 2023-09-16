@@ -20,10 +20,14 @@ export const orderTempSlice = createSlice({
   initialState,
   reducers: {
     // 注文者の設定
+    setOrderUser: (state, action: PayloadAction<CreateOrderUserSchemaType>) => {
+      state.orderUser = action.payload
+    },
+
     // 配送先の設定
     // 購入商品の追加・編集・削除
   },
 })
 
 // アクションの追加
-// export const {} = orderTempSlice.actions
+export const { setOrderUser } = orderTempSlice.actions

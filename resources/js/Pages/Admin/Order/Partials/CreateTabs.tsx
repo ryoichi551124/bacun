@@ -1,7 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { ReactNode, useState } from 'react'
-import { forms, colors } from '@/Styles'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/Stores'
+import { colors } from '@/Styles'
 import Card from '@/Components/Admin/Common/Card'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -9,7 +11,6 @@ import OrderUserTab from '@/Pages/Admin/Order/Partials/Tabs/OrderUserTab'
 import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab'
 import OrderDetailsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderDetailsTab'
 import type { User, Shipping, OrderDetail } from '@/Types'
-import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
 import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
 
 const tabs = css`
@@ -38,9 +39,9 @@ export default function CreateTabs() {
   // 顧客の検索から選択
   const [user, setUser] = useState<User | undefined>(undefined)
   // 注文者
-  const [orderUser, setOrderUser] = useState<
-    CreateOrderUserSchemaType | undefined
-  >(undefined)
+  const { orderUser } = useSelector(
+    (state: RootState) => state.orderTempReducer,
+  )
   // 配送先
   const [orderShipping, setOrderShipping] = useState<
     CreateOrderShippingSchemaType | undefined
@@ -59,8 +60,8 @@ export default function CreateTabs() {
         <OrderUserTab
           user={user}
           setUser={setUser}
-          orderUser={orderUser}
-          setOrderUser={setOrderUser}
+          //orderUser={orderUser}
+          //setOrderUser={setOrderUser}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
