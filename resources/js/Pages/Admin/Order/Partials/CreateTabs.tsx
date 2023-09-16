@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { ReactNode, useState } from 'react'
-import { forms, colors } from '@/Styles'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/Stores'
+import { colors } from '@/Styles'
 import Card from '@/Components/Admin/Common/Card'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import OrderUserTab from '@/Pages/Admin/Order/Partials/Tabs/OrderUserTab'
 import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab'
 import OrderDetailsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderDetailsTab'
-import type { User, Shipping, OrderDetail } from '@/Types'
-import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
-import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
+import type { User } from '@/Types'
 
 const tabs = css`
   border-bottom: 1px solid ${colors.gray};
@@ -37,16 +37,10 @@ export default function CreateTabs() {
 
   // 顧客の検索から選択
   const [user, setUser] = useState<User | undefined>(undefined)
-  // 注文者
-  const [orderUser, setOrderUser] = useState<
-    CreateOrderUserSchemaType | undefined
-  >(undefined)
-  // 配送先
-  const [orderShipping, setOrderShipping] = useState<
-    CreateOrderShippingSchemaType | undefined
-  >(undefined)
-  // 購入書品
-  const [orderDetails, setOrderDetails] = useState<OrderDetail[]>([])
+  // 注文者、配送先、購入商品
+  const { orderUser, orderShipping, orderDetails } = useSelector(
+    (state: RootState) => state.orderTempReducer,
+  )
 
   return (
     <Card title="受注登録">
@@ -56,25 +50,13 @@ export default function CreateTabs() {
         <Tab label="購入商品" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <OrderUserTab
-          user={user}
-          setUser={setUser}
-          orderUser={orderUser}
-          setOrderUser={setOrderUser}
-        />
+        <OrderUserTab user={user} setUser={setUser} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OrderShippingTab
-          orderUser={orderUser}
-          orderShipping={orderShipping}
-          setOrderShipping={setOrderShipping}
-        />
+        <OrderShippingTab orderUser={orderUser} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <OrderDetailsTab
-          orderDetails={orderDetails}
-          setOrderDetails={setOrderDetails}
-        />
+        <OrderDetailsTab />
       </TabPanel>
     </Card>
   )

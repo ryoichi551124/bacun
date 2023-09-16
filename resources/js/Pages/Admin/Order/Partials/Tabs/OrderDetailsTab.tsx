@@ -3,12 +3,18 @@ import { css } from '@emotion/react'
 import { forms } from '@/Styles'
 import { usePage } from '@inertiajs/react'
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@/Stores'
+import { updateOrderQuantity, setOrderDetails } from '@/Stores/orderTemp'
 import searchProducts from '@/Services/products/searchProducts'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Button } from '@mui/material'
-import { productToOrderDetail, makeQuantityArray } from '@/Services/orders/orderService'
+import {
+  productToOrderDetail,
+  makeQuantityArray,
+} from '@/Services/orders/orderService'
 import OrderPreviewTable from '@/Pages/Admin/Order/Partials/Tabs/OrderPreviewTable'
-import type { Category, Product, OrderDetail } from '@/Types'
+import type { Category, Product } from '@/Types'
 
 const flex = css`
   display: flex;
@@ -27,21 +33,19 @@ const marginFix = css`
 type OrderData = {
   categories: Category[]
 }
-type OrderDetailsTabProps = {
-  orderDetails: OrderDetail[]
-  setOrderDetails: React.Dispatch<React.SetStateAction<OrderDetail[]>>
-}
 
-export default function OrderDetailsTab({
-  orderDetails,
-  setOrderDetails,
-}: OrderDetailsTabProps) {
+export default function OrderDetailsTab() {
   const { categories } = usePage<OrderData>().props
   const [categoryId, setCategoryId] = useState<string | undefined>(undefined)
   const [products, setProducts] = useState<Product[] | undefined>(undefined)
   const [product, setProduct] = useState<Product | undefined>(undefined)
   const [quantityArray, setQuantityArray] = useState<number[]>([])
   const [quantity, setQuantity] = useState<number>(1)
+
+  const { orderDetails } = useSelector(
+    (state: RootState) => state.orderTempReducer,
+  )
+  const dispatch = useDispatch()
 
   /** カテゴリーの選択 */
   const handleSelectCategory = (
@@ -52,7 +56,7 @@ export default function OrderDetailsTab({
       : setCategoryId(undefined)
   }
 
-  /** カテゴリーから商品を検索 */
+  /** カテゴリーの商品を検索 */
   const handleSearchCategoryProducts = () => {
     searchProducts(Number(categoryId)).then((res) => {
       if (res) {
@@ -69,12 +73,11 @@ export default function OrderDetailsTab({
 
   /** 購入する商品を選択 */
   const handleSelectProduct = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    event.target.value &&
-      setProduct(
-        products?.filter(
-          (product) => product.id === Number(event.target.value),
-        )[0],
-      )
+    setProduct(
+      products?.filter(
+        (product) => product.id === Number(event.target.value),
+      )[0],
+    )
     product && setQuantityArray(makeQuantityArray(product.stock))
   }
 
@@ -82,28 +85,34 @@ export default function OrderDetailsTab({
   const handleSelectQuantity = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    event.target.value && setQuantity(Number(event.target.value))
+    setQuantity(Number(event.target.value))
   }
 
   /** 商品の追加 */
   const handleAddOrderDetails = () => {
     // 追加商品
-    const orderDetail = product && productToOrderDetail(product, quantity)
+    const addOrder = product && productToOrderDetail(product, quantity)
     // 商品配列が空なら追加
-    orderDetail && orderDetails.length === 0 && setOrderDetails([orderDetail])
+    addOrder &&
+      orderDetails.length === 0 &&
+      dispatch(setOrderDetails([addOrder]))
     // 同じのがあれば個数追加、無ければ商品配列に追加
-    if (orderDetail && orderDetails.length > 0) {
+    if (addOrder && orderDetails.length > 0) {
       let isExistOrder = false
-      const newOrderDetails = orderDetails.map((order) => {
-        if (order.product_id === orderDetail.product_id) {
-          order.quantity += orderDetail.quantity
+      const newOrderDetails = orderDetails.map((order, index) => {
+        if (order.product_id === addOrder.product_id) {
+          dispatch(
+            updateOrderQuantity({
+              index: index,
+              quantity: order.quantity + addOrder.quantity,
+            }),
+          )
           isExistOrder = true
         }
         return order
       })
-      isExistOrder
-        ? setOrderDetails(newOrderDetails)
-        : setOrderDetails(newOrderDetails.concat([orderDetail]))
+      isExistOrder === false &&
+        dispatch(setOrderDetails(newOrderDetails.concat([addOrder])))
     }
   }
 
@@ -207,9 +216,7 @@ export default function OrderDetailsTab({
       <hr />
 
       {/* 購入商品の表示 */}
-      {orderDetails.length > 0 && (
-        <OrderPreviewTable orderDetails={orderDetails} />
-      )}
+      <OrderPreviewTable />
     </>
   )
 }
