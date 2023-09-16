@@ -35,18 +35,22 @@ export const orderTempSlice = createSlice({
     ) => {
       state.orderShipping = action.payload
     },
-    // 購入商品の設定
-    updateOrderDetailQuantity: (
+    // 購入商品の個数変更
+    updateOrderQuantity: (
       state,
       action: PayloadAction<OrderDetailQuantity>,
     ) => {
       state.orderDetails[action.payload.index].quantity =
         action.payload.quantity
     },
+    // 購入商品をセット
     setOrderDetails: (state, action: PayloadAction<OrderDetail[]>) => {
-      console.log('action')
       state.orderDetails = action.payload
     },
+    // 購入商品を削除
+    deleteOrderDetail: (state, action: PayloadAction<number>) => {
+      state.orderDetails.splice(action.payload, 1)
+    }
   },
 })
 
@@ -54,6 +58,7 @@ export const orderTempSlice = createSlice({
 export const {
   setOrderUser,
   setOrderShipping,
+  updateOrderQuantity,
   setOrderDetails,
-  updateOrderDetailQuantity,
+  deleteOrderDetail,
 } = orderTempSlice.actions

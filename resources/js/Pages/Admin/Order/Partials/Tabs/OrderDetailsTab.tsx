@@ -5,7 +5,7 @@ import { usePage } from '@inertiajs/react'
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/Stores'
-import { updateOrderDetailQuantity, setOrderDetails } from '@/Stores/orderTemp'
+import { updateOrderQuantity, setOrderDetails } from '@/Stores/orderTemp'
 import searchProducts from '@/Services/products/searchProducts'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Button } from '@mui/material'
@@ -73,12 +73,11 @@ export default function OrderDetailsTab() {
 
   /** 購入する商品を選択 */
   const handleSelectProduct = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    event.target.value &&
-      setProduct(
-        products?.filter(
-          (product) => product.id === Number(event.target.value),
-        )[0],
-      )
+    setProduct(
+      products?.filter(
+        (product) => product.id === Number(event.target.value),
+      )[0],
+    )
     product && setQuantityArray(makeQuantityArray(product.stock))
   }
 
@@ -86,7 +85,7 @@ export default function OrderDetailsTab() {
   const handleSelectQuantity = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    event.target.value && setQuantity(Number(event.target.value))
+    setQuantity(Number(event.target.value))
   }
 
   /** 商品の追加 */
@@ -103,7 +102,7 @@ export default function OrderDetailsTab() {
       const newOrderDetails = orderDetails.map((order, index) => {
         if (order.product_id === addOrder.product_id) {
           dispatch(
-            updateOrderDetailQuantity({
+            updateOrderQuantity({
               index: index,
               quantity: order.quantity + addOrder.quantity,
             }),
@@ -217,9 +216,7 @@ export default function OrderDetailsTab() {
       <hr />
 
       {/* 購入商品の表示 */}
-      {orderDetails.length > 0 && (
-        <OrderPreviewTable orderDetails={orderDetails} />
-      )}
+      <OrderPreviewTable />
     </>
   )
 }
