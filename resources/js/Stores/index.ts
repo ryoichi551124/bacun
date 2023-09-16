@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { isSideOpenSlice } from '@/Stores/isSideOpen'
+import { orderTempSlice } from '@/Stores/orderTemp'
 
 export const store = configureStore({
   reducer: {
     isSideOpenReducer: isSideOpenSlice.reducer,
+    orderTempReducer: orderTempSlice.reducer,
   },
 })
 
