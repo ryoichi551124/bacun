@@ -9,7 +9,7 @@ import { setOrderUser } from '@/Stores/orderTemp'
 import searchUsers from '@/Services/users/searchUsers'
 import SearchUsers from '@/Pages/Admin/Order/Partials/Tabs/SearchUsers'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
-import { Button } from '@mui/material'
+import Button from '@mui/material/Button'
 import { useForm } from 'react-hook-form'
 import createOrderUserSchema, {
   CreateOrderUserSchemaType,
@@ -31,10 +31,6 @@ const marginFix = css`
 type OrderData = {
   prefs: Pref
   statuses: UserStatus
-}
-type OrderUserTabProps = {
-  user: User | undefined
-  setUser: React.Dispatch<React.SetStateAction<User | undefined>>
 }
 
 /**

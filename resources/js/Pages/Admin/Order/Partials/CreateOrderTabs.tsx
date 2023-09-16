@@ -8,7 +8,6 @@ import Tab from '@mui/material/Tab'
 import OrderUserTab from '@/Pages/Admin/Order/Partials/Tabs/OrderUserTab'
 import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab'
 import OrderDetailsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderDetailsTab'
-import type { User } from '@/Types'
 
 const tabs = css`
   border-bottom: 1px solid ${colors.gray};
