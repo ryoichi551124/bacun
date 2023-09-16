@@ -3,6 +3,9 @@ import { css } from '@emotion/react'
 import { forms } from '@/Styles'
 import { usePage } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@/Stores'
+import { setOrderUser } from '@/Stores/orderTemp'
 import searchUsers from '@/Services/users/searchUsers'
 import SearchUsers from '@/Pages/Admin/Order/Partials/Tabs/SearchUsers'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
@@ -32,23 +35,19 @@ type OrderData = {
 type OrderUserTabProps = {
   user: User | undefined
   setUser: React.Dispatch<React.SetStateAction<User | undefined>>
-  orderUser: CreateOrderUserSchemaType | undefined
-  setOrderUser: React.Dispatch<
-    React.SetStateAction<CreateOrderUserSchemaType | undefined>
-  >
 }
 
 /**
  * 注文者情報の設定
  */
-export default function OrderUserTab({
-  user,
-  setUser,
-  orderUser,
-  setOrderUser,
-}: OrderUserTabProps) {
+export default function OrderUserTab({ user, setUser }: OrderUserTabProps) {
   const { prefs, statuses } = usePage<OrderData>().props
   const [users, setUsers] = useState<User[] | undefined>(undefined)
+
+  const { orderUser } = useSelector(
+    (state: RootState) => state.orderTempReducer,
+  )
+  const dispatch = useDispatch()
 
   // 顧客が検索済みであれば、選択した顧客を設定
   useEffect(() => {
@@ -98,7 +97,7 @@ export default function OrderUserTab({
 
   /** 受注者の保存 */
   const createOrderUser = (data: CreateOrderUserSchemaType) => {
-    setOrderUser(data)
+    dispatch(setOrderUser(data))
   }
 
   return (
