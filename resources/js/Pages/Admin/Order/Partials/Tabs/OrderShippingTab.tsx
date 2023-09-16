@@ -1,55 +1,96 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Link, usePage, router } from '@inertiajs/react'
-import { forms } from '@/Styles'
-import Card from '@/Components/Admin/Common/Card'
-import Button from '@mui/material/Button'
+import { forms, colors } from '@/Styles'
+import { usePage } from '@inertiajs/react'
+import React from 'react'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
+import { Button } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import updateShippingSchema, {
-  UpdateShippingSchemaType,
-} from '@/Schemas/Admin/Shipping/updateSchema'
+import createOrderShippingSchema, {
+  CreateOrderShippingSchemaType,
+} from '@/Schemas/Admin/Order/createOrderShippingSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Shipping, Pref } from '@/Types'
+import { Pref } from '@/Types'
+import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
 
-const button = css`
-  margin-right: 2rem;
+const copyButton = css`
+  margin: 0.5rem 0 0 1rem;
 `
-
-type ShippingData = {
-  shipping: Shipping
+const notice = css`
+  margin: 1.5rem 0 1rem 1.5rem;
+  color: ${colors.error};
+`
+type OrderData = {
   prefs: Pref
 }
-type ShippingUpdateFormProps = {
-  onUpdateShipping?: (data: UpdateShippingSchemaType) => void
+type OrderShippingTabProps = {
+  orderUser: CreateOrderUserSchemaType | undefined
+  orderShipping: CreateOrderShippingSchemaType | undefined
+  setOrderShipping: React.Dispatch<
+    React.SetStateAction<CreateOrderShippingSchemaType | undefined>
+  >
 }
 
 /**
- * 配送先編集フォーム
+ * 配送先情報の設定
  */
-export default function ShippingUpdateForm({
-  onUpdateShipping,
-}: ShippingUpdateFormProps) {
-  const { shipping, prefs } = usePage<ShippingData>().props
+export default function OrderShippingTab({
+  orderUser,
+  orderShipping,
+  setOrderShipping,
+}: OrderShippingTabProps) {
+  const { prefs } = usePage<OrderData>().props
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<UpdateShippingSchemaType>({
-    defaultValues: shipping,
+  } = useForm<CreateOrderShippingSchemaType>({
+    defaultValues: orderShipping,
     reValidateMode: 'onBlur',
-    resolver: zodResolver(updateShippingSchema),
+    resolver: zodResolver(createOrderShippingSchema),
   })
 
-  /** 配送先編集 */
-  const onSubmit = (data: UpdateShippingSchemaType) => {
-    onUpdateShipping && onUpdateShipping(data)
+  // 注文者情報を配送先にコピー
+  const handleShippingCopy = () => {
+    if (orderUser) {
+      for (const [key, value] of Object.entries(orderUser)) {
+        setValue(key as keyof CreateOrderShippingSchemaType, value)
+      }
+    }
+  }
+
+  /** 配送先情報の保存 */
+  const createOrderShipping = (data: CreateOrderShippingSchemaType) => {
+    setOrderShipping(data)
   }
 
   return (
-    <Card title="配送先編集">
-      <form onSubmit={handleSubmit(onSubmit)} css={forms.container}>
+    <>
+      {/* 注文者情報のコピー */}
+      {orderUser ? (
+        <Grid container spacing={2} css={copyButton}>
+          {/* ボタン */}
+          <Grid xs={6} css={forms.buttonWrap}>
+            <Button
+              type="button"
+              variant="contained"
+              onClick={handleShippingCopy}
+            >
+              注文者情報に届ける
+            </Button>
+          </Grid>
+          <Grid xs={6}></Grid>
+        </Grid>
+      ) : (
+        <Grid container spacing={2} css={notice}>
+          <div>※注文者を設定してください</div>
+        </Grid>
+      )}
+
+      {/* 配送先情報入力フォーム */}
+      <form onSubmit={handleSubmit(createOrderShipping)} css={forms.container}>
         <Grid container spacing={2}>
           {/* 名前（漢字） */}
           <Grid xs={4}>
@@ -221,17 +262,12 @@ export default function ShippingUpdateForm({
           <Grid xs={3}></Grid>
           {/* ボタン */}
           <Grid xs={6} css={forms.buttonWrap}>
-            <Link href={route('admin.shipping.list')}>
-              <Button variant="outlined" css={button}>
-                戻る
-              </Button>
-            </Link>
             <Button type="submit" variant="contained">
-              編集
+              保存
             </Button>
           </Grid>
         </Grid>
       </form>
-    </Card>
+    </>
   )
 }

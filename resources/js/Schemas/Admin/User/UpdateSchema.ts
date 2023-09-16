@@ -2,6 +2,7 @@ import * as z from 'zod'
 
 const updateUserSchema = z
   .object({
+    id: z.number().optional().nullable(),
     last_name: z.string().min(1, '入力が必須の項目です'),
     first_name: z.string().min(1, '入力が必須の項目です'),
     last_kana: z.string().min(1, '入力が必須の項目です'),

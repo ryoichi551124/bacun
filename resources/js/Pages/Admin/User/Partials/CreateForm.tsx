@@ -36,8 +36,8 @@ export default function UserCreateForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateUserSchemaType>({
-    reValidateMode: 'onBlur',
     defaultValues: { sex: '1', status: '1' },
+    reValidateMode: 'onBlur',
     resolver: zodResolver(createUserSchema),
   })
 
