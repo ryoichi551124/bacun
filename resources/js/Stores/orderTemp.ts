@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
 import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
 import { OrderDetail } from '@/Types'
-import { CallToActionSharp } from '@mui/icons-material'
 
 export type OrderTemp = {
   orderUser: CreateOrderUserSchemaType | undefined
@@ -50,7 +49,7 @@ export const orderTempSlice = createSlice({
     // 購入商品を削除
     deleteOrderDetail: (state, action: PayloadAction<number>) => {
       state.orderDetails.splice(action.payload, 1)
-    }
+    },
   },
 })
 

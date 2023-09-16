@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { ReactNode, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/Stores'
 import { colors } from '@/Styles'
 import Card from '@/Components/Admin/Common/Card'
 import Tabs from '@mui/material/Tabs'
@@ -27,7 +25,7 @@ function TabPanel(props: TabPanelProps) {
   return value === index && <div>{children}</div>
 }
 
-export default function CreateTabs() {
+export default function CreateOrderTabs() {
   // タブの選択
   const [value, setValue] = useState(0)
   // タブの切り替え
@@ -37,13 +35,9 @@ export default function CreateTabs() {
 
   // 顧客の検索から選択
   const [user, setUser] = useState<User | undefined>(undefined)
-  // 注文者、配送先、購入商品
-  const { orderUser, orderShipping, orderDetails } = useSelector(
-    (state: RootState) => state.orderTempReducer,
-  )
 
   return (
-    <Card title="受注登録">
+    <Card title="受注新規作成">
       <Tabs value={value} onChange={handleTabChange} css={tabs}>
         <Tab label="注文者" />
         <Tab label="配送先" />
@@ -53,7 +47,7 @@ export default function CreateTabs() {
         <OrderUserTab user={user} setUser={setUser} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <OrderShippingTab orderUser={orderUser} />
+        <OrderShippingTab />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <OrderDetailsTab />
