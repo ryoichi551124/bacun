@@ -1,9 +1,9 @@
 import React, { ReactNode, useState } from 'react'
-import { Head, router, usePage } from '@inertiajs/react'
-import axios from 'axios'
+import { Head } from '@inertiajs/react'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
-import CreateTabs from '@/Pages/Admin/Order/Partials/CreateTabs'
+import CreateOrderTabs from '@/Pages/Admin/Order/Partials/CreateOrderTabs'
+import ConfirmOrder from '@/Pages/Admin/Order/Partials/ConfirmOrder'
 
 const title = '受注登録'
 
@@ -12,7 +12,8 @@ export default function OrderCreate() {
     <>
       <Head title={title} />
       <Title title={title} />
-      <CreateTabs />
+      <CreateOrderTabs />
+      <ConfirmOrder />
     </>
   )
 }
