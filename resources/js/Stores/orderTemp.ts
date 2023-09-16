@@ -23,11 +23,13 @@ export const orderTempSlice = createSlice({
     setOrderUser: (state, action: PayloadAction<CreateOrderUserSchemaType>) => {
       state.orderUser = action.payload
     },
-
     // 配送先の設定
+    setOrderShipping: (state, action: PayloadAction<CreateOrderShippingSchemaType>) => {
+      state.orderShipping = action.payload
+    }
     // 購入商品の追加・編集・削除
   },
 })
 
 // アクションの追加
-export const { setOrderUser } = orderTempSlice.actions
+export const { setOrderUser, setOrderShipping } = orderTempSlice.actions

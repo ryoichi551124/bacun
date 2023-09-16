@@ -10,8 +10,7 @@ import Tab from '@mui/material/Tab'
 import OrderUserTab from '@/Pages/Admin/Order/Partials/Tabs/OrderUserTab'
 import OrderShippingTab from '@/Pages/Admin/Order/Partials/Tabs/OrderShippingTab'
 import OrderDetailsTab from '@/Pages/Admin/Order/Partials/Tabs/OrderDetailsTab'
-import type { User, Shipping, OrderDetail } from '@/Types'
-import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrderShippingSchema'
+import type { User, OrderDetail } from '@/Types'
 
 const tabs = css`
   border-bottom: 1px solid ${colors.gray};
@@ -38,14 +37,10 @@ export default function CreateTabs() {
 
   // 顧客の検索から選択
   const [user, setUser] = useState<User | undefined>(undefined)
-  // 注文者
-  const { orderUser } = useSelector(
+  // 注文者、配送先
+  const { orderUser, orderShipping } = useSelector(
     (state: RootState) => state.orderTempReducer,
   )
-  // 配送先
-  const [orderShipping, setOrderShipping] = useState<
-    CreateOrderShippingSchemaType | undefined
-  >(undefined)
   // 購入書品
   const [orderDetails, setOrderDetails] = useState<OrderDetail[]>([])
 
@@ -60,15 +55,11 @@ export default function CreateTabs() {
         <OrderUserTab
           user={user}
           setUser={setUser}
-          //orderUser={orderUser}
-          //setOrderUser={setOrderUser}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <OrderShippingTab
           orderUser={orderUser}
-          orderShipping={orderShipping}
-          setOrderShipping={setOrderShipping}
         />
       </TabPanel>
       <TabPanel value={value} index={2}>

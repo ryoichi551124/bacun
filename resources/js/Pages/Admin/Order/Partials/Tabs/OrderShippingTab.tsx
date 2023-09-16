@@ -3,6 +3,9 @@ import { css } from '@emotion/react'
 import { forms, colors } from '@/Styles'
 import { usePage } from '@inertiajs/react'
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '@/Stores'
+import { setOrderShipping } from '@/Stores/orderTemp'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Button } from '@mui/material'
 import { useForm } from 'react-hook-form'
@@ -25,10 +28,6 @@ type OrderData = {
 }
 type OrderShippingTabProps = {
   orderUser: CreateOrderUserSchemaType | undefined
-  orderShipping: CreateOrderShippingSchemaType | undefined
-  setOrderShipping: React.Dispatch<
-    React.SetStateAction<CreateOrderShippingSchemaType | undefined>
-  >
 }
 
 /**
@@ -36,10 +35,13 @@ type OrderShippingTabProps = {
  */
 export default function OrderShippingTab({
   orderUser,
-  orderShipping,
-  setOrderShipping,
 }: OrderShippingTabProps) {
   const { prefs } = usePage<OrderData>().props
+
+  const { orderShipping } = useSelector(
+    (state: RootState) => state.orderTempReducer,
+  )
+  const dispatch = useDispatch()
 
   const {
     register,
@@ -63,7 +65,7 @@ export default function OrderShippingTab({
 
   /** 配送先情報の保存 */
   const createOrderShipping = (data: CreateOrderShippingSchemaType) => {
-    setOrderShipping(data)
+    dispatch(setOrderShipping(data))
   }
 
   return (
