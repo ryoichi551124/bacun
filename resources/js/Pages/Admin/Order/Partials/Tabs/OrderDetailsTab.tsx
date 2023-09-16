@@ -6,7 +6,10 @@ import React, { useState } from 'react'
 import searchProducts from '@/Services/products/searchProducts'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 import { Button } from '@mui/material'
-import { productToOrderDetail, makeQuantityArray } from '@/Services/orders/orderService'
+import {
+  productToOrderDetail,
+  makeQuantityArray,
+} from '@/Services/orders/orderService'
 import OrderPreviewTable from '@/Pages/Admin/Order/Partials/Tabs/OrderPreviewTable'
 import type { Category, Product, OrderDetail } from '@/Types'
 

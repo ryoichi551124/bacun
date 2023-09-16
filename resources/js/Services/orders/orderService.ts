@@ -61,6 +61,6 @@ export function productToOrderDetail(
 
 export function makeQuantityArray(stock: number): number[] {
   return stock > 10
-      ? [...Array(11).keys()].slice(1)
-      : [...Array(stock + 1).slice(1)]
+    ? [...Array(11).keys()].slice(1)
+    : [...Array(stock + 1).slice(1)]
 }
