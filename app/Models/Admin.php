@@ -54,7 +54,6 @@ class Admin extends Authenticatable
      */
     public function scopeId(Builder $query, int $id = null): void
     {
-        if (empty($id)) return;
         $query->where('id', $id);
     }
 }

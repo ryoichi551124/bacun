@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\shipping;
+namespace App\Http\Requests\Admin\OrderShipping;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,17 +22,17 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'      => ['required'],
-            'last_name'    => ['required', 'string', 'max:64'],
-            'first_name'   => ['required', 'string', 'max:64'],
-            'last_kana'    => ['required', 'string', 'max:64'],
-            'first_kana'   => ['required', 'string', 'max:64'],
-            'zip_code'     => ['nullable', 'regex:/^\d{7}$/i'],
-            'pref'         => ['required', 'string', 'max:8'],
-            'city'         => ['required', 'string', 'max:32'],
-            'address'      => ['required', 'string', 'max:128'],
-            'building'     => ['nullable', 'string', 'max:128'],
-            'memo'         => ['nullable', 'string'],
+            'order_id'          => ['required'],
+            'last_name'         => ['required', 'string', 'max:64'],
+            'first_name'        => ['required', 'string', 'max:64'],
+            'last_kana'         => ['required', 'string', 'max64'],
+            'first_kana'        => ['required', 'string', 'max:64'],
+            'zip_code'          => ['nullable', 'regex:/^\d{7}$/i'],
+            'pref'              => ['required', 'string', 'max:8'],
+            'city'              => ['required', 'string', 'max:32'],
+            'address'           => ['required', 'string', 'max:128'],
+            'building'          => ['nullable', 'string', 'max:128'],
+            'memo'              => ['nullable', 'string'],
         ];
     }
 
@@ -44,17 +44,17 @@ class CreateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'user_id'      => 'ユーザーID',
-            'last_name'    => '姓',
-            'first_name'   => '名',
-            'last_kana'    => '姓カナ',
-            'first_kana'   => '名カナ',
-            'zip_code'     => '郵便番号',
-            'pref'         => '都道府県',
-            'city'         => '市区町村',
-            'address'      => '丁目番地号',
-            'building'     => '建物名',
-            'memo'         => '配送メモ',
+            'order_id'          => '受注ID',
+            'last_name'         => '姓',
+            'first_name'        => '名',
+            'last_kana'         => '姓カナ',
+            'first_kana'        => '名カナ',
+            'zip_code'          => '郵便番号',
+            'pref'              => '都道府県',
+            'city'              => '市区町村',
+            'address'           => '丁目番地号',
+            'building'          => '建物名',
+            'memo'              => '受注配送先メモ',
         ];
     }
 
@@ -74,7 +74,7 @@ class CreateRequest extends FormRequest
     }
 
     /**
-     * 誕生日、郵便番号、電話番号の結合
+     * 郵便番号の結合
      */
     public function getValidatorInstance()
     {

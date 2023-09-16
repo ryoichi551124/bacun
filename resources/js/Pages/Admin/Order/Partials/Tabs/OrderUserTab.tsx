@@ -1,55 +1,150 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Link, usePage, router } from '@inertiajs/react'
 import { forms } from '@/Styles'
-import Card from '@/Components/Admin/Common/Card'
-import Button from '@mui/material/Button'
+import { usePage } from '@inertiajs/react'
+import { useEffect, useState } from 'react'
+import searchUsers from '@/Services/users/searchUsers'
+import SearchUsers from '@/Pages/Admin/Order/Partials/Tabs/SearchUsers'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
+import { Button } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import updateShippingSchema, {
-  UpdateShippingSchemaType,
-} from '@/Schemas/Admin/Shipping/updateSchema'
+import createOrderUserSchema, {
+  CreateOrderUserSchemaType,
+} from '@/Schemas/Admin/Order/createOrderUserSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import type { Shipping, Pref } from '@/Types'
+import { userDataToOrderUser } from '@/Services/orders/orderService'
+import type { SearchUsersSchemaType } from '@/Schemas/Admin/User/searchUsersSchema'
+import type { User, Pref, UserStatus } from '@/Types'
 
-const button = css`
-  margin-right: 2rem;
+const lead = css`
+  padding: 1.5rem 0 0 1.5rem;
+  font-weight: bold;
+`
+const marginFix = css`
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 `
 
-type ShippingData = {
-  shipping: Shipping
+type OrderData = {
   prefs: Pref
+  statuses: UserStatus
 }
-type ShippingUpdateFormProps = {
-  onUpdateShipping?: (data: UpdateShippingSchemaType) => void
+type OrderUserTabProps = {
+  user: User | undefined
+  setUser: React.Dispatch<React.SetStateAction<User | undefined>>
+  orderUser: CreateOrderUserSchemaType | undefined
+  setOrderUser: React.Dispatch<
+    React.SetStateAction<CreateOrderUserSchemaType | undefined>
+  >
 }
 
 /**
- * 配送先編集フォーム
+ * 注文者情報の設定
  */
-export default function ShippingUpdateForm({
-  onUpdateShipping,
-}: ShippingUpdateFormProps) {
-  const { shipping, prefs } = usePage<ShippingData>().props
+export default function OrderUserTab({
+  user,
+  setUser,
+  orderUser,
+  setOrderUser,
+}: OrderUserTabProps) {
+  const { prefs, statuses } = usePage<OrderData>().props
+  const [users, setUsers] = useState<User[] | undefined>(undefined)
+
+  // 顧客が検索済みであれば、選択した顧客を設定
+  useEffect(() => {
+    user && setUsers([user])
+  }, [])
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<UpdateShippingSchemaType>({
-    defaultValues: shipping,
+  } = useForm<CreateOrderUserSchemaType>({
+    defaultValues: orderUser,
     reValidateMode: 'onBlur',
-    resolver: zodResolver(updateShippingSchema),
+    resolver: zodResolver(createOrderUserSchema),
   })
 
-  /** 配送先編集 */
-  const onSubmit = (data: UpdateShippingSchemaType) => {
-    onUpdateShipping && onUpdateShipping(data)
+  /** 顧客検索 */
+  const handleSearchUser = (data: SearchUsersSchemaType) => {
+    searchUsers(data).then((res) => {
+      if (res) {
+        setUsers(res)
+        setUser(res[0])
+      } else {
+        setUsers([])
+        setUser(undefined)
+      }
+    })
+  }
+
+  /** 登録する顧客を選択 */
+  const handleSelectUser = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.target.value &&
+      setUser(
+        users?.filter((user) => user.id === Number(event.target.value))[0],
+      )
+  }
+
+  /** 選択した顧客のデータをフォームにコピーする */
+  const handleUserCopy = () => {
+    if (user) {
+      for (const [key, value] of Object.entries(userDataToOrderUser(user))) {
+        setValue(key as keyof CreateOrderUserSchemaType, value)
+      }
+    }
+  }
+
+  /** 受注者の保存 */
+  const createOrderUser = (data: CreateOrderUserSchemaType) => {
+    setOrderUser(data)
   }
 
   return (
-    <Card title="配送先編集">
-      <form onSubmit={handleSubmit(onSubmit)} css={forms.container}>
+    <>
+      <div css={lead}>登録済みの顧客を検索</div>
+      {/* 検索フォーム */}
+      <SearchUsers onSearchUser={handleSearchUser} users={users} />
+      {/* 検索結果から注文者を選ぶ */}
+      {users && users.length > 0 && (
+        <>
+          <hr />
+          <Grid container spacing={2} css={[forms.container, marginFix]}>
+            <Grid xs={6}>
+              <label htmlFor="users" css={forms.label}>
+                登録する顧客を選ぶ
+              </label>
+              <select
+                defaultValue={users[0].id}
+                onChange={handleSelectUser}
+                css={forms.input}
+              >
+                {users.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.last_name} {user.first_name} {user.email}
+                  </option>
+                ))}
+              </select>
+            </Grid>
+            <Grid xs={6}></Grid>
+            {/* ボタン */}
+            <Grid xs={6} css={forms.buttonWrap}>
+              <Button
+                type="button"
+                variant="contained"
+                onClick={handleUserCopy}
+              >
+                顧客情報をコピーする
+              </Button>
+            </Grid>
+          </Grid>
+        </>
+      )}
+      <hr />
+
+      {/* 注文者情報入力フォーム */}
+      <form onSubmit={handleSubmit(createOrderUser)} css={forms.container}>
         <Grid container spacing={2}>
           {/* 名前（漢字） */}
           <Grid xs={4}>
@@ -111,6 +206,22 @@ export default function ShippingUpdateForm({
             )}
           </Grid>
           <Grid xs={4}></Grid>
+          {/* メール */}
+          <Grid xs={6}>
+            <label htmlFor="email" css={forms.label}>
+              メール
+            </label>
+            <input
+              id="email"
+              placeholder="メールアドレス"
+              css={[forms.input, errors.email && forms.error]}
+              {...register('email')}
+            />
+            {errors.email && (
+              <div css={forms.errText}>{errors.email.message}</div>
+            )}
+          </Grid>
+          <Grid xs={6}></Grid>
           {/* 郵便番号 */}
           <Grid xs={4}>
             <label css={forms.label}>郵便番号</label>
@@ -202,6 +313,56 @@ export default function ShippingUpdateForm({
             )}
           </Grid>
           <Grid xs={6}></Grid>
+          {/* 電話番号 */}
+          <Grid xs={6}>
+            <label css={forms.label}>電話番号</label>
+            <div css={forms.flexCenter}>
+              <input
+                placeholder="000"
+                css={[forms.input, errors.tel1 && forms.error]}
+                {...register('tel1')}
+              />
+              <input
+                placeholder="0000"
+                css={[forms.input, errors.tel2 && forms.error]}
+                {...register('tel2')}
+              />
+              <input
+                placeholder="0000"
+                css={[forms.input, errors.tel3 && forms.error]}
+                {...register('tel3')}
+              />
+            </div>
+            <div css={forms.flexCenter}>
+              {(errors.tel1 || errors.tel2 || errors.tel3) && (
+                <div css={forms.errText}>入力が必須の項目です</div>
+              )}
+            </div>
+          </Grid>
+          <Grid xs={6}></Grid>
+          {/* 性別 */}
+          <Grid xs={6}>
+            <div css={forms.label}>性別</div>
+            <label css={forms.radioLabel}>
+              <input
+                type="radio"
+                value="1"
+                css={forms.radioInput}
+                {...register('sex')}
+              />
+              男性
+            </label>
+            <label css={forms.radioLabel}>
+              <input
+                type="radio"
+                value="2"
+                css={forms.radioInput}
+                {...register('sex')}
+              />
+              女性
+            </label>
+          </Grid>
+          <Grid xs={6}></Grid>
           {/* メモ */}
           <Grid xs={9}>
             <label htmlFor="memo" css={forms.label}>
@@ -221,17 +382,12 @@ export default function ShippingUpdateForm({
           <Grid xs={3}></Grid>
           {/* ボタン */}
           <Grid xs={6} css={forms.buttonWrap}>
-            <Link href={route('admin.shipping.list')}>
-              <Button variant="outlined" css={button}>
-                戻る
-              </Button>
-            </Link>
             <Button type="submit" variant="contained">
-              編集
+              保存
             </Button>
           </Grid>
         </Grid>
       </form>
-    </Card>
+    </>
   )
 }

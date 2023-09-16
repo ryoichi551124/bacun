@@ -21,7 +21,7 @@ const button = css`
 `
 
 type UserData = {
-  user: User
+  user: UpdateUserSchemaType
   statuses: UserStatus
   prefs: Pref
 }
@@ -37,8 +37,8 @@ export default function UserUpdateForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<UpdateUserSchemaType>({
-    reValidateMode: 'onBlur',
     defaultValues: user,
+    reValidateMode: 'onBlur',
     resolver: zodResolver(updateUserSchema),
   })
 

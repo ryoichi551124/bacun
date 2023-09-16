@@ -103,7 +103,6 @@ class Order extends Model
      */
     public function scopdId(Builder $query, int $id = null): void
     {
-        if (empty($id)) return;
         $query->where('id', $id);
     }
 }
