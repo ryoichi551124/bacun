@@ -13,7 +13,6 @@ import createOrderShippingSchema, {
 } from '@/Schemas/Admin/Order/createOrderShippingSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Pref } from '@/Types'
-import { CreateOrderUserSchemaType } from '@/Schemas/Admin/Order/createOrderUserSchema'
 
 const copyButton = css`
   margin: 0.5rem 0 0 1rem;
@@ -25,17 +24,14 @@ const notice = css`
 type OrderData = {
   prefs: Pref
 }
-type OrderShippingTabProps = {
-  orderUser: CreateOrderUserSchemaType | undefined
-}
 
 /**
  * 配送先情報の設定
  */
-export default function OrderShippingTab({ orderUser }: OrderShippingTabProps) {
+export default function OrderShippingTab() {
   const { prefs } = usePage<OrderData>().props
 
-  const { orderShipping } = useSelector(
+  const { orderUser, orderShipping } = useSelector(
     (state: RootState) => state.orderTempReducer,
   )
   const dispatch = useDispatch()
