@@ -31,6 +31,10 @@ const noContent = css`
   padding-top: 0.5rem;
   color: ${colors.error};
 `
+const disableButton = css`
+  background: ${colors.gray};
+  pointer-events: none;
+`
 
 type OrderData = {
   prefs: Pref
@@ -187,7 +191,16 @@ export default function ConfirmOrder() {
 
         {/* ボタン */}
         <Grid xs={6} css={forms.buttonWrap}>
-          <Button type="button" variant="contained" onClick={handleCreateOrder}>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={handleCreateOrder}
+            css={
+              orderUser && orderShipping && orderDetails.length > 0
+                ? ''
+                : disableButton
+            }
+          >
             受注を登録する
           </Button>
         </Grid>
