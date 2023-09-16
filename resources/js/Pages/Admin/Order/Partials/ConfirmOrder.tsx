@@ -67,19 +67,28 @@ export default function ConfirmOrder() {
             <>
               <div css={flex}>
                 <div css={lead}>名前</div>
-                <div css={content}>{orderUser.last_name} {orderUser.first_name}</div>
+                <div css={content}>
+                  {orderUser.last_name} {orderUser.first_name}
+                </div>
               </div>
               <div css={flex}>
                 <div css={lead}>フリガナ</div>
-                <div css={content}>{orderUser.last_kana} {orderUser.first_kana}</div>
+                <div css={content}>
+                  {orderUser.last_kana} {orderUser.first_kana}
+                </div>
               </div>
               <div css={flex}>
                 <div css={lead}>住所</div>
                 <div css={content}>
-                  <div>〒:{orderUser.zip_code1}-{orderUser.zip_code2}</div>
+                  <div>
+                    〒:{orderUser.zip_code1}-{orderUser.zip_code2}
+                  </div>
                   <div>
                     {prefs[Number(orderUser.pref)]}
-                    {orderUser.city}{orderUser.address}{orderUser.building}
+                    {orderUser.city}
+                    {orderUser.address}
+                    <br />
+                    {orderUser.building}
                   </div>
                 </div>
               </div>
@@ -89,7 +98,9 @@ export default function ConfirmOrder() {
               </div>
               <div css={flex}>
                 <div css={lead}>電話番号</div>
-                <div css={content}>{orderUser.tel1}-{orderUser.tel2}-{orderUser.tel3}</div>
+                <div css={content}>
+                  {orderUser.tel1}-{orderUser.tel2}-{orderUser.tel3}
+                </div>
               </div>
             </>
           ) : (
@@ -103,19 +114,28 @@ export default function ConfirmOrder() {
             <>
               <div css={flex}>
                 <div css={lead}>名前</div>
-                <div css={content}>{orderShipping.last_name} {orderShipping.first_name}</div>
+                <div css={content}>
+                  {orderShipping.last_name} {orderShipping.first_name}
+                </div>
               </div>
               <div css={flex}>
                 <div css={lead}>フリガナ</div>
-                <div css={content}>{orderShipping.last_kana} {orderShipping.first_kana}</div>
+                <div css={content}>
+                  {orderShipping.last_kana} {orderShipping.first_kana}
+                </div>
               </div>
               <div css={flex}>
                 <div css={lead}>住所</div>
                 <div css={content}>
-                  <div>〒:{orderShipping.zip_code1}-{orderShipping.zip_code2}</div>
+                  <div>
+                    〒:{orderShipping.zip_code1}-{orderShipping.zip_code2}
+                  </div>
                   <div>
                     {prefs[Number(orderShipping.pref)]}
-                    {orderShipping.city}{orderShipping.address}{orderShipping.building}
+                    {orderShipping.city}
+                    {orderShipping.address}
+                    <br />
+                    {orderShipping.building}
                   </div>
                 </div>
               </div>
@@ -144,11 +164,11 @@ export default function ConfirmOrder() {
               </div>
               <div css={flex}>
                 <div css={lead}>小計</div>
-                <div css={content}>{subTotal}</div>
+                <div css={content}>￥{subTotal}</div>
               </div>
               <div css={flex}>
                 <div css={lead}>消費税</div>
-                <div css={content}>{subTotal * 0.1}</div>
+                <div css={content}>￥{subTotal * 0.1}</div>
               </div>
               <div css={flex}>
                 <div css={lead}>送料</div>
@@ -157,7 +177,7 @@ export default function ConfirmOrder() {
               <div css={flex}>
                 <div css={lead}>合計</div>
                 <div css={content}>
-                  {Math.ceil(Math.floor(subTotal * 1.1 * 100) / 100)}
+                  ￥{Math.ceil(Math.floor(subTotal * 1.1 * 100) / 100)}
                 </div>
               </div>
             </>
