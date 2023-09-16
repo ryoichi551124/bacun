@@ -2,7 +2,6 @@
 import { css } from '@emotion/react'
 import { forms, colors } from '@/Styles'
 import { usePage } from '@inertiajs/react'
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/Stores'
 import { setOrderShipping } from '@/Stores/orderTemp'
@@ -33,9 +32,7 @@ type OrderShippingTabProps = {
 /**
  * 配送先情報の設定
  */
-export default function OrderShippingTab({
-  orderUser,
-}: OrderShippingTabProps) {
+export default function OrderShippingTab({ orderUser }: OrderShippingTabProps) {
   const { prefs } = usePage<OrderData>().props
 
   const { orderShipping } = useSelector(
