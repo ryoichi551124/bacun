@@ -40,8 +40,9 @@ type OrderUserTabProps = {
 /**
  * 注文者情報の設定
  */
-export default function OrderUserTab({ user, setUser }: OrderUserTabProps) {
+export default function OrderUserTab() {
   const { prefs, statuses } = usePage<OrderData>().props
+  const [user, setUser] = useState<User | undefined>(undefined)
   const [users, setUsers] = useState<User[] | undefined>(undefined)
 
   const { orderUser } = useSelector(

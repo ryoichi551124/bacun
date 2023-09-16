@@ -33,9 +33,6 @@ export default function CreateOrderTabs() {
     setValue(newValue)
   }
 
-  // 顧客の検索から選択
-  const [user, setUser] = useState<User | undefined>(undefined)
-
   return (
     <Card title="受注新規作成">
       <Tabs value={value} onChange={handleTabChange} css={tabs}>
@@ -44,7 +41,7 @@ export default function CreateOrderTabs() {
         <Tab label="購入商品" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <OrderUserTab user={user} setUser={setUser} />
+        <OrderUserTab />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <OrderShippingTab />
