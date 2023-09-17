@@ -4,7 +4,6 @@ namespace App\Http\Requests\Admin\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 use App\Models\User;
 
 class UpdateRequest extends FormRequest
@@ -29,7 +28,6 @@ class UpdateRequest extends FormRequest
                 'required', 'email', 'max:128',
                 Rule::unique(User::class)->ignore($this->route('id'))
             ],
-            'password'      => ['required', 'confirmed', Password::defaults()],
             'last_name'     => ['required', 'string', 'max:64'],
             'first_name'    => ['required', 'string', 'max:64'],
             'last_kana'     => ['required', 'string', 'max:64'],
@@ -56,7 +54,6 @@ class UpdateRequest extends FormRequest
     {
         return [
             'email'         => 'メールアドレス',
-            'password'      => 'パスワード',
             'last_name'     => '姓',
             'first_name'    => '名',
             'last_kana'     => '姓カナ',
@@ -88,7 +85,6 @@ class UpdateRequest extends FormRequest
             'max'           => ':attributeは:max文字以内で入力してください',
             'regex'         => ':attributeは不正な値です',
             'date'          => ':attributeは無効な日付です',
-            'confirmed'     => '確認用の:attributeに誤りがあります',
             'unique'        => 'この:attributeはすでに登録されています',
             'in'            => ':attributeは無効な値です',
         ];

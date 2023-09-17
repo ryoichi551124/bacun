@@ -78,44 +78,6 @@ export default function AdminUpdateForm() {
             )}
           </Grid>
           <Grid xs={6}></Grid>
-          {/* パスワード */}
-          <Grid xs={6}>
-            <label htmlFor="password" css={forms.label}>
-              パスワード
-            </label>
-            <input
-              id="password"
-              placeholder="パスワード"
-              type="password"
-              autoComplete="off"
-              css={[forms.input, errors.password && forms.error]}
-              {...register('password')}
-            />
-            {errors.password && (
-              <div css={forms.errText}>{errors.password.message}</div>
-            )}
-          </Grid>
-          <Grid xs={6}></Grid>
-          {/* パスワード（確認） */}
-          <Grid xs={6}>
-            <label htmlFor="password_confirmation" css={forms.label}>
-              パスワード（確認）
-            </label>
-            <input
-              id="password_confirmation"
-              placeholder="パスワード（確認）"
-              type="password"
-              autoComplete="off"
-              css={[forms.input, errors.password_confirmation && forms.error]}
-              {...register('password_confirmation')}
-            />
-            {errors.password_confirmation && (
-              <div css={forms.errText}>
-                {errors.password_confirmation.message}
-              </div>
-            )}
-          </Grid>
-          <Grid xs={6}></Grid>
           {/* 権限 */}
           <Grid xs={6}>
             <label htmlFor="role" css={forms.label}>

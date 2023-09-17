@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react'
 import AdminLayout from '@/Layouts/Admin/AdminLayout'
 import Title from '@/Components/Admin/Common/Title'
 import AdminUpdateForm from '@/Pages/Admin/Admin/Partials/UpdateForm'
+import AdminUpdatePasswordForm from '@/Pages/Admin/Admin/Partials/UpdatePasswordForm'
 
 const title = '管理者設定'
 
@@ -15,6 +16,7 @@ export default function AdminEdit() {
       <Head title={title} />
       <Title title={title} />
       <AdminUpdateForm />
+      <AdminUpdatePasswordForm />
     </>
   )
 }
