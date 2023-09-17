@@ -18,10 +18,7 @@ class UpdateController extends Controller
      */
     public function __invoke(UpdateRequest $request): RedirectResponse
     {
-        User::Id($request->id)->update(array_merge(
-            $request->validated(),
-            ['password' => Hash::make($request->password)]
-        ));
+        User::Id($request->id)->update($request->validated());
 
         return redirect()
             ->route('admin.user.list')
