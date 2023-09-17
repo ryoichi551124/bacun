@@ -42,13 +42,14 @@ export default function UserUpdateForm() {
     resolver: zodResolver(updateUserSchema),
   })
 
-  const createUser = (data: UpdateUserSchemaType) => {
+  /** 顧客情報の編集 */
+  const updateUser = (data: UpdateUserSchemaType) => {
     router.put(`/admin/user/edit/update/${user.id}`, data)
   }
 
   return (
     <Card title="顧客編集">
-      <form onSubmit={handleSubmit(createUser)} css={forms.container}>
+      <form onSubmit={handleSubmit(updateUser)} css={forms.container}>
         <Grid container spacing={2}>
           {/* 名前（漢字） */}
           <Grid xs={4}>
@@ -123,44 +124,6 @@ export default function UserUpdateForm() {
             />
             {errors.email && (
               <div css={forms.errText}>{errors.email.message}</div>
-            )}
-          </Grid>
-          <Grid xs={6}></Grid>
-          {/* パスワード */}
-          <Grid xs={6}>
-            <label htmlFor="password" css={forms.label}>
-              パスワード
-            </label>
-            <input
-              id="password"
-              placeholder="パスワード"
-              type="password"
-              autoComplete="off"
-              css={[forms.input, errors.password && forms.error]}
-              {...register('password')}
-            />
-            {errors.password && (
-              <div css={forms.errText}>{errors.password.message}</div>
-            )}
-          </Grid>
-          <Grid xs={6}></Grid>
-          {/* パスワード（確認） */}
-          <Grid xs={6}>
-            <label htmlFor="password_confirmation" css={forms.label}>
-              パスワード（確認）
-            </label>
-            <input
-              id="password_confirmation"
-              placeholder="パスワード（確認）"
-              type="password"
-              autoComplete="off"
-              css={[forms.input, errors.password_confirmation && forms.error]}
-              {...register('password_confirmation')}
-            />
-            {errors.password_confirmation && (
-              <div css={forms.errText}>
-                {errors.password_confirmation.message}
-              </div>
             )}
           </Grid>
           <Grid xs={6}></Grid>

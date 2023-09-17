@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Admin\Edit;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Admin\Admin\UpdateRequest;
 use App\Models\Admin;
 use Illuminate\Http\RedirectResponse;
@@ -18,10 +17,7 @@ class UpdateController extends Controller
      */
     public function __invoke(UpdateRequest $request): RedirectResponse
     {
-        Admin::Id($request->id)->update(array_merge(
-            $request->validated(),
-            ['password' => Hash::make($request->password)]
-        ));
+        Admin::Id($request->id)->update($request->validated());
 
         return redirect()
             ->route('admin.admin.list')
