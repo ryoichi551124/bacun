@@ -21,6 +21,8 @@ const updateUserPasswordSchema = z
     },
   )
 
-export type UpdateUserPasswordSchemaType = z.infer<typeof updateUserPasswordSchema>
+export type UpdateUserPasswordSchemaType = z.infer<
+  typeof updateUserPasswordSchema
+>
 
 export default updateUserPasswordSchema

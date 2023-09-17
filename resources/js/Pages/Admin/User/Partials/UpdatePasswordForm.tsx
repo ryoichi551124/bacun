@@ -29,7 +29,7 @@ export default function UserPasswordUpdateForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors } ,
+    formState: { errors },
   } = useForm<UpdateUserPasswordSchemaType>({
     reValidateMode: 'onBlur',
     resolver: zodResolver(updateUserPasswordSchema),

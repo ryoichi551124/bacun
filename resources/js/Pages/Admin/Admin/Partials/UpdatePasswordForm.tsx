@@ -32,7 +32,7 @@ export default function AdminUpdatePasswordForm() {
     formState: { errors },
   } = useForm<UpdateAdminPasswordSchemaType>({
     reValidateMode: 'onBlur',
-    resolver: zodResolver(updateAdminPasswordSchema)
+    resolver: zodResolver(updateAdminPasswordSchema),
   })
 
   /** 管理者のパスワード変更 */
