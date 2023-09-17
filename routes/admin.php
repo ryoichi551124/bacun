@@ -183,6 +183,8 @@ Route::middleware('auth:admin')->group(function () {
             ->name('edit');
         Route::put('/edit/update/{id}', User\Edit\UpdateController::class)
             ->name('edit.update');
+        Route::put('/edit/update/password/{id}', User\Edit\UpdatePasswordController::class)
+            ->name('edit.update.password');
     });
 
     // 管理者設定
