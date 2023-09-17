@@ -3,10 +3,9 @@
 namespace App\Http\Requests\Admin\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use App\Models\Admin;
+use Illuminate\Validation\Rules\Password;
 
-class UpdateRequest extends FormRequest
+class UpdatePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +23,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => ['required', 'string', 'max:64'],
-            'email'     => [
-                'required', 'email', 'max:128',
-                Rule::unique(Admin::class)->ignore($this->route('id'))
-            ],
-            'role'      => ['required', Rule::in('admin', 'member')],
+            'password'  => ['required', 'confirmed', Password::defaults()],
         ];
     }
 
@@ -41,9 +35,7 @@ class UpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name'      => '管理者名',
-            'email'     => 'メールアドレス',
-            'role'      => '権限名',
+            'password'  => 'パスワード',
         ];
     }
 
@@ -56,11 +48,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'required'      => ':attributeは必須項目です',
-            'string'        => ':attributeは文字列を入力してください',
-            'email'         => '不正なメールアドレスです',
-            'unique'        => 'この:attributeはすでに登録されています',
+            'confirmed'     => '確認用の:attributeに誤りがあります',
             'max'           => ':attributeは:max文字以内で入力してください',
-            'in'            => '無効な権限名です',
         ];
     }
 }
