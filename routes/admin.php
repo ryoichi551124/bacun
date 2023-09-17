@@ -199,6 +199,8 @@ Route::middleware('auth:admin')->group(function () {
             ->name('edit');
         Route::put('/edit/update/{id}', Admin\Edit\UpdateController::class)
             ->name('edit.update');
+        Route::put('/edit/update/password/{id}', Admin\Edit\UpdatePasswordController::class)
+            ->name('edit.update.password');
     });
 
     // 基本情報
