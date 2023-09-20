@@ -4,6 +4,7 @@ import { CreateOrderShippingSchemaType } from '@/Schemas/Admin/Order/createOrder
 import { OrderDetail } from '@/Types'
 
 export type OrderTemp = {
+  userId: number | undefined
   orderUser: CreateOrderUserSchemaType | undefined
   orderShipping: CreateOrderShippingSchemaType | undefined
   orderDetails: OrderDetail[]
@@ -14,6 +15,7 @@ export type OrderDetailQuantity = {
 }
 
 const initialState: OrderTemp = {
+  userId: undefined,
   orderUser: undefined,
   orderShipping: undefined,
   orderDetails: [],
@@ -23,6 +25,10 @@ export const orderTempSlice = createSlice({
   name: 'orderTemp',
   initialState,
   reducers: {
+    // ユーザーIDのセット
+    setUserId: (state, action: PayloadAction<number | undefined>) => {
+      state.userId = action.payload
+    },
     // 注文者の設定
     setOrderUser: (
       state,
@@ -58,6 +64,7 @@ export const orderTempSlice = createSlice({
 
 // アクションの追加
 export const {
+  setUserId,
   setOrderUser,
   setOrderShipping,
   updateOrderQuantity,

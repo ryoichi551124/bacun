@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { useState, useEffect } from 'react'
-import { usePage } from '@inertiajs/react'
+import { usePage, router } from '@inertiajs/react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/Stores'
 import { colors, forms, fontSizes } from '@/Styles'
@@ -44,7 +44,7 @@ export default function ConfirmOrder() {
   const { prefs } = usePage<OrderData>().props
   const [subTotal, setSubTotal] = useState<number>(0)
   // 注文者、配送先、購入商品
-  const { orderUser, orderShipping, orderDetails } = useSelector(
+  const { userId, orderUser, orderShipping, orderDetails } = useSelector(
     (state: RootState) => state.orderTempReducer,
   )
 
@@ -57,9 +57,15 @@ export default function ConfirmOrder() {
     setSubTotal(newSubTotal)
   }, [orderDetails])
 
-  const handleCreateOrder = () => {
-    // 受注登録処理
+  const handleCreateOrder = async () => {
+    router.post('/admin/order/create/create', {
+      user_id: userId,
+      order_user: orderUser,
+      order_shipping: orderShipping,
+      orderDetails,
+    })
   }
+  console.log(userId)
 
   return (
     <Card title="受注確認・登録">

@@ -5,7 +5,7 @@ import { usePage } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/Stores'
-import { setOrderUser } from '@/Stores/orderTemp'
+import { setUserId, setOrderUser } from '@/Stores/orderTemp'
 import searchUsers from '@/Services/users/searchUsers'
 import SearchUsers from '@/Pages/Admin/Order/Partials/Tabs/SearchUsers'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
@@ -68,19 +68,22 @@ export default function OrderUserTab() {
       if (res) {
         setUsers(res)
         setUser(res[0])
+        dispatch(setUserId(res[0].id))
       } else {
         setUsers([])
         setUser(undefined)
+        dispatch(setUserId(undefined))
       }
     })
   }
 
   /** 登録する顧客を選択 */
   const handleSelectUser = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    event.target.value &&
-      setUser(
-        users?.filter((user) => user.id === Number(event.target.value))[0],
-      )
+    const user = users?.filter(
+      (user) => user.id === Number(event.target.value),
+    )[0]
+    setUser(user)
+    user && dispatch(setUserId(user.id))
   }
 
   /** 選択した顧客のデータをフォームにコピーする */
